@@ -6,16 +6,6 @@ if (checkCmpyId()) {
     exit;
 }
 
-/*
-if (!function_exists('db_fnc_dbConn')) {
-    require_once("/home/cass/shoppling/lib/db_fnc.lib");
-}
-
-if (!$db_conn) {
-    $db_conn = db_fnc_dbConn($_SESSION['SVRNM']);
-}
-*/
-
 $title = '쇼핑몰 코드 정보';
 
 $style = array(
@@ -29,18 +19,6 @@ $class = array(
 );
 
 $head_string = 'NO	쇼핑몰코드	표준 쇼핑몰명';
-
-/*
-$sql = 'SELECT DISTINCT small_cd, mall_nm FROM `s_mall` WHERE use_fg = 'Y' AND service_fg = 'Y' ORDER BY small_cd ASC';
-
-$qry = mysql_query($sql, $db_conn);
-
-$body = array();
-
-while ($row = mysql_fetch_array($qry)) {
-    $body[] = $row;
-}
-*/
 
 $body_string = '1	SMALL_00001	옥션
 2	SMALL_00002	지마켓

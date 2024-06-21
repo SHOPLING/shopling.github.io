@@ -18,28 +18,6 @@ $class = array(
 
 $head_string = '택배사코드	택배사';
 
-/*
-if (!function_exists('db_fnc_dbConn')) {
-    require_once("/home/cass/shoppling/lib/db_fnc.lib");
-}
-
-if (!$db_conn) {
-    $db_conn = db_fnc_dbConn($_SESSION['SVRNM']);
-}
-
-$sql = "SELECT cd, cd_nm FROM s_cdzip WHERE title = '택배사' AND use_yn = 'Y' ORDER BY cd ASC";
-
-$qry = mysql_query($sql, $db_conn);
-
-$tmp_body = array();
-
-while ($row = mysql_fetch_row($qry)) {
-    $tmp_body[] = implode('	', $row);
-}
-
-$body_string = implode("\n", $tmp_body);
-*/
-
 $body_string = '001	한진택배
 002	현대택배
 004	CJGLS
