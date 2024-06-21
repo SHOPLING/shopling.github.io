@@ -1,37 +1,5 @@
-<?
-ini_set('memory_limit','-1');
-
-set_time_limit(0);
-
-require_once("/home/cass/shoppling/admin/inc/config.inc");
-
-require_once("/home/cass/shoppling/lib/a_fnc.lib");
-require_once("/home/cass/shoppling/lib/db_fnc.lib");
-require_once("/home/cass/shoppling/lib/common_fnc.lib");
-
-require_once('common.lib');
-
-if (checkCmpyId(false)) {
-} else {
-    echo '
-    <script type="application/javascript">
-    <!--
-    document.location.replace("//'.$_SERVER['HTTP_HOST'].'");
-    //-->
-    </script>';
-
-    exit;
-}
-
-$window_width   = 1600;
-$menu_width     = 200;
-$content_width  = $window_width - $menu_width;
-
-$menu_width_px = $menu_width.'px';
-$content_width_px = $content_width.'px';
-?>
 <head>
-    <title><?=getTitle()?></title>
+    <title>Shopling API Manual</title>
 </head>
 
 <style>
