@@ -1,0 +1,212 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = '상품 수정 요청';
+
+$desc = '상품 수정 요청 (수정만 가능)';
+
+$url = 'prod/prod_modify_api.phtml';
+
+$request_string = '<reqst>
+   <apiProdMdy>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+		api_auth_key	API 인증코드				Y	shopPling 발급
+		partner_id						필요시 partner_id (pdion, cl … , onchannel
+      <goodsInfo>	Y							상품 정보 시작 태그(상품당1개)
+	Y	goods_key	샵플링 상품코드				Y	존재하면 먼저 검색함 우선순의 첫번째 (수정 key)
+	Y	ptn_goods_cd	고객사 상품코드	<![CDATA[]]>			Y	삽플링 상품코드가 없을시 검색함 우선순의 두번째 (수정key)
+	Y	goods_var_name	상품정보 변수명	<![CDATA[]]>				(상품필드 기술서 변수 참조) 변수 미선언시 수정되지않음
+         <options>	Y							옵션정보 시작  미선언시 수정되지않음
+	Y	optClear	옵션삭제여부	<![CDATA[]]>				Y: 삭제
+            <optList>	Y Y							옵션 단수만큼 반복 (단품은 한번만 옴) 조합으로 매치되는 옵션만 수정합니다.
+	Y Y	title	옵션명 (옵션항목명)	<![CDATA[]]>			Y	(단품은 "단품" 으로 표기)
+	Y Y	value	옵션구성값(구분자 “,” 로 구분)	<![CDATA[]]>			Y	(단품은 "단품" 으로 표기)
+            </optList>	Y Y
+	Y	optStatus 	판매상태(구분자 “,” 로 구분) 				Y	조합으로  B:판매, C:품절, X:미사용
+	Y	optQty 	현재고(구분자 “,” 로 구분) 				Y	조합으로 현재수량
+	Y	optVrtlQty 	가상재고(구분자 “,” 로 구분) 					조합으로 가상재고수량
+	Y	optSaveQty 	안전재고(구분자 “,” 로 구분) 					조합으로 안전재고수량
+	Y	optBundleQty 	묶음수량(구분자 “,” 로 구분) 					조합으로 묶음수량
+	Y	optAmt 	추가금액(구분자 “,” 로 구분) 					조합으로 추가금액  없으면  “0”
+	Y	optWeight	무게 g단위(구분자 “,” 로 구분)
+	Y	optBarcode	바코드(구분자 “,” 로 구분)
+	Y	optStoreMemo	창고메모(구분자 “,” 로 구분) 	<![CDATA[]]>				(구분자 “,” 로 구분)
+	Y	optNo	옵션정렬순서(구분 “,” 로 구분) 	<![CDATA[]]>				(구분자 “,” 로 구분)
+	Y	optPtnOptCd	자체관리옵션코드					(구분 “,” 로 구분)
+	Y	optImgUrl	옵션 이미지 url	<![CDATA[]]>				(구분 “,” 로 구분) 2017.03.22 추가
+	Y	optDescUrl	옵션 상세설명 url	<![CDATA[]]>				(구분 “,” 로 구분) 2017.03.22 추가
+	Y	optOrgAmt	옵션 원가 추가금액	<![CDATA[]]>				(구분 “,” 로 구분) 2017.09.06 추가
+         </options>	Y
+         <goodsAttri>	Y Y							상품고시정보 시작태그 (여러개 가능)  미선언시 수정되지않음
+            <attriList>	Y Y
+	Y Y	code	상품정보고시분류코드	<![CDATA[]]>			Y	(상품정보고시 분류코드참조)
+   	Y Y	attri_var_name	상품속성변수	<![CDATA[]]>				(상품정보고시 분류코드 속성 변수 참조) 변수 미선언시 수정되지않음
+            </attriList>	Y Y
+         </goodsAttri>	Y Y
+      </goodsInfo>	Y
+   </apiProdMdy>
+</reqst> 								';
+
+$response_string = '<rspns>
+   <apiProdMdyRst>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+      <goodsRst>	Y
+	Y	goods_key	샵플링 상품코드
+	Y	ptn_goods_cd	고객사 상품코드	<![CDATA[]]>
+	Y	code	성공,실패 결과코드	<![CDATA[]]>
+	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
+      </goodsRst>
+		succs_cnt	성공건수 					실패시 에러코드 반환
+		fail_cnt	실패건수					실패시 에러메세지 반환
+   </apiProdMdyRst>
+</rspns> 								';
+
+$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+<reqst>
+   <apiProdMdy>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <api_auth_key>fgsddfgfkdgdkfgk</api_auth_key>
+      <goodsInfo>
+         <goods_key>100051</goods_key>
+         <ptn_goods_cd><![CDATA[A1000045]]></ptn_goods_cd>
+         <prod_tp><![CDATA[A]]></prod_tp>
+         <prod_nm><![CDATA[수정상품명]]></prod_nm>
+         <org_price><![CDATA[45000]]></org_price>
+         <sale_price><![CDATA[60000]]></sale_price>
+         <list_price><![CDATA[80000]]></list_price>
+         <tax_tp><![CDATA[A]]></tax_tp>
+         <sex_tp><![CDATA[해당없음]]></sex_tp>
+         <sale_area><![CDATA[수도권]]></sale_area>
+         <sale_status><![CDATA[B]]></sale_status>
+         <origin_nm><![CDATA[국산]]></origin_nm>
+         <dtl_desc><![CDATA[상세설명]]></dtl_desc>
+         <img_0><![CDATA[http://img.aaa.co.kr/aaa.jpg]]></img_0>
+         <img_19><![CDATA[http://img.aaa.co.kr/aaa.jpg]]></img_19>
+         <options>
+            <optList>
+               <title><![CDATA[색상]]></title>
+               <value><![CDATA[파랑,검정]]></value>
+            </optList>
+            <optList>
+               <title><![CDATA[사이즈]]></title>
+               <value><![CDATA[대,중,소]]></value>
+            </optList>
+            <optStatus>B,B,B,B,B,B</optStatus>
+            <optQty>50,51,52,53,54,55</optQty>
+            <optVrtlQty>500,500,500,500,500,500</optVrtlQty>
+            <optAmt>2500,2000,2500,3000,5000,5000</optAmt>
+         </options>
+         <goodsAttri>
+            <attriList>
+               <code><![CDATA[03]]></code>
+               <a002><![CDATA[3일]]></a002>
+               <a003><![CDATA[파랑색과 검정색]]></a003>
+               <a005><![CDATA[행복물산 / 국산]]></a005>
+               <a006><![CDATA[대한민국]]></a006>
+               <a009><![CDATA[상세설명참조]]></a009>
+               <a010><![CDATA[AS번호 : 080-000-0000]]></a010>
+               <a011><![CDATA[비뚤어짜기 금지]]></a011>
+               <a012><![CDATA[상세설명참조]]></a012>
+               <a013><![CDATA[소가죽]]></a013>
+               <a014><![CDATA[가로30cm, 세로20cm]]></a014>
+            </attriList>
+         </goodsAttri>
+      </goodsInfo>
+      <goodsInfo>
+         <goods_key>100052</goods_key>
+         <ptn_goods_cd><![CDATA[A1000046]]></ptn_goods_cd>
+         <prod_tp><![CDATA[A]]></prod_tp>
+         <prod_nm><![CDATA[수정상품명]]></prod_nm>
+         <org_price><![CDATA[45000]]></org_price>
+         <sale_price><![CDATA[60000]]></sale_price>
+         <list_price><![CDATA[80000]]></list_price>
+         <tax_tp><![CDATA[A]]></tax_tp>
+         <sex_tp><![CDATA[해당없음]]></sex_tp>
+         <sale_area><![CDATA[수도권]]></sale_area>
+         <sale_status><![CDATA[B]]></sale_status>
+         <origin_nm><![CDATA[국산]]></origin_nm>
+         <dtl_desc><![CDATA[상세설명]]></dtl_desc>
+         <img_0><![CDATA[http://img.aaa.co.kr/aaa.jpg]]></img_0>
+         <img_19><![CDATA[http://img.aaa.co.kr/aaa.jpg]]></img_19>
+         <options>
+            <optList>
+               <title><![CDATA[색상]]></title>
+               <value><![CDATA[파랑,검정]]></value>
+            </optList>
+            <optList>
+               <title><![CDATA[사이즈]]></title>
+               <value><![CDATA[대,중,소]]></value>
+            </optList>
+            <optStatus>B,B,B,B,B,B</optStatus>
+            <optQty>50,51,52,53,54,55</optQty>
+            <optVrtlQty>500,500,500,500,500,500</optVrtlQty>
+            <optAmt>2500,2000,2500,3000,5000,5000</optAmt>
+         </options>
+         <goodsAttri>
+            <attriList>
+               <code>03</code>
+               <a002><![CDATA[3일]]></a002>
+               <a003><![CDATA[파랑색과 검정색]]></a003>
+               <a005><![CDATA[행복물산 / 국산]]></a005>
+               <a006><![CDATA[대한민국]]></a006>
+               <a009><![CDATA[상세설명참조]]></a009>
+               <a010><![CDATA[AS번호 : 080-000-0000]]></a010>
+               <a011><![CDATA[비뚤어짜기 금지]]></a011>
+               <a012><![CDATA[상세설명참조]]></a012>
+               <a013><![CDATA[소가죽]]></a013>
+               <a014><![CDATA[가로30cm, 세로20cm]]></a014>
+            </attriList>
+         </goodsAttri>
+      </goodsInfo>
+   </apiProdMdy>
+</reqst>';
+
+$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+<rspns>
+   <apiProdMdyRst>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <goodsRst>
+         <goods_key>100051</goods_key>
+         <ptn_goods_cd><![CDATA[A1000045]]></ptn_goods_cd>
+         <code><![CDATA[000]]></code>
+         <msg><![CDATA[정상]]></msg>
+      </goodsRst>
+      <goodsRst>
+         <goods_key>100052</goods_key>
+         <ptn_goods_cd><![CDATA[A1000046]]></ptn_goods_cd>
+         <code><![CDATA[000]]></code>
+         <msg><![CDATA[정상]]></msg>
+      </goodsRst>
+      <succs_cnt>2</succs_cnt>
+      <fail_cnt>0</fail_cnt>
+   </apiProdMdyRst>
+</rspns>';
+
+$result_code = '000 정상
+001 상품옵션수정 실패
+002 상품이미지수정 실패
+003 상품정보고시수정 실패
+004 상품상세설명 수정 실패
+100 상품명 누락
+101 판매상태 누락
+102 제조사 누락
+103 원산지 누락
+104 소비자가 누락
+105 판매가 누락
+106 공급가 누락
+107 대표이미지 누락
+108 상세설명 누락
+109 상품기본정보수정 실패';
+
+require_once('api_content_layout.phtml');
+
+?>

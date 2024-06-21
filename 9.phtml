@@ -1,0 +1,89 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = '주문 클레임요청 처리';
+
+$desc = '삽플링 주문 클레임 처리 요청 하기';
+
+$url = 'order/order_claim_req_api.phtml';
+
+$request_string = '<reqst>
+   <apiClaimReq>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+		api_auth_key	API 인증코드				Y	shopPling 발급
+      <claimInfo>	Y
+	Y	ord_no	샤플링 주문번호				Y
+	Y	claim_status	변경할 클레임 주문상태	<![CDATA[]]>			Y	클레임 처리 가능 상태 : <br>  신규주문,발송준비,발송보류,발송대기 → 취소접수<br>  취소접수 → 취소완료<br>  발송완료,주문출고완료 → 반품접수, 교환접수<br>  반품접수 → 반품수거완료<br>  교환접수 → 교환수거완료
+	Y	exchange_new	교환접수시 신규주문생성여부	<![CDATA[]]>				Y 시 교환주문으로 신규주문 생성함
+	Y	mall_claim_rsn2	클레임 사유	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)<br>교환사유 : 색상변경, 사이즈변경, 기타,배송오류, 상품파손, 옵션변경, 상품불량, 상품불만족<br>반품사유 : 상품품절, 배송오류, 배송지연,단순변심, 기타, 상품불만족, 상품불량, 상품파손<br>취소사유 : 상품품절, 기타, 단순변심,배송지연, 상품변경
+	Y	memo	클레임내용	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)
+	Y	prod_use_status	상품사용상태	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)<br>알수없음, 미개봉,  개봉후미사용,   개봉후사용
+	Y	pickup_tp	반품,교환수거방법	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)<br>교환방법: 맞교환지시, 고객발송, 수거완료확인, 수거지시, 누락재출고, 전체재출고<br>반품방법: 수거지시, 고객발송, 수거완료확인, 쇼핑몰수거
+	Y	dlvy_id	회수택배정보 택배사 코드	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)<br>택배사 코드 참조
+	Y	dlvy_no	회수택배정보 운송장번호	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)
+	Y	dlvy_fee	회수택배정보 택배비	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)
+	Y	enclose_amt	동봉금액	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)
+      </claimInfo>	Y
+   </apiClaimReq>
+</reqst>';
+
+$response_string = '<rspns>
+   <apiClaimReqRst>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y
+	Y
+      <claimInfoRst>	Y	ord_no	샤플링 주문번호				Y
+	Y	code	성공,실패 결과코드	<![CDATA[]]>
+	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
+	Y
+		succs_cnt	성공건수
+      </claimInfoRst>		fail_cnt	실패건수
+   </apiClaimReqRst>
+</rspns> 								';
+
+$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+<reqst>
+   <apiClaimReq>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <api_auth_key>fgsddfgfkdgdkfgk</api_auth_key>
+      <claimInfo>
+         <ord_no>1159661</ord_no>
+         <claim_status><![CDATA[취소접수]]></claim_status>
+         <exchange_new><![CDATA[Y]]></exchange_new>
+         <mall_claim_rsn2><![CDATA[기타]]></mall_claim_rsn2>
+         <memo><![CDATA[사이즈가 안맞아 클레임 들어옴]]></memo>
+         <prod_use_status><![CDATA[개봉후미사용]]></prod_use_status>
+         <pickup_tp><![CDATA[고객발송]]></pickup_tp>
+         <dlvy_id><![CDATA[018]]></dlvy_id>
+         <dlvy_no><![CDATA[59875563226654]]></dlvy_no>
+         <dlvy_fee><![CDATA[2500]]></dlvy_fee>
+         <enclose_amt><![CDATA[5000]]></enclose_amt>
+      </claimInfo>
+   </apiClaimReq>
+</reqst>';
+
+$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+<rspns>
+   <apiClaimReqRst>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <claimInfoRst>
+         <ord_no>1159661</ord_no>
+         <code><![CDATA[000]]></code>
+         <msg><![CDATA[정상]]></msg>
+      </claimInfoRst>
+      <succs_cnt>1</succs_cnt>
+      <fail_cnt>0</fail_cnt>
+   </apiClaimReqRst>
+</rspns>';
+
+require_once('api_content_layout.phtml');
+
+?>

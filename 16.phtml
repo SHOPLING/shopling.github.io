@@ -1,0 +1,40 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = 'QnA 필드 기술서';
+
+$style = array(
+    'width: 300px;',
+    'width: 150px;',
+    'width: 150px;',
+);
+
+$head_string = '필드 변수 항목	필드 변수 명	필드 변수 타입	필드 변수 설명';
+
+$body_string = '관리번호	qna_key	int(12)
+쇼핑몰코드	mall_key	varchar(11)
+쇼핑몰아이디	mall_login_id	varchar(50)
+쇼핑몰주문번호	mall_ord_id	varchar(30)
+쇼핑몰상품코드	mall_prod_key	varchar(30)
+쇼핑몰상품명	mall_prod_nm	varchar(100)
+상품코드	prod_id	int(12)
+문의구분	qna_tp	varchar(30)
+문의자아이디	qna_wid	varchar(20)
+문의자명	qna_wnm	varchar(20)
+문의제목	qna_title	varchar(100)
+문의내용	qna_q	text
+답변내용	qna_a	text
+처리상태	qna_status	varchar(20)	 미답변, 답변저장, 답변송신완료, 답변송신강제완료, 답변송신실패
+답변저장일자	save_dt	varchar(14)
+답변전송일자	send_dt	varchar(14)
+송신실패메세지	err_msg	varchar(255)
+고객문의등록일자	qna_i_dt	varchar(14)
+수집일자	i_dt	varchar(14)
+';
+
+require_once('table_layout.phtml');

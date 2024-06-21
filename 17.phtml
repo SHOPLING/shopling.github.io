@@ -1,0 +1,142 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = '택배사 코드';
+
+$style = array(
+    'width: 100px;',
+);
+
+$class = array(
+    'center',
+);
+
+$head_string = '택배사코드	택배사';
+
+/*
+if (!function_exists('db_fnc_dbConn')) {
+    require_once("/home/cass/shoppling/lib/db_fnc.lib");
+}
+
+if (!$db_conn) {
+    $db_conn = db_fnc_dbConn($_SESSION['SVRNM']);
+}
+
+$sql = "SELECT cd, cd_nm FROM s_cdzip WHERE title = '택배사' AND use_yn = 'Y' ORDER BY cd ASC";
+
+$qry = mysql_query($sql, $db_conn);
+
+$tmp_body = array();
+
+while ($row = mysql_fetch_row($qry)) {
+    $tmp_body[] = implode('	', $row);
+}
+
+$body_string = implode("\n", $tmp_body);
+*/
+
+$body_string = '001	한진택배
+002	현대택배
+004	CJGLS
+005	동부택배
+006	우체국택배
+007	KGB택배
+008	로젠택배
+009	옐로우캡
+010	경동택배
+011	SC로지스(사가와)
+012	천일택배
+013	대신택배
+014	일양택배
+015	업체(설치)배송
+016	편의점택배
+017	합동택배
+018	CJ대한통운
+019	하나로로지스
+020	네덱스택배
+021	이노지스택배
+022	GTX로지스
+023	KG로지스
+024	우편등기
+025	우체국국제등기
+026	일반우편
+027	ACI Express
+028	AirBoyExpress
+029	CVSnet
+030	GSM 국제택배
+031	KT로지스
+032	WIZWA
+033	고려택배
+034	나이트맨
+035	네덱스
+036	다젠
+037	대신택배
+039	동원로엑스
+040	동원택배
+041	삼성택배HTH(구)
+042	스피디익스프레스
+043	신세계(세덱스)
+044	우체국EMS
+045	우체국택배(연동)
+046	이젠택배
+047	조이익스프레스
+048	트라넷
+049	현대국제택배
+050	롯데택배
+051	DHL
+052	DHL(독일)
+053	FEDEX
+054	EZUSA
+056	UPS
+057	USPS
+058	Qxpress
+059	TNT Express
+060	한의사랑택배
+061	건영택배
+062	GSMNtoN(인로스)
+063	DHL Global Mail
+064	i-Parcel
+065	한덱스
+066	CU 편의점택배
+067	KGL네트웍스
+068	APEX(EMS Express)
+069	굿트럭
+070	GSI Express
+071	CJ대한통운 국제특송
+072	애니트럭
+073	SLX
+074	호남택배
+075	우리한방택배
+076	롯데택배 해외특송
+077	드림택배
+078	인트라스(INTRAS)
+079	홈픽택배
+080	하이브시티
+081	티피엠코리아
+082	AliExpress Standard Shipping
+083	현대글로비스
+084	부릉
+085	CWAY EXPRESS
+086	우리택배
+087	핑퐁택배
+088	RINCOS
+089	에스더쉬핑
+090	지에이치스피드
+091	은하쉬핑
+092	LTL
+093	ACE express
+901	업체직송
+902	자체배송
+903	방문수령
+904	직접전달
+905	퀵서비스
+990	발송없음
+991	범한판토스
+999	기타';
+
+require_once('table_layout.phtml');

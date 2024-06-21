@@ -1,0 +1,41 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = '클레임 필드 기술서';
+
+$style = array(
+    'width: 300px;',
+    'width: 150px;',
+    'width: 150px;',
+);
+
+$head_string = '필드 변수 항목	필드 변수 명	필드 변수 타입	필드 변수 설명';
+
+$body_string = '관리번호	claim_key	varchar(10)
+쇼핑몰코드	mall_key	varchar(11)
+쇼핑몰아이디	mall_login_id	varchar(50)
+자동수집구분	auto_fg	char(1)	자동, 수동
+쇼핑몰클레임수집구분	mall_claim_tp	varchar(20)
+클레임상태	ord_status	char(3)	취소접수, 취소완료, 반품접수, 반품완료, 교환접수, 교환완료
+쇼핑몰주문번호	mall_ord_id	varchar(50)
+쇼핑몰상품코드	mall_prod_key	varchar(50)
+쇼핑몰클레임번호	mall_claim_no	varchar(30)
+Shoppling주문번호	ord_no	int(12)
+Shoppling상품번호	prod_id	int(12)
+상품사용상태	prod_use_status	char(3)	알수없음, 미개봉,  개봉후미사용,   개봉후사용
+클레임 사유	mall_claim_rsn2	char(3)
+수집 - 클레임사유	mall_claim_rsn	varchar(130)
+수집 - 클레임내용	mall_claim_cnts	text
+클레임메모	memo	varchar(255)
+회수택배정보 택배사	dlvy_id	varchar(3)
+회수택배정보 운송장번호	dlvy_no	varchar(30)
+회수택배정보 택배비	dlvy_fee	int(12)
+동봉금액	enclose_amt	int(12)
+클레임접수일자	i_dt	varchar(14)';
+
+require_once('table_layout.phtml');

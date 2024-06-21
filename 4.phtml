@@ -1,0 +1,102 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = '쇼핑몰별 상품수정 요청';
+
+$desc = '쇼핑몰별 상품수정 요청';
+
+$url = 'prod/prod_each_mall_modify_api.phtml';
+
+$request_string = '<reqst>
+   <apiProdEachMdy>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+		api_auth_key	API 인증코드				Y	shopPling 발급
+		partner_id						필요시 partner_id (pdion, cl … , onchannel
+      <goodsInfo>	Y							상품 정보 시작 태그(상품당1개)
+	Y	mall_key	쇼핑몰 코드				Y
+	Y	goods_key	샵플링 상품코드				Y	존재하면 먼저 검색함 우선순의 첫번째 (수정 key)
+	Y	ptn_goods_cd	고객사 상품코드	<![CDATA[]]>			Y	삽플링 상품코드가 없을시 검색함 우선순의 두번째 (수정key)
+	Y	sale_price	판매가					변수 미선언시 수정되지않음
+	Y	org_price	공급가					변수 미선언시 수정되지않음
+	Y	list_price	소비자가					변수 미선언시 수정되지않음
+	Y	margin	마진율					변수 미선언시 수정되지않음
+	Y	dtl_desc	상세설명					변수 미선언시 수정되지않음
+	Y	prod_nm	상품명					변수 미선언시 수정되지않음
+	Y	attri_cd_1	상품정보고시분류코드	<![CDATA[]]>				(상품정보고시 분류코드 속성 변수 참조) 변수 미선언시 수정되지않음
+      </goodsInfo>	Y
+   </apiProdEachMdy>
+</reqst> 								';
+
+$response_string = '<rspns>
+   <apiProdEachMdyRst>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+      <goodsRst>	Y
+	Y	goods_key	샵플링 상품코드
+	Y	ptn_goods_cd	고객사 상품코드	<![CDATA[]]>
+	Y	code	성공,실패 결과코드	<![CDATA[]]>
+	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
+      </goodsRst>
+		succs_cnt	성공건수 					실패시 에러코드 반환
+		fail_cnt	실패건수					실패시 에러메세지 반환
+   </apiProdEachMdyRst>
+</rspns> 								';
+
+$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+<reqst>
+   <apiProdEachMdy>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <api_auth_key>fgsddfgfkdgdkfgk</api_auth_key>
+      <goodsInfo>
+         <mall_key>SMALL_00002</mall_key>
+         <goods_key>100051</goods_key>
+         <ptn_goods_cd><![CDATA[A1000045]]></ptn_goods_cd>
+         <prod_nm><![CDATA[수정상품명]]></prod_nm>
+         <org_price><![CDATA[45000]]></org_price>
+         <sale_price><![CDATA[60000]]></sale_price>
+         <list_price><![CDATA[80000]]></list_price>
+      </goodsInfo>
+      <goodsInfo>
+         <mall_key>SMALL_00002</mall_key>
+         <goods_key>100052</goods_key>
+         <ptn_goods_cd><![CDATA[A1000046]]></ptn_goods_cd>
+         <prod_nm><![CDATA[수정상품명]]></prod_nm>
+         <org_price><![CDATA[45000]]></org_price>
+         <sale_price><![CDATA[60000]]></sale_price>
+         <list_price><![CDATA[80000]]></list_price>
+      </goodsInfo>
+   </apiProdEachMdy>
+</reqst>';
+
+$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+<rspns>
+   <apiProdEachMdyRst>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <goodsRst>
+         <goods_key>100051</goods_key>
+         <ptn_goods_cd><![CDATA[A1000045]]></ptn_goods_cd>
+         <code><![CDATA[000]]></code>
+         <msg><![CDATA[등록정상]]></msg>
+      </goodsRst>
+      <goodsRst>
+         <goods_key>100052</goods_key>
+         <ptn_goods_cd><![CDATA[A1000046]]></ptn_goods_cd>
+         <code><![CDATA[001]]></code>
+         <msg><![CDATA[수정정상]]></msg>
+      </goodsRst>
+      <succs_cnt>2</succs_cnt>
+      <fail_cnt>0</fail_cnt>
+   </apiProdEachMdyRst>
+</rspns>';
+
+require_once('api_content_layout.phtml');
+
+?>

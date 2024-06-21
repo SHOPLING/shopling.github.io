@@ -1,0 +1,81 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = '주문상태변경';
+
+$desc = '삽플링 주문 상태변경 하기';
+
+$url = 'order/order_status_mdy_api.phtml';
+
+$request_string = '<reqst>
+   <apiOrdStatus>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+		api_auth_key	API 인증코드				Y	shopPling 발급
+      <orderInfo>	Y
+	Y	ord_no	샤플링 주문번호				Y
+	Y	ord_status	변경할 주문상태	<![CDATA[]]>			Y	발송준비 (신규주문 -> 발송준비, 발송보류  가능<br>          발송준비 -> 발송보류 or 발송보류->발송준비 가능)<br><br>CS메모만 남기고자 할 경우 "CS메모" 로 보냅니다.
+	Y	cs_msg	CS 메모	<![CDATA[]]>				CS 메모 내용(필요시 입력함)
+      </orderInfo>	Y
+   </apiOrdStatus>
+</reqst> 								';
+
+$response_string = '<rspns>
+   <apiOrdStatusRst>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y
+	Y
+      <orderInfoRst>	Y	ord_no	샤플링 주문번호				Y
+	Y	code	성공,실패 결과코드	<![CDATA[]]>
+	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
+	Y
+		succs_cnt	성공건수
+      </orderInfoRst>		fail_cnt	실패건수
+   </apiOrdStatusRst>
+</rspns> 								';
+
+$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+<reqst>
+   <apiOrdStatus>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <api_auth_key>fgsddfgfkdgdkfgk</api_auth_key>
+      <orderInfo>
+         <ord_no>100058</ord_no>
+         <ord_status><![CDATA[발송준비]]></ord_status>
+      </orderInfo>
+      <orderInfo>
+         <ord_no>100057</ord_no>
+         <ord_status><![CDATA[발송준비]]></ord_status>
+      </orderInfo>
+   </apiOrdStatus>
+</reqst>';
+
+$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+<rspns>
+   <apiOrdStatusRst>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <orderInfoRst>
+         <ord_no>100058</ord_no>
+         <code><![CDATA[000]]></code>
+         <msg><![CDATA[정상등록]]></msg>
+      </orderInfoRst>
+      <orderInfoRst>
+         <ord_no>100057</ord_no>
+         <code><![CDATA[001]]></code>
+         <msg><![CDATA[정상수정]]></msg>
+      </orderInfoRst>
+      <succs_cnt>2</succs_cnt>
+      <fail_cnt>0</fail_cnt>
+   </apiOrdStatusRst>
+</rspns>';
+
+require_once('api_content_layout.phtml');
+
+?>

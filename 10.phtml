@@ -1,0 +1,86 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = '송장등록';
+
+$desc = '삽플링에 송장등록 하기';
+
+$url = 'invoice/invoice_registration_api.phtml';
+
+$request_string = '<reqst>
+   <apiDlvyReg>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+		api_auth_key	API 인증코드				Y	shopPling 발급
+      <dlvyInfo>	Y
+	Y	ord_no	샤플링 주문번호				Y
+	Y	dlvery_id	택배사코드	<![CDATA[]]>			Y	택배사 코드 참조
+	Y	invoice_no	운송장번호	<![CDATA[]]>			Y
+	Y	expect_dt	배송예정일		yyyymmdd
+      </dlvyInfo>	Y
+   </apiDlvyReg>
+</reqst> 								';
+
+$response_string = '<rspns>
+   <apiDlvyRegRst>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+      <dlvyListRst>	Y
+	Y	ord_no	샤플링 주문번호				Y
+	Y	code	성공,실패 결과코드	<![CDATA[]]>
+	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
+      </dlvyListRst>	Y
+		succs_cnt	성공건수
+		fail_cnt	실패건수
+   </apiDlvyRegRst>
+</rspns> 								';
+
+$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+<reqst>
+   <apiDlvyReg>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <api_auth_key>fgsddfgfkdgdkfgk</api_auth_key>
+      <dlvyInfo>
+         <ord_no>100058</ord_no>
+         <dlvery_id><![CDATA[018]]></dlvery_id>
+         <invoice_no><![CDATA[100058978956]]></invoice_no>
+         <expect_dt>20150213</expect_dt>
+      </dlvyInfo>
+      <dlvyInfo>
+         <ord_no>100057</ord_no>
+         <dlvery_id><![CDATA[018]]></dlvery_id>
+         <invoice_no><![CDATA[100058978957]]></invoice_no>
+         <expect_dt>20150213</expect_dt>
+      </dlvyInfo>
+   </apiDlvyReg>
+</reqst>';
+
+$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+<rspns>
+   <apiDlvyRegRst>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <dlvyListRst>
+         <ord_no>100058</ord_no>
+         <code><![CDATA[000]]></code>
+         <msg><![CDATA[정상등록]]></msg>
+      </dlvyListRst>
+      <dlvyListRst>
+         <ord_no>100057</ord_no>
+         <code><![CDATA[001]]></code>
+         <msg><![CDATA[정상수정]]></msg>
+      </dlvyListRst>
+      <succs_cnt>2</succs_cnt>
+      <fail_cnt>0</fail_cnt>
+   </apiDlvyRegRst>
+</rspns>';
+
+require_once('api_content_layout.phtml');
+
+?>

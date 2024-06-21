@@ -1,0 +1,178 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+/*
+if (!function_exists('db_fnc_dbConn')) {
+    require_once("/home/cass/shoppling/lib/db_fnc.lib");
+}
+
+if (!$db_conn) {
+    $db_conn = db_fnc_dbConn($_SESSION['SVRNM']);
+}
+*/
+
+$title = '쇼핑몰 코드 정보';
+
+$style = array(
+    'width: 100px;',
+    'width: 200px;',
+);
+
+$class = array(
+    'center',
+    'center',
+);
+
+$head_string = 'NO	쇼핑몰코드	표준 쇼핑몰명';
+
+/*
+$sql = 'SELECT DISTINCT small_cd, mall_nm FROM `s_mall` WHERE use_fg = 'Y' AND service_fg = 'Y' ORDER BY small_cd ASC';
+
+$qry = mysql_query($sql, $db_conn);
+
+$body = array();
+
+while ($row = mysql_fetch_array($qry)) {
+    $body[] = $row;
+}
+*/
+
+$body_string = '1	SMALL_00001	옥션
+2	SMALL_00002	지마켓
+3	SMALL_00003	11번가
+4	SMALL_00004	스마트스토어
+5	SMALL_00005	GS SHOP
+6	SMALL_00006	롯데홈쇼핑
+7	SMALL_00007	CJ온스타일
+8	SMALL_00008	현대H몰
+9	SMALL_00009	홈앤쇼핑
+10	SMALL_00010	NS홈쇼핑
+11	SMALL_00011	티몬
+12	SMALL_00012	쿠팡
+13	SMALL_00013	위메프 1.0
+14	SMALL_00014	카페24(1.9)
+15	SMALL_00015	메이크샵(1.0)
+16	SMALL_00016	고도몰
+17	SMALL_00017	인터파크(OM)
+18	SMALL_00018	롯데닷컴
+19	SMALL_00019	신세계몰
+20	SMALL_00020	이마트몰
+21	SMALL_00021	AK MALL
+22	SMALL_00022	하프클럽
+23	SMALL_00023	1300K
+24	SMALL_00024	텐바이텐
+25	SMALL_00025	POOM
+26	SMALL_00027	iStyle24
+27	SMALL_00029	WizWid
+28	SMALL_00030	패션플러스
+29	SMALL_00031	골핑(B2C)
+30	SMALL_00033	이지웰
+31	SMALL_00034	바보사랑
+32	SMALL_00035	가온물산
+33	SMALL_00038	인터파크비즈마켓
+34	SMALL_00040	다이소몰
+35	SMALL_00041	GS리테일
+36	SMALL_00042	수협쇼핑
+37	SMALL_00043	교보핫트랙스
+38	SMALL_00045	까사
+39	SMALL_00051	후추통
+40	SMALL_00054	동원몰
+41	SMALL_00061	네이버페이
+42	SMALL_00069	도매꾹
+43	SMALL_00071	도매창고
+44	SMALL_00079	아이스탁몰
+45	SMALL_00081	머스트잇
+46	SMALL_00083	메이크샵(2.0)
+47	SMALL_00084	에듀팡
+48	SMALL_00085	제로투세븐(N)
+49	SMALL_00086	고도몰 5
+50	SMALL_00087	인터파크(MD)
+51	SMALL_00088	Qoo10(큐텐)
+52	SMALL_00090	블로그페이
+53	SMALL_00092	스킨알엑스
+54	SMALL_00093	아이마켓코리아
+55	SMALL_00094	트렌드 코리아
+56	SMALL_00095	오늘의집
+57	SMALL_00096	한샘몰
+58	SMALL_00097	펀앤
+59	SMALL_00098	Brandi
+60	SMALL_00099	위메프 2.0
+61	SMALL_00100	shopcorn
+62	SMALL_00101	카카오톡스토어
+63	SMALL_00102	woogos
+64	SMALL_00103	LFmall
+65	SMALL_00104	브리치
+66	SMALL_00105	멸치쇼핑(수수료)
+67	SMALL_00106	멸치쇼핑(공급가)
+68	SMALL_00107	오너클랜
+69	SMALL_00108	LOOKPIN
+70	SMALL_00109	돌핀스
+71	SMALL_00110	쇼피(싱가포르)
+72	SMALL_00111	W Concept
+73	SMALL_00112	에이블리
+74	SMALL_00113	샵트리
+75	SMALL_00114	11번가(해외직구전용)
+76	SMALL_00115	Hiver
+77	SMALL_00116	셀파
+78	SMALL_00117	쇼피(필리핀)
+79	SMALL_00118	쇼피(말레이시아)
+80	SMALL_00119	쇼피(인도네시아)
+81	SMALL_00120	shop by(고도몰)
+82	SMALL_00121	지그재그
+83	SMALL_00122	롯데마트
+84	SMALL_00123	쇼피(대만)
+85	SMALL_00124	식스샵
+86	SMALL_00125	디비디비
+87	SMALL_00126	셀러허브
+88	SMALL_00127	우먼스톡
+89	SMALL_00128	가방팝
+90	SMALL_00129	DHgate.com
+91	SMALL_00130	롯데ON
+92	SMALL_00131	하프클럽(N)
+93	SMALL_00132	우체국쇼핑
+94	SMALL_00133	인포크
+95	SMALL_00134	도매로
+96	SMALL_00135	프로셀
+97	SMALL_00137	shopify(쇼피파이)
+98	SMALL_00138	LG CNS
+99	SMALL_00139	Lazada(라자다)
+100	SMALL_00140	캔디버드
+101	SMALL_00141	보리보리
+102	SMALL_00142	아트박스(N)
+103	SMALL_00143	필웨이
+104	SMALL_00144	TMall
+105	SMALL_00145	롯데하이마트몰
+106	SMALL_00146	LF스퀘어몰
+107	SMALL_00147	스타일쉐어
+108	SMALL_00148	왈라뷰
+109	SMALL_00149	Wish
+110	SMALL_00150	골디
+111	SMALL_00151	바바더닷컴
+112	SMALL_00152	GS리테일(배송관리 시스템)
+113	SMALL_00153	발란
+114	SMALL_00155	MRODOT
+115	SMALL_00156	쇼피(태국)
+116	SMALL_00157	쇼피(브라질)
+117	SMALL_00158	쇼피(멕시코)
+118	SMALL_00159	파트너스몰
+119	SMALL_00160	쇼피(베트남)
+120	SMALL_00161	비숍
+121	SMALL_00163	플렉스지
+122	SMALL_00164	트렌비
+123	SMALL_00165	셀링콕
+124	SMALL_00166	W쇼핑
+125	SMALL_00167	Amazon
+126	SMALL_00168	인큐텐
+127	SMALL_00169	퍼스트몰
+128	SMALL_00170	서울스토어
+129	SMALL_00171	리본즈
+130	SMALL_00172	쇼피(KRSC)
+131	SMALL_00173	올웨이즈
+132	SMALL_00174	보고플레이';
+
+require_once('table_layout.phtml');

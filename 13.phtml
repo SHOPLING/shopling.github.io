@@ -1,0 +1,80 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = 'QnA  답변등록';
+
+$desc = '삽플링에 QnA답변등록 하기';
+
+$url = 'qna/qna_replyReg_api.phtml';
+
+$request_string = '<reqst>
+   <apiQnaReplyReg>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+		api_auth_key	API 인증코드				Y	shopPling 발급
+      <qnaReplyInfo>	Y
+	Y	qna_key	QnA 번호 key				Y
+	Y	reply	답변내용	<![CDATA[]]>			Y
+      </qnaReplyInfo>	Y
+   </apiQnaReplyReg>
+</reqst> 								';
+
+$response_string = '<rspns>
+   <apiQnaReplyRegRst>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+      <qnaReplyListRst>	Y
+	Y	qna_key	QnA 번호 key				Y
+	Y	code	성공,실패 결과코드
+	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
+      </qnaReplyListRst>	Y
+		succs_cnt	성공건수
+		fail_cnt	실패건수
+   </apiQnaReplyRegRst>
+</rspns> 								';
+
+$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+<reqst>
+   <apiQnaReplyReg>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <api_auth_key>fgsddfgfkdgdkfgk</api_auth_key>
+      <qnaReplyInfo>
+         <qna_key>105987</qna_key>
+         <reply><![CDATA[해당 상품은 품절되었습니다.]]></reply>
+      </qnaReplyInfo>
+      <qnaReplyInfo>
+         <qna_key>105986</qna_key>
+         <reply><![CDATA[해당 상품은 3일 후에 배송예정입니다.]]></reply>
+      </qnaReplyInfo>
+   </apiQnaReplyReg>
+</reqst>';
+
+$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+<rspns>
+   <apiQnaReplyRegRst>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <qnaReplyListRst>
+         <qna_key>105987</qna_key>
+         <code><![CDATA[000]]></code>
+         <msg><![CDATA[정상등록]]></msg>
+      </qnaReplyListRst>
+      <qnaReplyListRst>
+         <qna_key>105986</qna_key>
+         <code><![CDATA[001]]></code>
+         <msg><![CDATA[정상수정]]></msg>
+      </qnaReplyListRst>
+      <succs_cnt>2</succs_cnt>
+      <fail_cnt>0</fail_cnt>
+   </apiQnaReplyRegRst>
+</rspns>';
+
+require_once('api_content_layout.phtml');
+
+?>

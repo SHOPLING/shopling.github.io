@@ -1,0 +1,87 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = '주문필드 기술서';
+
+$style = array(
+    'width: 300px;',
+    'width: 150px;',
+    'width: 150px;',
+);
+
+$head_string = '필드 변수 항목	필드 변수 명	필드 변수 타입	필드 변수 설명';
+
+$body_string = '관리번호(샵플링주문번호)	ord_no	int(12)
+쇼핑몰코드	mall_key	varchar(11)
+쇼핑몰아이디	mall_login_id	varchar(50)
+쇼핑몰주문번호	mall_ord_id	varchar(50)
+주문순번	mall_ord_seq	varchar(50)
+배송번호,배송지시번호,합포장번호, 출고번호	mall_dlvy_id	varchar(50)
+배송순번	mall_dlvy_seq	varchar(50)
+몰 주문일자	mall_ord_dt	varchar(14)
+몰 결제일자	mall_pay_dt	varchar(14)
+주문유형	ord_tp	char(1)	주문, 교환주문, 사은품
+자동수집구분	auto_fg	char(1)	자동, 수동
+주문상태	ord_status	char(3)	신규주문, 발송준비, 발송보류, 발송대기, 발송완료, 취소접수, 취소완료, 반품접수, 반품회수완료, 교환접수, 교환회수완료
+Shopling 매핑 상품번호	prod_id	int(12)	매핑시점에 확정되며 시점관리입니다.
+Shopling 매핑 옵션코드	opt_id	int(12)	매핑시점에 확정되며 시점관리입니다.
+Shopling 매핑 상품명	t_prod_nm	varchar(255)	매핑시점에 확정되며 시점관리입니다.
+Shopling 매핑 옵션명	t_opt_valu	varchar(50)	매핑시점에 확정되며 시점관리입니다.
+Shopling 매핑 매입처 코드	buying_cd	varchar(10)	매핑시점에 확정되며 시점관리입니다.
+Shopling 매핑 과세구분	tax_tp	char(1)	매핑시점에 확정되며 시점관리입니다. (과세, 면세, 비과세, 영세)
+Shopling 매핑 물류처코드	logis_cd	varchar(12)	매핑시점에 확정되며 시점관리입니다.
+Shopling 매핑 자사상품코드	ptn_goods_cd	varchar(50)	매핑시점에 확정되며 시점관리입니다.
+주문자정보 : 주문자ID	mall_user_id	varchar(255)
+주문자정보 : 주문자명	mall_user_nm	varchar(255)
+주문자정보 : 주문자전화번호	mall_user_tel	varchar(255)
+주문자정보 : 주문자휴대폰	mall_user_phone	varchar(255)
+주문자정보 : 주문자이메일	mall_user_email	varchar(255)
+수취인정보 : 수취인전화번호	mall_rcv_tel	varchar(255)
+수취인정보 : 수취인휴대폰	mall_rcv_phone	varchar(255)
+수취인정보 : 수취인이메일	mall_rcv_email	varchar(255)
+수취인정보 : 수취인명	mall_rcv_nm	varchar(255)
+수취인정보 : 수취인 영문명	mall_rcv_en_nm	varchar(50)
+수취인정보 : 수취인우편번호	mall_rcv_zipcd	varchar(7)
+수취인정보 : 수취인 주소1	mall_rcv_addr1	varchar(255)
+수취인정보 : 수취인 주소2	mall_rcv_addr2	varchar(400)
+수취인정보 : 수취인 도로명 주소1	mall_rcv_add1	varchar(255)
+수취인정보 : 수취인 도로명 주소2	mall_rcv_add2	varchar(300)
+수취인정보 : 배송메세지	mall_rcv_msg	varchar(250)
+수집주문정보 : 주문구분 	mall_ord_tp	varchar(30)	주문, 직송, 직택배, 해외주문
+수집주문정보 : 주문총금액	mall_ord_amt	int(12)
+수집주문정보 : 결제총금액	mall_pay_amt	int(12)
+수집주문정보 : 결제방법	mall_pay_tp	varchar(20)	 카드, 무통장 등등
+수집주문정보 : 판매단가	mall_unit_price	int(12)
+수집주문정보 : 쇼핑몰공급가	mall_supply_price	int(12)	(수집or가공)
+수집주문정보 : 배송비지불방법	mall_dlvy_amt_tp2	char(1)	무료, 착불, 선결제, 착불/선결제, 조건부무료, 기타
+수집주문정보 : 배송비	mall_dlvy_amt	int(12)
+수집주문정보 : 주문수량	mall_ord_cnt	int(12)
+정산금액	djustment_amt	int(12)
+원가	org_price	int(12)	(매입단가(상품정보의 매입가)
+운송장정보 : 택배사코드	dlvy_id	varchar(3)
+운송장정보 : 운송장번호	dlvy_no	varchar(30)
+운송장정보 : 쇼핑몰운송장전송일	dlvy_send_dt	varchar(14)
+운송장정보 : 쇼핑몰운송장전송결과	dlvy_tp	char(2)	전송성공, 강제처리, :전송실패, 미전송
+상품수집정보 : 쇼핑몰상품코드	mall_prod_key	varchar(50)
+상품수집정보 : 자사상품코드	mall_ptn_goods_cd	varchar(30)
+상품수집정보 : 상품명	mall_prod_nm	varchar(255)
+상품수집정보 : 옵션명	mall_opt_valu	varchar(255)
+상품수집정보 : 옵션가격	mall_opt_price	int(12)
+상품수집정보 : 옵션코드	mall_opt_cd	varchar(20)
+상품수집정보 : 추가상품명	mall_add_valu	varchar(255)
+상품수집정보 : 추가금액	mall_add_price	int(12)
+상품수집정보 : 사은품	mall_gift	varchar(255)
+기타수집정보 : 설치방법	mall_int_tp	varchar(50)
+기타수집정보 : 설치비	mall_int_amt	int(12)
+기타수집정보 : 매출매체정보	mall_sale_root	varchar(30)
+배송희망일	mall_expect_dt	varchar(30)
+원주문번호	org_ord_no	int(12)	분리,클레임시 원주문번호
+주문생성일	i_dt	varchar(14)	20170101132555
+상품수집정보 : 자사옵션코드	mall_ptn_opt_cd	varchar(30)	상품등록시 전송한 옵션자체코드를 가져옴 단, 쇼핑몰에서 주문수집시 해당 정보를 주지 않은 경우는  수집 못함.';
+
+require_once('table_layout.phtml');

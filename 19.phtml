@@ -1,0 +1,91 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$title = '쇼핑몰 상품코드 가져오기';
+
+$desc = '샵플링 상품코드에 해당하는 쇼핑몰 상품코드 가져오기';
+
+$url = 'prod/get_mall_goods_cd.phtml';
+
+$request_string = '<reqst>
+   <apiGetMallGoodsCd>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y	shopPling 발급
+		api_auth_key	API 인증코드				Y	shopPling 발급
+		partner_id	파트너 코드					필요시 partner_id (habibi)
+      <goodsInfo>	Y
+	Y	mall_key	쇼핑몰 코드	<![CDATA[]]>			Y	쇼핑몰 코드 필수
+	Y	mall_login_id	쇼핑몰 아이디	<![CDATA[]]>				쇼핑몰 로그인 아이디 선택
+	Y	goods_key	샵플링 상품코드	<![CDATA[]]>			Y	샵플링 상품코드 필수
+      </goodsInfo>	Y
+   </apiGetMallGoodsCd>
+</reqst> 								';
+
+$response_string = '<rspns>
+   <apiGetMallGoodsCdRst>
+		login_id	로그인ID	<![CDATA[]]>			Y
+		company_id	고객사 아이디				Y
+      <goodsListRst>	Y
+	Y	mall_key	쇼핑몰 코드
+	Y	mall_login_id	쇼핑몰 아이디	<![CDATA[]]>
+	Y	goods_key	샵플링 상품코드	<![CDATA[]]>
+	Y	mall_goods_cd	쇼핑몰 상품코드	<![CDATA[]]>
+	Y	link_seq	샵플링 연동번호	<![CDATA[]]>
+	Y	code	성공,실패 결과코드	<![CDATA[]]>
+	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
+      </goodsListRst>	Y
+		succs_cnt	성공건수
+		fail_cnt	실패건수
+   </apiGetMallGoodsCdRst>
+</rspns> 								';
+
+$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+<reqst>
+   <apiGetMallGoodsCd>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <api_auth_key>fgsddfgfkdgdkfgk</api_auth_key>
+      <goodsInfo>
+         <mall_key>100058</mall_key>
+         <mall_login_id><![CDATA[018]]></mall_login_id>
+         <goods_key><![CDATA[100058978956]]></goods_key>
+      </goodsInfo>
+   </apiGetMallGoodsCd>
+</reqst>';
+
+$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+<rspns>
+   <apiGetMallGoodsCdRst>
+      <login_id><![CDATA[shoppling]]></login_id>
+      <company_id>S001</company_id>
+      <goodsListRst>
+         <mall_key>100058</mall_key>
+         <mall_login_id>100058</mall_login_id>
+         <goods_key>100058</goods_key>
+         <mall_goods_cd>100058</mall_goods_cd>
+         <link_seq>100058</link_seq>
+         <code><![CDATA[000]]></code>
+         <msg><![CDATA[정상]]></msg>
+      </goodsListRst>
+      <goodsListRst>
+         <mall_key>100058</mall_key>
+         <mall_login_id>100058</mall_login_id>
+         <goods_key>100058</goods_key>
+         <mall_goods_cd>100058</mall_goods_cd>
+         <link_seq>100058</link_seq>
+         <code><![CDATA[000]]></code>
+         <msg><![CDATA[정상]]></msg>
+      </goodsListRst>
+      <succs_cnt>2</succs_cnt>
+      <fail_cnt>0</fail_cnt>
+   </apiGetMallGoodsCdRst>
+</rspns>';
+
+require_once('api_content_layout.phtml');
+
+?>

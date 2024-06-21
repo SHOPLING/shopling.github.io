@@ -1,0 +1,85 @@
+<?
+require_once('common.lib');
+
+if (checkCmpyId()) {
+} else {
+    exit;
+}
+
+$prd = $prd_info = $prd_get = $ord = $ord_info = array();
+
+if (prdCmpyId()) {
+    $prd = array(
+        '상품등록'                  => array('url' => '1.phtml'),
+        '상품수정'                  => array('url' => '2.phtml'),
+        '상품수정 (2)'              => array('url' => '3.phtml'),
+        '쇼핑몰별상품등록수정'      => array('url' => '4.phtml'),
+    );
+
+    $prd_info = array(
+        '상품필드기술서'            => array('url' => '5.phtml'),
+        '상품정보고시 코드정보'     => array('url' => '6.phtml'),
+    );
+}
+
+if (prdGetCmpyId()) {
+    $prd_get = array(
+        '상품가져오기'              => array('url' => '18.phtml'),
+        '쇼핑몰상품코드가져오기'    => array('url' => '19.phtml'),
+    );
+
+    $prd_info['상품가져오기필드기술서'] = array('url' => '20.phtml');
+}
+
+if (ordCmpyId()) {
+    $ord = array(
+        '주문수집'                  => array('url' => '7.phtml'),
+        '주문상태발주처리'          => array('url' => '8.phtml'),
+        '클레임수집'                => array('url' => '11.phtml'),
+        '클레임요청처리'            => array('url' => '9.phtml'),
+        '송장등록수정'              => array('url' => '10.phtml'),
+        'QnA수집'                   => array('url' => '12.phtml'),
+        'QnA답변등록'               => array('url' => '13.phtml'),
+    );
+
+    $ord_info = array(
+        '주문필드기술서'            => array('url' => '14.phtml'),
+        '클레임필드기술서'          => array('url' => '15.phtml'),
+        'QnA필드기술서'             => array('url' => '16.phtml'),
+        '택배사 코드'               => array('url' => '17.phtml'),
+    );
+}
+
+$etc_info = array(
+    '쇼핑몰 코드 리스트'        => array('url' => '21.phtml'),
+);
+?>
+
+<h3><?=getTitle()?></h3>
+
+<ul><li data-url='main.phtml' class='on'>main</li></ul>
+
+<? if (count($prd) || count($prd_get)) { ?>
+<h3>상품</h3>
+
+<ul><? foreach ($prd as $name => $data)        { $attr = menuAttrString($data); echo "<li {$attr}>{$name}</li>"; } ?></ul>
+<ul><? foreach ($prd_get as $name => $data)    { $attr = menuAttrString($data); echo "<li {$attr}>{$name}</li>"; } ?></ul>
+
+<h3>상품정보</h3>
+
+<ul><? foreach ($prd_info as $name => $data)   { $attr = menuAttrString($data); echo "<li {$attr}>{$name}</li>"; } ?></ul>
+<? } ?>
+
+<? if (count($ord)) { ?>
+<h3>주문</h3>
+
+<ul><? foreach ($ord as $name => $data)        { $attr = menuAttrString($data); echo "<li {$attr}>{$name}</li>"; } ?></ul>
+
+<h3>주문정보</h3>
+
+<ul><? foreach ($ord_info as $name => $data)   { $attr = menuAttrString($data); echo "<li {$attr}>{$name}</li>"; } ?></ul>
+<? } ?>
+
+<h3>기타정보</h3>
+
+<ul><? foreach ($etc_info as $name => $data)   { $attr = menuAttrString($data); echo "<li {$attr}>{$name}</li>"; } ?></ul>

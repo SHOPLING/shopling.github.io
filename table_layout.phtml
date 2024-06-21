@@ -1,0 +1,59 @@
+<?
+require_once('common.lib');
+
+if ($head_string) {
+    $head = fieldStringToArray($head_string);
+}
+
+if ($body_string) {
+    $body = fieldStringToArray($body_string);
+}
+?>
+
+<h3>
+    <?=$title?>
+    <span class='ver'>(<?=pageLastUpdateDate()?>)</span>
+
+    <?
+    $tableName = 'table'.rand();
+
+    $_MASTER_SITE_IP = array($_SERVER["REMOTE_ADDR"]); $_COOKIE['CKI_DEBUG_MODE'] = 'Y';
+
+    $jsm_search_table_selector = '#'.$tableName;
+    $jsm_search_flag_keyword_sync = false;
+    $jsm_search_input_title = $title.' 검색';
+    $jsm_search_input_style = 'width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;';
+
+    include($_SERVER['DOCUMENT_ROOT']."/z_test/jsm_search.phtml");
+    ?>
+</h3>
+
+<span class='info'><?=$info?></span>
+
+<table id='<?=$tableName?>' style="<?=$tableStyle?>">
+    <? if (count($head)) { ?>
+    <? foreach($head as $row) { ?>
+    <tr>
+        <? foreach($row as $k => $th) { ?>
+        <th style="<?=$style[$k]?>"><?=trim($th)?></th>
+        <? } ?>
+    </tr>
+    <? } ?>
+    <? } ?>
+
+    <? if (count($body)) { ?>
+    <? foreach($body as $td) { ?>
+    <tr>
+        <? foreach($head[0] as $k => $v) { ?>
+        <td class="<?=$class[$k]?>"><?=trim($td[$k])?></td>
+        <? } ?>
+    </tr>
+    <? } ?>
+    <? } ?>
+</table>
+
+<?
+$title = $info = $head_string = $body_string = $tableStyle = '';
+
+$head = $body = $style = $class = array();
+?>
