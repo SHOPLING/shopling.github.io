@@ -1,1 +1,1 @@
-Github Pages README for 'Shopling API Manual'
+Github Pages for 'Shopling API Manual'
