@@ -1,53 +1,447 @@
-<?
-require_once('common.lib');
 
-if (checkCmpyId()) {
-} else {
-    exit;
-}
+<h3>
+    주문 클레임요청 처리    <span class='ver'>(마지막 수정일시: 2023-08-22 14:23:03)</span>
+</h3>
 
-$title = '주문 클레임요청 처리';
+<table>
+    <tr> <th width='100'>기능</th>  <td><xmp>삽플링 주문 클레임 처리 요청 하기  (아래 둘중 하나 골라서 사용)</xmp></td></tr>    <tr> <th>URL</th>               <td><xmp>https://api.shopling.co.kr/order/order_claim_req_api.phtml?mode=1&xml_src_url=(아래 xml 데이타가 있는 url 기술)
+https://api.shopling.co.kr/order/order_claim_req_api.phtml?mode=2     -> 소켓통신으로 바로 xml로 밀어넣을시</xmp></td>                       </tr></table>
 
-$desc = '삽플링 주문 클레임 처리 요청 하기';
+<span class='info'>※ 필수값이 아니고 해당사항이 없는경우는 미선언 하시면 됩니다.</span>
 
-$url = 'order/order_claim_req_api.phtml';
+<table>
 
-$request_string = '<reqst>
-   <apiClaimReq>
-		login_id	로그인ID	<![CDATA[]]>			Y
-		company_id	고객사 아이디				Y	shopPling 발급
-		api_auth_key	API 인증코드				Y	shopPling 발급
-      <claimInfo>	Y
-	Y	ord_no	샤플링 주문번호				Y
-	Y	claim_status	변경할 클레임 주문상태	<![CDATA[]]>			Y	클레임 처리 가능 상태 : <br>  신규주문,발송준비,발송보류,발송대기 → 취소접수<br>  취소접수 → 취소완료<br>  발송완료,주문출고완료 → 반품접수, 교환접수<br>  반품접수 → 반품수거완료<br>  교환접수 → 교환수거완료
-	Y	exchange_new	교환접수시 신규주문생성여부	<![CDATA[]]>				Y 시 교환주문으로 신규주문 생성함
-	Y	mall_claim_rsn2	클레임 사유	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)<br>교환사유 : 색상변경, 사이즈변경, 기타,배송오류, 상품파손, 옵션변경, 상품불량, 상품불만족<br>반품사유 : 상품품절, 배송오류, 배송지연,단순변심, 기타, 상품불만족, 상품불량, 상품파손<br>취소사유 : 상품품절, 기타, 단순변심,배송지연, 상품변경
-	Y	memo	클레임내용	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)
-	Y	prod_use_status	상품사용상태	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)<br>알수없음, 미개봉,  개봉후미사용,   개봉후사용
-	Y	pickup_tp	반품,교환수거방법	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)<br>교환방법: 맞교환지시, 고객발송, 수거완료확인, 수거지시, 누락재출고, 전체재출고<br>반품방법: 수거지시, 고객발송, 수거완료확인, 쇼핑몰수거
-	Y	dlvy_id	회수택배정보 택배사 코드	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)<br>택배사 코드 참조
-	Y	dlvy_no	회수택배정보 운송장번호	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)
-	Y	dlvy_fee	회수택배정보 택배비	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)
-	Y	enclose_amt	동봉금액	<![CDATA[]]>				클레임 정보(클레임 아닐시 기재하지 않습니다.)
-      </claimInfo>	Y
-   </apiClaimReq>
-</reqst>';
+    <tr>
+        <th style='width:50px;'  >요청   </th>
+        <th style='width:150px;' >XML node   </th>
+        <th style='width:30px;'  >반복       </th>
+        <th style='width:100px;' >field      </th>
+        <th style='width:300px;' >field 설명 </th>
+        <th style='width:80px;'  >Data type  </th>
+        <th style='width:50px;'  >format     </th>
+        <th style='width:20px;'  >max        </th>
+        <th style='width:30px;'  >필수       </th>
+        <th style='width:500px;' >비고       </th>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp><reqst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>   <apiClaimReq>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>login_id</xmp></td>
+        <td>로그인ID</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>company_id</xmp></td>
+        <td>고객사 아이디</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>api_auth_key</xmp></td>
+        <td>API 인증코드</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>      <claimInfo></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>ord_no</xmp></td>
+        <td>샤플링 주문번호</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>claim_status</xmp></td>
+        <td>변경할 클레임 주문상태</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>클레임&nbsp;처리&nbsp;가능&nbsp;상태&nbsp;:&nbsp;<br>&nbsp;&nbsp;신규주문,발송준비,발송보류,발송대기&nbsp;→&nbsp;취소접수<br>&nbsp;&nbsp;취소접수&nbsp;→&nbsp;취소완료<br>&nbsp;&nbsp;발송완료,주문출고완료&nbsp;→&nbsp;반품접수,&nbsp;교환접수<br>&nbsp;&nbsp;반품접수&nbsp;→&nbsp;반품수거완료<br>&nbsp;&nbsp;교환접수&nbsp;→&nbsp;교환수거완료</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>exchange_new</xmp></td>
+        <td>교환접수시 신규주문생성여부</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>Y&nbsp;시&nbsp;교환주문으로&nbsp;신규주문&nbsp;생성함</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>mall_claim_rsn2</xmp></td>
+        <td>클레임 사유</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>클레임&nbsp;정보(클레임&nbsp;아닐시&nbsp;기재하지&nbsp;않습니다.)<br>교환사유&nbsp;:&nbsp;색상변경,&nbsp;사이즈변경,&nbsp;기타,배송오류,&nbsp;상품파손,&nbsp;옵션변경,&nbsp;상품불량,&nbsp;상품불만족<br>반품사유&nbsp;:&nbsp;상품품절,&nbsp;배송오류,&nbsp;배송지연,단순변심,&nbsp;기타,&nbsp;상품불만족,&nbsp;상품불량,&nbsp;상품파손<br>취소사유&nbsp;:&nbsp;상품품절,&nbsp;기타,&nbsp;단순변심,배송지연,&nbsp;상품변경</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>memo</xmp></td>
+        <td>클레임내용</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>클레임&nbsp;정보(클레임&nbsp;아닐시&nbsp;기재하지&nbsp;않습니다.)</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>prod_use_status</xmp></td>
+        <td>상품사용상태</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>클레임&nbsp;정보(클레임&nbsp;아닐시&nbsp;기재하지&nbsp;않습니다.)<br>알수없음,&nbsp;미개봉,&nbsp;&nbsp;개봉후미사용,&nbsp;&nbsp;&nbsp;개봉후사용</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>pickup_tp</xmp></td>
+        <td>반품,교환수거방법</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>클레임&nbsp;정보(클레임&nbsp;아닐시&nbsp;기재하지&nbsp;않습니다.)<br>교환방법:&nbsp;맞교환지시,&nbsp;고객발송,&nbsp;수거완료확인,&nbsp;수거지시,&nbsp;누락재출고,&nbsp;전체재출고<br>반품방법:&nbsp;수거지시,&nbsp;고객발송,&nbsp;수거완료확인,&nbsp;쇼핑몰수거</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>dlvy_id</xmp></td>
+        <td>회수택배정보 택배사 코드</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>클레임&nbsp;정보(클레임&nbsp;아닐시&nbsp;기재하지&nbsp;않습니다.)<br>택배사&nbsp;코드&nbsp;참조</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>dlvy_no</xmp></td>
+        <td>회수택배정보 운송장번호</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>클레임&nbsp;정보(클레임&nbsp;아닐시&nbsp;기재하지&nbsp;않습니다.)</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>dlvy_fee</xmp></td>
+        <td>회수택배정보 택배비</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>클레임&nbsp;정보(클레임&nbsp;아닐시&nbsp;기재하지&nbsp;않습니다.)</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>enclose_amt</xmp></td>
+        <td>동봉금액</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>클레임&nbsp;정보(클레임&nbsp;아닐시&nbsp;기재하지&nbsp;않습니다.)</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>      </claimInfo></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>   </apiClaimReq>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></reqst></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr></table>
 
-$response_string = '<rspns>
-   <apiClaimReqRst>
-		login_id	로그인ID	<![CDATA[]]>			Y
-		company_id	고객사 아이디				Y
-	Y
-      <claimInfoRst>	Y	ord_no	샤플링 주문번호				Y
-	Y	code	성공,실패 결과코드	<![CDATA[]]>
-	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
-	Y
-		succs_cnt	성공건수
-      </claimInfoRst>		fail_cnt	실패건수
-   </apiClaimReqRst>
-</rspns> 								';
+<table>
 
-$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+    <tr>
+        <th style='width:50px;'  >응답   </th>
+        <th style='width:150px;' >XML node   </th>
+        <th style='width:30px;'  >반복       </th>
+        <th style='width:100px;' >field      </th>
+        <th style='width:300px;' >field 설명 </th>
+        <th style='width:80px;'  >Data type  </th>
+        <th style='width:50px;'  >format     </th>
+        <th style='width:20px;'  >max        </th>
+        <th style='width:30px;'  >필수       </th>
+        <th style='width:500px;' >비고       </th>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp><rspns>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>   <apiClaimReqRst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>login_id</xmp></td>
+        <td>로그인ID</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>company_id</xmp></td>
+        <td>고객사 아이디</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>      <claimInfoRst></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>ord_no</xmp></td>
+        <td>샤플링 주문번호</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>code</xmp></td>
+        <td>성공,실패 결과코드</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>msg</xmp></td>
+        <td>성공,실패 결과메세지</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>succs_cnt</xmp></td>
+        <td>성공건수</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>      </claimInfoRst></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>fail_cnt</xmp></td>
+        <td>실패건수</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>   </apiClaimReqRst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></rspns> </xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr></table>
+
+<h3>XML 요청 예시</h3><div class='code'><pre><xmp><\?xml version="1.0" encoding="UTF-8"?>
 <reqst>
    <apiClaimReq>
       <login_id><![CDATA[shoppling]]></login_id>
@@ -67,9 +461,8 @@ $request_example = '<?xml version="1.0" encoding="UTF-8"?>
          <enclose_amt><![CDATA[5000]]></enclose_amt>
       </claimInfo>
    </apiClaimReq>
-</reqst>';
-
-$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+</reqst></xmp></pre></div>
+<h3>XML 응답 예시</h3><div class='code'><pre><xmp><\?xml version="1.0" encoding="UTF-8"?>
 <rspns>
    <apiClaimReqRst>
       <login_id><![CDATA[shoppling]]></login_id>
@@ -82,8 +475,5 @@ $response_example = '<?xml version="1.0" encoding="UTF-8"?>
       <succs_cnt>1</succs_cnt>
       <fail_cnt>0</fail_cnt>
    </apiClaimReqRst>
-</rspns>';
+</rspns></xmp></pre></div>
 
-require_once('api_content_layout.phtml');
-
-?>

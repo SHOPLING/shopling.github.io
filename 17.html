@@ -1,120 +1,463 @@
-<?
-require_once('common.lib');
 
-if (checkCmpyId()) {
-} else {
-    exit;
-}
+<h3>
+    택배사 코드    <span class='ver'>(마지막 수정일시: 2024-06-21 17:53:30)</span>
 
-$title = '택배사 코드';
 
-$style = array(
-    'width: 100px;',
-);
+<script>
 
-$class = array(
-    'center',
-);
+	function jsm_search_fn490507501(_input)
+	{
+		var _table, _select, _keyword;
 
-$head_string = '택배사코드	택배사';
+		_keyword = _input.value;
 
-$body_string = '001	한진택배
-002	현대택배
-004	CJGLS
-005	동부택배
-006	우체국택배
-007	KGB택배
-008	로젠택배
-009	옐로우캡
-010	경동택배
-011	SC로지스(사가와)
-012	천일택배
-013	대신택배
-014	일양택배
-015	업체(설치)배송
-016	편의점택배
-017	합동택배
-018	CJ대한통운
-019	하나로로지스
-020	네덱스택배
-021	이노지스택배
-022	GTX로지스
-023	KG로지스
-024	우편등기
-025	우체국국제등기
-026	일반우편
-027	ACI Express
-028	AirBoyExpress
-029	CVSnet
-030	GSM 국제택배
-031	KT로지스
-032	WIZWA
-033	고려택배
-034	나이트맨
-035	네덱스
-036	다젠
-037	대신택배
-039	동원로엑스
-040	동원택배
-041	삼성택배HTH(구)
-042	스피디익스프레스
-043	신세계(세덱스)
-044	우체국EMS
-045	우체국택배(연동)
-046	이젠택배
-047	조이익스프레스
-048	트라넷
-049	현대국제택배
-050	롯데택배
-051	DHL
-052	DHL(독일)
-053	FEDEX
-054	EZUSA
-056	UPS
-057	USPS
-058	Qxpress
-059	TNT Express
-060	한의사랑택배
-061	건영택배
-062	GSMNtoN(인로스)
-063	DHL Global Mail
-064	i-Parcel
-065	한덱스
-066	CU 편의점택배
-067	KGL네트웍스
-068	APEX(EMS Express)
-069	굿트럭
-070	GSI Express
-071	CJ대한통운 국제특송
-072	애니트럭
-073	SLX
-074	호남택배
-075	우리한방택배
-076	롯데택배 해외특송
-077	드림택배
-078	인트라스(INTRAS)
-079	홈픽택배
-080	하이브시티
-081	티피엠코리아
-082	AliExpress Standard Shipping
-083	현대글로비스
-084	부릉
-085	CWAY EXPRESS
-086	우리택배
-087	핑퐁택배
-088	RINCOS
-089	에스더쉬핑
-090	지에이치스피드
-091	은하쉬핑
-092	LTL
-093	ACE express
-901	업체직송
-902	자체배송
-903	방문수령
-904	직접전달
-905	퀵서비스
-990	발송없음
-991	범한판토스
-999	기타';
+					_table = $("#table1191481236");
 
-require_once('table_layout.phtml');
+		if(_table) {
+			_table.find("tr").each(function(idx){
+				if(idx > 0) {
+					if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0 && !$(this).find("input:checkbox:eq(0)").is(":checked")){
+						$(this).hide();
+					}else{
+						$(this).show();
+					}
+				}
+			});
+		}
+
+
+		if(_select) {
+			_select.html($("#jsm_search_hidden_select490507501").html());
+
+			$(" option").each(function(){
+				if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0) {
+					$(this).remove();
+				}
+			});
+		}
+	}
+
+	$(document).ready(function(){
+
+			});
+
+</script>
+
+
+<input
+	type="text"
+	style='width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;'
+	class="jsm_search_keyword_input"
+	id="jsm_search_input490507501"
+	onblur="jsm_search_fn490507501(this);"
+	onfocus="jsm_search_fn490507501(this);"
+	onkeyup="jsm_search_fn490507501(this);"
+	placeholder="택배사 코드 검색"
+	title="택배사 코드 검색"
+	>
+<select id="jsm_search_hidden_select490507501" style="display:none;"></select>
+
+</h3>
+
+<span class='info'></span>
+
+<table id='table1191481236' style="">
+            <tr>
+                <th style="width: 100px;">택배사코드</th>
+                <th style="">택배사</th>
+            </tr>
+
+            <tr>
+                <td class="center">001</td>
+                <td class="">한진택배</td>
+            </tr>
+        <tr>
+                <td class="center">002</td>
+                <td class="">현대택배</td>
+            </tr>
+        <tr>
+                <td class="center">004</td>
+                <td class="">CJGLS</td>
+            </tr>
+        <tr>
+                <td class="center">005</td>
+                <td class="">동부택배</td>
+            </tr>
+        <tr>
+                <td class="center">006</td>
+                <td class="">우체국택배</td>
+            </tr>
+        <tr>
+                <td class="center">007</td>
+                <td class="">KGB택배</td>
+            </tr>
+        <tr>
+                <td class="center">008</td>
+                <td class="">로젠택배</td>
+            </tr>
+        <tr>
+                <td class="center">009</td>
+                <td class="">옐로우캡</td>
+            </tr>
+        <tr>
+                <td class="center">010</td>
+                <td class="">경동택배</td>
+            </tr>
+        <tr>
+                <td class="center">011</td>
+                <td class="">SC로지스(사가와)</td>
+            </tr>
+        <tr>
+                <td class="center">012</td>
+                <td class="">천일택배</td>
+            </tr>
+        <tr>
+                <td class="center">013</td>
+                <td class="">대신택배</td>
+            </tr>
+        <tr>
+                <td class="center">014</td>
+                <td class="">일양택배</td>
+            </tr>
+        <tr>
+                <td class="center">015</td>
+                <td class="">업체(설치)배송</td>
+            </tr>
+        <tr>
+                <td class="center">016</td>
+                <td class="">편의점택배</td>
+            </tr>
+        <tr>
+                <td class="center">017</td>
+                <td class="">합동택배</td>
+            </tr>
+        <tr>
+                <td class="center">018</td>
+                <td class="">CJ대한통운</td>
+            </tr>
+        <tr>
+                <td class="center">019</td>
+                <td class="">하나로로지스</td>
+            </tr>
+        <tr>
+                <td class="center">020</td>
+                <td class="">네덱스택배</td>
+            </tr>
+        <tr>
+                <td class="center">021</td>
+                <td class="">이노지스택배</td>
+            </tr>
+        <tr>
+                <td class="center">022</td>
+                <td class="">GTX로지스</td>
+            </tr>
+        <tr>
+                <td class="center">023</td>
+                <td class="">KG로지스</td>
+            </tr>
+        <tr>
+                <td class="center">024</td>
+                <td class="">우편등기</td>
+            </tr>
+        <tr>
+                <td class="center">025</td>
+                <td class="">우체국국제등기</td>
+            </tr>
+        <tr>
+                <td class="center">026</td>
+                <td class="">일반우편</td>
+            </tr>
+        <tr>
+                <td class="center">027</td>
+                <td class="">ACI Express</td>
+            </tr>
+        <tr>
+                <td class="center">028</td>
+                <td class="">AirBoyExpress</td>
+            </tr>
+        <tr>
+                <td class="center">029</td>
+                <td class="">CVSnet</td>
+            </tr>
+        <tr>
+                <td class="center">030</td>
+                <td class="">GSM 국제택배</td>
+            </tr>
+        <tr>
+                <td class="center">031</td>
+                <td class="">KT로지스</td>
+            </tr>
+        <tr>
+                <td class="center">032</td>
+                <td class="">WIZWA</td>
+            </tr>
+        <tr>
+                <td class="center">033</td>
+                <td class="">고려택배</td>
+            </tr>
+        <tr>
+                <td class="center">034</td>
+                <td class="">나이트맨</td>
+            </tr>
+        <tr>
+                <td class="center">035</td>
+                <td class="">네덱스</td>
+            </tr>
+        <tr>
+                <td class="center">036</td>
+                <td class="">다젠</td>
+            </tr>
+        <tr>
+                <td class="center">037</td>
+                <td class="">대신택배</td>
+            </tr>
+        <tr>
+                <td class="center">039</td>
+                <td class="">동원로엑스</td>
+            </tr>
+        <tr>
+                <td class="center">040</td>
+                <td class="">동원택배</td>
+            </tr>
+        <tr>
+                <td class="center">041</td>
+                <td class="">삼성택배HTH(구)</td>
+            </tr>
+        <tr>
+                <td class="center">042</td>
+                <td class="">스피디익스프레스</td>
+            </tr>
+        <tr>
+                <td class="center">043</td>
+                <td class="">신세계(세덱스)</td>
+            </tr>
+        <tr>
+                <td class="center">044</td>
+                <td class="">우체국EMS</td>
+            </tr>
+        <tr>
+                <td class="center">045</td>
+                <td class="">우체국택배(연동)</td>
+            </tr>
+        <tr>
+                <td class="center">046</td>
+                <td class="">이젠택배</td>
+            </tr>
+        <tr>
+                <td class="center">047</td>
+                <td class="">조이익스프레스</td>
+            </tr>
+        <tr>
+                <td class="center">048</td>
+                <td class="">트라넷</td>
+            </tr>
+        <tr>
+                <td class="center">049</td>
+                <td class="">현대국제택배</td>
+            </tr>
+        <tr>
+                <td class="center">050</td>
+                <td class="">롯데택배</td>
+            </tr>
+        <tr>
+                <td class="center">051</td>
+                <td class="">DHL</td>
+            </tr>
+        <tr>
+                <td class="center">052</td>
+                <td class="">DHL(독일)</td>
+            </tr>
+        <tr>
+                <td class="center">053</td>
+                <td class="">FEDEX</td>
+            </tr>
+        <tr>
+                <td class="center">054</td>
+                <td class="">EZUSA</td>
+            </tr>
+        <tr>
+                <td class="center">056</td>
+                <td class="">UPS</td>
+            </tr>
+        <tr>
+                <td class="center">057</td>
+                <td class="">USPS</td>
+            </tr>
+        <tr>
+                <td class="center">058</td>
+                <td class="">Qxpress</td>
+            </tr>
+        <tr>
+                <td class="center">059</td>
+                <td class="">TNT Express</td>
+            </tr>
+        <tr>
+                <td class="center">060</td>
+                <td class="">한의사랑택배</td>
+            </tr>
+        <tr>
+                <td class="center">061</td>
+                <td class="">건영택배</td>
+            </tr>
+        <tr>
+                <td class="center">062</td>
+                <td class="">GSMNtoN(인로스)</td>
+            </tr>
+        <tr>
+                <td class="center">063</td>
+                <td class="">DHL Global Mail</td>
+            </tr>
+        <tr>
+                <td class="center">064</td>
+                <td class="">i-Parcel</td>
+            </tr>
+        <tr>
+                <td class="center">065</td>
+                <td class="">한덱스</td>
+            </tr>
+        <tr>
+                <td class="center">066</td>
+                <td class="">CU 편의점택배</td>
+            </tr>
+        <tr>
+                <td class="center">067</td>
+                <td class="">KGL네트웍스</td>
+            </tr>
+        <tr>
+                <td class="center">068</td>
+                <td class="">APEX(EMS Express)</td>
+            </tr>
+        <tr>
+                <td class="center">069</td>
+                <td class="">굿트럭</td>
+            </tr>
+        <tr>
+                <td class="center">070</td>
+                <td class="">GSI Express</td>
+            </tr>
+        <tr>
+                <td class="center">071</td>
+                <td class="">CJ대한통운 국제특송</td>
+            </tr>
+        <tr>
+                <td class="center">072</td>
+                <td class="">애니트럭</td>
+            </tr>
+        <tr>
+                <td class="center">073</td>
+                <td class="">SLX</td>
+            </tr>
+        <tr>
+                <td class="center">074</td>
+                <td class="">호남택배</td>
+            </tr>
+        <tr>
+                <td class="center">075</td>
+                <td class="">우리한방택배</td>
+            </tr>
+        <tr>
+                <td class="center">076</td>
+                <td class="">롯데택배 해외특송</td>
+            </tr>
+        <tr>
+                <td class="center">077</td>
+                <td class="">드림택배</td>
+            </tr>
+        <tr>
+                <td class="center">078</td>
+                <td class="">인트라스(INTRAS)</td>
+            </tr>
+        <tr>
+                <td class="center">079</td>
+                <td class="">홈픽택배</td>
+            </tr>
+        <tr>
+                <td class="center">080</td>
+                <td class="">하이브시티</td>
+            </tr>
+        <tr>
+                <td class="center">081</td>
+                <td class="">티피엠코리아</td>
+            </tr>
+        <tr>
+                <td class="center">082</td>
+                <td class="">AliExpress Standard Shipping</td>
+            </tr>
+        <tr>
+                <td class="center">083</td>
+                <td class="">현대글로비스</td>
+            </tr>
+        <tr>
+                <td class="center">084</td>
+                <td class="">부릉</td>
+            </tr>
+        <tr>
+                <td class="center">085</td>
+                <td class="">CWAY EXPRESS</td>
+            </tr>
+        <tr>
+                <td class="center">086</td>
+                <td class="">우리택배</td>
+            </tr>
+        <tr>
+                <td class="center">087</td>
+                <td class="">핑퐁택배</td>
+            </tr>
+        <tr>
+                <td class="center">088</td>
+                <td class="">RINCOS</td>
+            </tr>
+        <tr>
+                <td class="center">089</td>
+                <td class="">에스더쉬핑</td>
+            </tr>
+        <tr>
+                <td class="center">090</td>
+                <td class="">지에이치스피드</td>
+            </tr>
+        <tr>
+                <td class="center">091</td>
+                <td class="">은하쉬핑</td>
+            </tr>
+        <tr>
+                <td class="center">092</td>
+                <td class="">LTL</td>
+            </tr>
+        <tr>
+                <td class="center">093</td>
+                <td class="">ACE express</td>
+            </tr>
+        <tr>
+                <td class="center">901</td>
+                <td class="">업체직송</td>
+            </tr>
+        <tr>
+                <td class="center">902</td>
+                <td class="">자체배송</td>
+            </tr>
+        <tr>
+                <td class="center">903</td>
+                <td class="">방문수령</td>
+            </tr>
+        <tr>
+                <td class="center">904</td>
+                <td class="">직접전달</td>
+            </tr>
+        <tr>
+                <td class="center">905</td>
+                <td class="">퀵서비스</td>
+            </tr>
+        <tr>
+                <td class="center">990</td>
+                <td class="">발송없음</td>
+            </tr>
+        <tr>
+                <td class="center">991</td>
+                <td class="">범한판토스</td>
+            </tr>
+        <tr>
+                <td class="center">999</td>
+                <td class="">기타</td>
+            </tr>
+        </table>
+

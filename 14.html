@@ -1,87 +1,475 @@
-<?
-require_once('common.lib');
 
-if (checkCmpyId()) {
-} else {
-    exit;
-}
+<h3>
+    주문필드 기술서    <span class='ver'>(마지막 수정일시: 2023-09-12 16:24:31)</span>
 
-$title = '주문필드 기술서';
 
-$style = array(
-    'width: 300px;',
-    'width: 150px;',
-    'width: 150px;',
-);
+<script>
 
-$head_string = '필드 변수 항목	필드 변수 명	필드 변수 타입	필드 변수 설명';
+	function jsm_search_fn1679322634(_input)
+	{
+		var _table, _select, _keyword;
 
-$body_string = '관리번호(샵플링주문번호)	ord_no	int(12)
-쇼핑몰코드	mall_key	varchar(11)
-쇼핑몰아이디	mall_login_id	varchar(50)
-쇼핑몰주문번호	mall_ord_id	varchar(50)
-주문순번	mall_ord_seq	varchar(50)
-배송번호,배송지시번호,합포장번호, 출고번호	mall_dlvy_id	varchar(50)
-배송순번	mall_dlvy_seq	varchar(50)
-몰 주문일자	mall_ord_dt	varchar(14)
-몰 결제일자	mall_pay_dt	varchar(14)
-주문유형	ord_tp	char(1)	주문, 교환주문, 사은품
-자동수집구분	auto_fg	char(1)	자동, 수동
-주문상태	ord_status	char(3)	신규주문, 발송준비, 발송보류, 발송대기, 발송완료, 취소접수, 취소완료, 반품접수, 반품회수완료, 교환접수, 교환회수완료
-Shopling 매핑 상품번호	prod_id	int(12)	매핑시점에 확정되며 시점관리입니다.
-Shopling 매핑 옵션코드	opt_id	int(12)	매핑시점에 확정되며 시점관리입니다.
-Shopling 매핑 상품명	t_prod_nm	varchar(255)	매핑시점에 확정되며 시점관리입니다.
-Shopling 매핑 옵션명	t_opt_valu	varchar(50)	매핑시점에 확정되며 시점관리입니다.
-Shopling 매핑 매입처 코드	buying_cd	varchar(10)	매핑시점에 확정되며 시점관리입니다.
-Shopling 매핑 과세구분	tax_tp	char(1)	매핑시점에 확정되며 시점관리입니다. (과세, 면세, 비과세, 영세)
-Shopling 매핑 물류처코드	logis_cd	varchar(12)	매핑시점에 확정되며 시점관리입니다.
-Shopling 매핑 자사상품코드	ptn_goods_cd	varchar(50)	매핑시점에 확정되며 시점관리입니다.
-주문자정보 : 주문자ID	mall_user_id	varchar(255)
-주문자정보 : 주문자명	mall_user_nm	varchar(255)
-주문자정보 : 주문자전화번호	mall_user_tel	varchar(255)
-주문자정보 : 주문자휴대폰	mall_user_phone	varchar(255)
-주문자정보 : 주문자이메일	mall_user_email	varchar(255)
-수취인정보 : 수취인전화번호	mall_rcv_tel	varchar(255)
-수취인정보 : 수취인휴대폰	mall_rcv_phone	varchar(255)
-수취인정보 : 수취인이메일	mall_rcv_email	varchar(255)
-수취인정보 : 수취인명	mall_rcv_nm	varchar(255)
-수취인정보 : 수취인 영문명	mall_rcv_en_nm	varchar(50)
-수취인정보 : 수취인우편번호	mall_rcv_zipcd	varchar(7)
-수취인정보 : 수취인 주소1	mall_rcv_addr1	varchar(255)
-수취인정보 : 수취인 주소2	mall_rcv_addr2	varchar(400)
-수취인정보 : 수취인 도로명 주소1	mall_rcv_add1	varchar(255)
-수취인정보 : 수취인 도로명 주소2	mall_rcv_add2	varchar(300)
-수취인정보 : 배송메세지	mall_rcv_msg	varchar(250)
-수집주문정보 : 주문구분 	mall_ord_tp	varchar(30)	주문, 직송, 직택배, 해외주문
-수집주문정보 : 주문총금액	mall_ord_amt	int(12)
-수집주문정보 : 결제총금액	mall_pay_amt	int(12)
-수집주문정보 : 결제방법	mall_pay_tp	varchar(20)	 카드, 무통장 등등
-수집주문정보 : 판매단가	mall_unit_price	int(12)
-수집주문정보 : 쇼핑몰공급가	mall_supply_price	int(12)	(수집or가공)
-수집주문정보 : 배송비지불방법	mall_dlvy_amt_tp2	char(1)	무료, 착불, 선결제, 착불/선결제, 조건부무료, 기타
-수집주문정보 : 배송비	mall_dlvy_amt	int(12)
-수집주문정보 : 주문수량	mall_ord_cnt	int(12)
-정산금액	djustment_amt	int(12)
-원가	org_price	int(12)	(매입단가(상품정보의 매입가)
-운송장정보 : 택배사코드	dlvy_id	varchar(3)
-운송장정보 : 운송장번호	dlvy_no	varchar(30)
-운송장정보 : 쇼핑몰운송장전송일	dlvy_send_dt	varchar(14)
-운송장정보 : 쇼핑몰운송장전송결과	dlvy_tp	char(2)	전송성공, 강제처리, :전송실패, 미전송
-상품수집정보 : 쇼핑몰상품코드	mall_prod_key	varchar(50)
-상품수집정보 : 자사상품코드	mall_ptn_goods_cd	varchar(30)
-상품수집정보 : 상품명	mall_prod_nm	varchar(255)
-상품수집정보 : 옵션명	mall_opt_valu	varchar(255)
-상품수집정보 : 옵션가격	mall_opt_price	int(12)
-상품수집정보 : 옵션코드	mall_opt_cd	varchar(20)
-상품수집정보 : 추가상품명	mall_add_valu	varchar(255)
-상품수집정보 : 추가금액	mall_add_price	int(12)
-상품수집정보 : 사은품	mall_gift	varchar(255)
-기타수집정보 : 설치방법	mall_int_tp	varchar(50)
-기타수집정보 : 설치비	mall_int_amt	int(12)
-기타수집정보 : 매출매체정보	mall_sale_root	varchar(30)
-배송희망일	mall_expect_dt	varchar(30)
-원주문번호	org_ord_no	int(12)	분리,클레임시 원주문번호
-주문생성일	i_dt	varchar(14)	20170101132555
-상품수집정보 : 자사옵션코드	mall_ptn_opt_cd	varchar(30)	상품등록시 전송한 옵션자체코드를 가져옴 단, 쇼핑몰에서 주문수집시 해당 정보를 주지 않은 경우는  수집 못함.';
+		_keyword = _input.value;
 
-require_once('table_layout.phtml');
+					_table = $("#table1233994131");
+
+		if(_table) {
+			_table.find("tr").each(function(idx){
+				if(idx > 0) {
+					if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0 && !$(this).find("input:checkbox:eq(0)").is(":checked")){
+						$(this).hide();
+					}else{
+						$(this).show();
+					}
+				}
+			});
+		}
+
+
+		if(_select) {
+			_select.html($("#jsm_search_hidden_select1679322634").html());
+
+			$(" option").each(function(){
+				if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0) {
+					$(this).remove();
+				}
+			});
+		}
+	}
+
+	$(document).ready(function(){
+
+			});
+
+</script>
+
+
+<input
+	type="text"
+	style='width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;'
+	class="jsm_search_keyword_input"
+	id="jsm_search_input1679322634"
+	onblur="jsm_search_fn1679322634(this);"
+	onfocus="jsm_search_fn1679322634(this);"
+	onkeyup="jsm_search_fn1679322634(this);"
+	placeholder="주문필드 기술서 검색"
+	title="주문필드 기술서 검색"
+	>
+<select id="jsm_search_hidden_select1679322634" style="display:none;"></select>
+
+</h3>
+
+<span class='info'></span>
+
+<table id='table1233994131' style="">
+            <tr>
+                <th style="width: 300px;">필드 변수 항목</th>
+                <th style="width: 150px;">필드 변수 명</th>
+                <th style="width: 150px;">필드 변수 타입</th>
+                <th style="">필드 변수 설명</th>
+            </tr>
+
+            <tr>
+                <td class="">관리번호(샵플링주문번호)</td>
+                <td class="">ord_no</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">쇼핑몰코드</td>
+                <td class="">mall_key</td>
+                <td class="">varchar(11)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">쇼핑몰아이디</td>
+                <td class="">mall_login_id</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">쇼핑몰주문번호</td>
+                <td class="">mall_ord_id</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">주문순번</td>
+                <td class="">mall_ord_seq</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">배송번호,배송지시번호,합포장번호, 출고번호</td>
+                <td class="">mall_dlvy_id</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">배송순번</td>
+                <td class="">mall_dlvy_seq</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">몰 주문일자</td>
+                <td class="">mall_ord_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">몰 결제일자</td>
+                <td class="">mall_pay_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">주문유형</td>
+                <td class="">ord_tp</td>
+                <td class="">char(1)</td>
+                <td class="">주문, 교환주문, 사은품</td>
+            </tr>
+        <tr>
+                <td class="">자동수집구분</td>
+                <td class="">auto_fg</td>
+                <td class="">char(1)</td>
+                <td class="">자동, 수동</td>
+            </tr>
+        <tr>
+                <td class="">주문상태</td>
+                <td class="">ord_status</td>
+                <td class="">char(3)</td>
+                <td class="">신규주문, 발송준비, 발송보류, 발송대기, 발송완료, 취소접수, 취소완료, 반품접수, 반품회수완료, 교환접수, 교환회수완료</td>
+            </tr>
+        <tr>
+                <td class="">Shopling 매핑 상품번호</td>
+                <td class="">prod_id</td>
+                <td class="">int(12)</td>
+                <td class="">매핑시점에 확정되며 시점관리입니다.</td>
+            </tr>
+        <tr>
+                <td class="">Shopling 매핑 옵션코드</td>
+                <td class="">opt_id</td>
+                <td class="">int(12)</td>
+                <td class="">매핑시점에 확정되며 시점관리입니다.</td>
+            </tr>
+        <tr>
+                <td class="">Shopling 매핑 상품명</td>
+                <td class="">t_prod_nm</td>
+                <td class="">varchar(255)</td>
+                <td class="">매핑시점에 확정되며 시점관리입니다.</td>
+            </tr>
+        <tr>
+                <td class="">Shopling 매핑 옵션명</td>
+                <td class="">t_opt_valu</td>
+                <td class="">varchar(50)</td>
+                <td class="">매핑시점에 확정되며 시점관리입니다.</td>
+            </tr>
+        <tr>
+                <td class="">Shopling 매핑 매입처 코드</td>
+                <td class="">buying_cd</td>
+                <td class="">varchar(10)</td>
+                <td class="">매핑시점에 확정되며 시점관리입니다.</td>
+            </tr>
+        <tr>
+                <td class="">Shopling 매핑 과세구분</td>
+                <td class="">tax_tp</td>
+                <td class="">char(1)</td>
+                <td class="">매핑시점에 확정되며 시점관리입니다. (과세, 면세, 비과세, 영세)</td>
+            </tr>
+        <tr>
+                <td class="">Shopling 매핑 물류처코드</td>
+                <td class="">logis_cd</td>
+                <td class="">varchar(12)</td>
+                <td class="">매핑시점에 확정되며 시점관리입니다.</td>
+            </tr>
+        <tr>
+                <td class="">Shopling 매핑 자사상품코드</td>
+                <td class="">ptn_goods_cd</td>
+                <td class="">varchar(50)</td>
+                <td class="">매핑시점에 확정되며 시점관리입니다.</td>
+            </tr>
+        <tr>
+                <td class="">주문자정보 : 주문자ID</td>
+                <td class="">mall_user_id</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">주문자정보 : 주문자명</td>
+                <td class="">mall_user_nm</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">주문자정보 : 주문자전화번호</td>
+                <td class="">mall_user_tel</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">주문자정보 : 주문자휴대폰</td>
+                <td class="">mall_user_phone</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">주문자정보 : 주문자이메일</td>
+                <td class="">mall_user_email</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인전화번호</td>
+                <td class="">mall_rcv_tel</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인휴대폰</td>
+                <td class="">mall_rcv_phone</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인이메일</td>
+                <td class="">mall_rcv_email</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인명</td>
+                <td class="">mall_rcv_nm</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인 영문명</td>
+                <td class="">mall_rcv_en_nm</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인우편번호</td>
+                <td class="">mall_rcv_zipcd</td>
+                <td class="">varchar(7)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인 주소1</td>
+                <td class="">mall_rcv_addr1</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인 주소2</td>
+                <td class="">mall_rcv_addr2</td>
+                <td class="">varchar(400)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인 도로명 주소1</td>
+                <td class="">mall_rcv_add1</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 수취인 도로명 주소2</td>
+                <td class="">mall_rcv_add2</td>
+                <td class="">varchar(300)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수취인정보 : 배송메세지</td>
+                <td class="">mall_rcv_msg</td>
+                <td class="">varchar(250)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수집주문정보 : 주문구분</td>
+                <td class="">mall_ord_tp</td>
+                <td class="">varchar(30)</td>
+                <td class="">주문, 직송, 직택배, 해외주문</td>
+            </tr>
+        <tr>
+                <td class="">수집주문정보 : 주문총금액</td>
+                <td class="">mall_ord_amt</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수집주문정보 : 결제총금액</td>
+                <td class="">mall_pay_amt</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수집주문정보 : 결제방법</td>
+                <td class="">mall_pay_tp</td>
+                <td class="">varchar(20)</td>
+                <td class="">카드, 무통장 등등</td>
+            </tr>
+        <tr>
+                <td class="">수집주문정보 : 판매단가</td>
+                <td class="">mall_unit_price</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수집주문정보 : 쇼핑몰공급가</td>
+                <td class="">mall_supply_price</td>
+                <td class="">int(12)</td>
+                <td class="">(수집or가공)</td>
+            </tr>
+        <tr>
+                <td class="">수집주문정보 : 배송비지불방법</td>
+                <td class="">mall_dlvy_amt_tp2</td>
+                <td class="">char(1)</td>
+                <td class="">무료, 착불, 선결제, 착불/선결제, 조건부무료, 기타</td>
+            </tr>
+        <tr>
+                <td class="">수집주문정보 : 배송비</td>
+                <td class="">mall_dlvy_amt</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수집주문정보 : 주문수량</td>
+                <td class="">mall_ord_cnt</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">정산금액</td>
+                <td class="">djustment_amt</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">원가</td>
+                <td class="">org_price</td>
+                <td class="">int(12)</td>
+                <td class="">(매입단가(상품정보의 매입가)</td>
+            </tr>
+        <tr>
+                <td class="">운송장정보 : 택배사코드</td>
+                <td class="">dlvy_id</td>
+                <td class="">varchar(3)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">운송장정보 : 운송장번호</td>
+                <td class="">dlvy_no</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">운송장정보 : 쇼핑몰운송장전송일</td>
+                <td class="">dlvy_send_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">운송장정보 : 쇼핑몰운송장전송결과</td>
+                <td class="">dlvy_tp</td>
+                <td class="">char(2)</td>
+                <td class="">전송성공, 강제처리, :전송실패, 미전송</td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 쇼핑몰상품코드</td>
+                <td class="">mall_prod_key</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 자사상품코드</td>
+                <td class="">mall_ptn_goods_cd</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 상품명</td>
+                <td class="">mall_prod_nm</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 옵션명</td>
+                <td class="">mall_opt_valu</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 옵션가격</td>
+                <td class="">mall_opt_price</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 옵션코드</td>
+                <td class="">mall_opt_cd</td>
+                <td class="">varchar(20)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 추가상품명</td>
+                <td class="">mall_add_valu</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 추가금액</td>
+                <td class="">mall_add_price</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 사은품</td>
+                <td class="">mall_gift</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">기타수집정보 : 설치방법</td>
+                <td class="">mall_int_tp</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">기타수집정보 : 설치비</td>
+                <td class="">mall_int_amt</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">기타수집정보 : 매출매체정보</td>
+                <td class="">mall_sale_root</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">배송희망일</td>
+                <td class="">mall_expect_dt</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">원주문번호</td>
+                <td class="">org_ord_no</td>
+                <td class="">int(12)</td>
+                <td class="">분리,클레임시 원주문번호</td>
+            </tr>
+        <tr>
+                <td class="">주문생성일</td>
+                <td class="">i_dt</td>
+                <td class="">varchar(14)</td>
+                <td class="">20170101132555</td>
+            </tr>
+        <tr>
+                <td class="">상품수집정보 : 자사옵션코드</td>
+                <td class="">mall_ptn_opt_cd</td>
+                <td class="">varchar(30)</td>
+                <td class="">상품등록시 전송한 옵션자체코드를 가져옴 단, 쇼핑몰에서 주문수집시 해당 정보를 주지 않은 경우는  수집 못함.</td>
+            </tr>
+        </table>
+

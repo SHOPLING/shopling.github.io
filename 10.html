@@ -1,46 +1,363 @@
-<?
-require_once('common.lib');
 
-if (checkCmpyId()) {
-} else {
-    exit;
-}
+<h3>
+    송장등록    <span class='ver'>(마지막 수정일시: 2023-08-22 14:23:03)</span>
+</h3>
 
-$title = '송장등록';
+<table>
+    <tr> <th width='100'>기능</th>  <td><xmp>삽플링에 송장등록 하기  (아래 둘중 하나 골라서 사용)</xmp></td></tr>    <tr> <th>URL</th>               <td><xmp>https://api.shopling.co.kr/invoice/invoice_registration_api.phtml?mode=1&xml_src_url=(아래 xml 데이타가 있는 url 기술)
+https://api.shopling.co.kr/invoice/invoice_registration_api.phtml?mode=2     -> 소켓통신으로 바로 xml로 밀어넣을시</xmp></td>                       </tr></table>
 
-$desc = '삽플링에 송장등록 하기';
+<span class='info'>※ 필수값이 아니고 해당사항이 없는경우는 미선언 하시면 됩니다.</span>
 
-$url = 'invoice/invoice_registration_api.phtml';
+<table>
 
-$request_string = '<reqst>
-   <apiDlvyReg>
-		login_id	로그인ID	<![CDATA[]]>			Y
-		company_id	고객사 아이디				Y	shopPling 발급
-		api_auth_key	API 인증코드				Y	shopPling 발급
-      <dlvyInfo>	Y
-	Y	ord_no	샤플링 주문번호				Y
-	Y	dlvery_id	택배사코드	<![CDATA[]]>			Y	택배사 코드 참조
-	Y	invoice_no	운송장번호	<![CDATA[]]>			Y
-	Y	expect_dt	배송예정일		yyyymmdd
-      </dlvyInfo>	Y
-   </apiDlvyReg>
-</reqst> 								';
+    <tr>
+        <th style='width:50px;'  >요청   </th>
+        <th style='width:150px;' >XML node   </th>
+        <th style='width:30px;'  >반복       </th>
+        <th style='width:100px;' >field      </th>
+        <th style='width:300px;' >field 설명 </th>
+        <th style='width:80px;'  >Data type  </th>
+        <th style='width:50px;'  >format     </th>
+        <th style='width:20px;'  >max        </th>
+        <th style='width:30px;'  >필수       </th>
+        <th style='width:500px;' >비고       </th>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp><reqst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>   <apiDlvyReg>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>login_id</xmp></td>
+        <td>로그인ID</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>company_id</xmp></td>
+        <td>고객사 아이디</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>api_auth_key</xmp></td>
+        <td>API 인증코드</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>      <dlvyInfo></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>ord_no</xmp></td>
+        <td>샤플링 주문번호</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>dlvery_id</xmp></td>
+        <td>택배사코드</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>택배사&nbsp;코드&nbsp;참조</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>invoice_no</xmp></td>
+        <td>운송장번호</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>expect_dt</xmp></td>
+        <td>배송예정일</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp>yyyymmdd</xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>      </dlvyInfo></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>   </apiDlvyReg>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></reqst> </xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr></table>
 
-$response_string = '<rspns>
-   <apiDlvyRegRst>
-		login_id	로그인ID	<![CDATA[]]>			Y
-		company_id	고객사 아이디				Y	shopPling 발급
-      <dlvyListRst>	Y
-	Y	ord_no	샤플링 주문번호				Y
-	Y	code	성공,실패 결과코드	<![CDATA[]]>
-	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
-      </dlvyListRst>	Y
-		succs_cnt	성공건수
-		fail_cnt	실패건수
-   </apiDlvyRegRst>
-</rspns> 								';
+<table>
 
-$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+    <tr>
+        <th style='width:50px;'  >응답   </th>
+        <th style='width:150px;' >XML node   </th>
+        <th style='width:30px;'  >반복       </th>
+        <th style='width:100px;' >field      </th>
+        <th style='width:300px;' >field 설명 </th>
+        <th style='width:80px;'  >Data type  </th>
+        <th style='width:50px;'  >format     </th>
+        <th style='width:20px;'  >max        </th>
+        <th style='width:30px;'  >필수       </th>
+        <th style='width:500px;' >비고       </th>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp><rspns>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>   <apiDlvyRegRst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>login_id</xmp></td>
+        <td>로그인ID</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>company_id</xmp></td>
+        <td>고객사 아이디</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>      <dlvyListRst></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>ord_no</xmp></td>
+        <td>샤플링 주문번호</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>code</xmp></td>
+        <td>성공,실패 결과코드</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>msg</xmp></td>
+        <td>성공,실패 결과메세지</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>      </dlvyListRst></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>succs_cnt</xmp></td>
+        <td>성공건수</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>fail_cnt</xmp></td>
+        <td>실패건수</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>   </apiDlvyRegRst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></rspns> </xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr></table>
+
+<h3>XML 요청 예시</h3><div class='code'><pre><xmp><\?xml version="1.0" encoding="UTF-8"?>
 <reqst>
    <apiDlvyReg>
       <login_id><![CDATA[shoppling]]></login_id>
@@ -59,9 +376,8 @@ $request_example = '<?xml version="1.0" encoding="UTF-8"?>
          <expect_dt>20150213</expect_dt>
       </dlvyInfo>
    </apiDlvyReg>
-</reqst>';
-
-$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+</reqst></xmp></pre></div>
+<h3>XML 응답 예시</h3><div class='code'><pre><xmp><\?xml version="1.0" encoding="UTF-8"?>
 <rspns>
    <apiDlvyRegRst>
       <login_id><![CDATA[shoppling]]></login_id>
@@ -79,8 +395,5 @@ $response_example = '<?xml version="1.0" encoding="UTF-8"?>
       <succs_cnt>2</succs_cnt>
       <fail_cnt>0</fail_cnt>
    </apiDlvyRegRst>
-</rspns>';
+</rspns></xmp></pre></div>
 
-require_once('api_content_layout.phtml');
-
-?>

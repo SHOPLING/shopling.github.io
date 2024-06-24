@@ -1,40 +1,187 @@
-<?
-require_once('common.lib');
 
-if (checkCmpyId()) {
-} else {
-    exit;
-}
+<h3>
+    QnA 필드 기술서    <span class='ver'>(마지막 수정일시: 2023-09-12 16:25:05)</span>
 
-$title = 'QnA 필드 기술서';
 
-$style = array(
-    'width: 300px;',
-    'width: 150px;',
-    'width: 150px;',
-);
+<script>
 
-$head_string = '필드 변수 항목	필드 변수 명	필드 변수 타입	필드 변수 설명';
+	function jsm_search_fn177130818(_input)
+	{
+		var _table, _select, _keyword;
 
-$body_string = '관리번호	qna_key	int(12)
-쇼핑몰코드	mall_key	varchar(11)
-쇼핑몰아이디	mall_login_id	varchar(50)
-쇼핑몰주문번호	mall_ord_id	varchar(30)
-쇼핑몰상품코드	mall_prod_key	varchar(30)
-쇼핑몰상품명	mall_prod_nm	varchar(100)
-상품코드	prod_id	int(12)
-문의구분	qna_tp	varchar(30)
-문의자아이디	qna_wid	varchar(20)
-문의자명	qna_wnm	varchar(20)
-문의제목	qna_title	varchar(100)
-문의내용	qna_q	text
-답변내용	qna_a	text
-처리상태	qna_status	varchar(20)	 미답변, 답변저장, 답변송신완료, 답변송신강제완료, 답변송신실패
-답변저장일자	save_dt	varchar(14)
-답변전송일자	send_dt	varchar(14)
-송신실패메세지	err_msg	varchar(255)
-고객문의등록일자	qna_i_dt	varchar(14)
-수집일자	i_dt	varchar(14)
-';
+		_keyword = _input.value;
 
-require_once('table_layout.phtml');
+					_table = $("#table1161273164");
+
+		if(_table) {
+			_table.find("tr").each(function(idx){
+				if(idx > 0) {
+					if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0 && !$(this).find("input:checkbox:eq(0)").is(":checked")){
+						$(this).hide();
+					}else{
+						$(this).show();
+					}
+				}
+			});
+		}
+
+
+		if(_select) {
+			_select.html($("#jsm_search_hidden_select177130818").html());
+
+			$(" option").each(function(){
+				if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0) {
+					$(this).remove();
+				}
+			});
+		}
+	}
+
+	$(document).ready(function(){
+
+			});
+
+</script>
+
+
+<input
+	type="text"
+	style='width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;'
+	class="jsm_search_keyword_input"
+	id="jsm_search_input177130818"
+	onblur="jsm_search_fn177130818(this);"
+	onfocus="jsm_search_fn177130818(this);"
+	onkeyup="jsm_search_fn177130818(this);"
+	placeholder="QnA 필드 기술서 검색"
+	title="QnA 필드 기술서 검색"
+	>
+<select id="jsm_search_hidden_select177130818" style="display:none;"></select>
+
+</h3>
+
+<span class='info'></span>
+
+<table id='table1161273164' style="">
+            <tr>
+                <th style="width: 300px;">필드 변수 항목</th>
+                <th style="width: 150px;">필드 변수 명</th>
+                <th style="width: 150px;">필드 변수 타입</th>
+                <th style="">필드 변수 설명</th>
+            </tr>
+
+            <tr>
+                <td class="">관리번호</td>
+                <td class="">qna_key</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">쇼핑몰코드</td>
+                <td class="">mall_key</td>
+                <td class="">varchar(11)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">쇼핑몰아이디</td>
+                <td class="">mall_login_id</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">쇼핑몰주문번호</td>
+                <td class="">mall_ord_id</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">쇼핑몰상품코드</td>
+                <td class="">mall_prod_key</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">쇼핑몰상품명</td>
+                <td class="">mall_prod_nm</td>
+                <td class="">varchar(100)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품코드</td>
+                <td class="">prod_id</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">문의구분</td>
+                <td class="">qna_tp</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">문의자아이디</td>
+                <td class="">qna_wid</td>
+                <td class="">varchar(20)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">문의자명</td>
+                <td class="">qna_wnm</td>
+                <td class="">varchar(20)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">문의제목</td>
+                <td class="">qna_title</td>
+                <td class="">varchar(100)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">문의내용</td>
+                <td class="">qna_q</td>
+                <td class="">text</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">답변내용</td>
+                <td class="">qna_a</td>
+                <td class="">text</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">처리상태</td>
+                <td class="">qna_status</td>
+                <td class="">varchar(20)</td>
+                <td class="">미답변, 답변저장, 답변송신완료, 답변송신강제완료, 답변송신실패</td>
+            </tr>
+        <tr>
+                <td class="">답변저장일자</td>
+                <td class="">save_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">답변전송일자</td>
+                <td class="">send_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">송신실패메세지</td>
+                <td class="">err_msg</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">고객문의등록일자</td>
+                <td class="">qna_i_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수집일자</td>
+                <td class="">i_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+            </tr>
+        </table>
+

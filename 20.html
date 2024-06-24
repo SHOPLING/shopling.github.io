@@ -1,88 +1,536 @@
-<?
-require_once('common.lib');
 
-if (checkCmpyId()) {
-} else {
-    exit;
-}
+<h3>
+    상품가져오기 필드 기술서    <span class='ver'>(마지막 수정일시: 2023-09-12 16:37:27)</span>
 
-$title = '상품가져오기 필드 기술서';
 
-$style = array(
-    'width: 200px;',
-    'width: 150px;',
-    'width: 150px;',
-    '',
-    'width: 250px;',
-);
+<script>
 
-$head_string = '필드 변수 항목	필드 변수 명	필드 변수 타입	값 범례	예시';
+	function jsm_search_fn510648963(_input)
+	{
+		var _table, _select, _keyword;
 
-$body_string = '상품코드	goods_key	int(12)
-표준카테고리 전체분류명	cate_all_nm	varchar(100)	표준카테고리 대중소세명 구분자는 “>”	여성의류>테마/이벤트의류>유니폼
-자사상품코드	ptn_goods_cd	varchar(65)		A00585686
-상품구분 	prod_tp	char(1)	A:사입, B:직영, C:제조, D:위탁, Z:해당없음	A
-상품명	prod_nm	varchar(255)
-노출상품명	prod_exp_nm	varchar(255)
-상품약어	prod_abbr	varchar(255)
-영문상품명	prod_en_nm	varchar(255)
-중문상품명	prod_en_cn	varchar(255)
-일어상품명	prod_en_jp	varchar(255)
-매입처코드	buying_cd	varchar(10)	매입처코드
-사이트검색어 구분자","	site_srch	varchar(500)	구분자","
-원가(매입가)	org_price	int(12)	숫자만기입	45000
-판매가	sale_price	int(12)	숫자만기입	60000
-리스트가(태그가)	list_price	int(12)	숫자만기입	80000
-마진율	margin	int(4)	숫자만기입	20
-과세구분	tax_tp	char(1)	A:과세, B:면세, C:비과세, D:영세	A
-배송비구분	dlvy_tp	char(1)	A:무료,B:착불,C:선결제,D:조건부배송,Z:해당없음	A
-배송비	dlvy_cost	int(12)	숫자만기입
-ISBN	isbn	varchar(100)
-브랜드명	brand_nm	varchar(50)
-성인용품여부	adult_yn	char(1)	[Y|N]	N
-계절정보	season_tp	varchar(4)	봄, 여름, 가을, 겨울, 공용, 해당없음	공용
-남여구분	sex_tp	varchar(4)	남, 여, 공용, 해당없음	해당없음
-연령	age_tp	char(2)	12:12세이상, 15:15세이상, 19:19세이상, 00:제한없음, X:해당없음	해당없음
-판매지역정보	sale_area	varchar(12)	전국, 전국(도서/산간제외), 수도권, 기타	수도권
-상품유효일	expire_dt	varchar(14)		상품유효일
-무게(g으로 표시)	prod_weight	int(5)	g 으로 단위로 숫자만 입력	50
-제조사	maker_nm	varchar(50)
-제조년도	make_yy	varchar(4)
-제조일(발행일)	make_dt	varchar(14)
-모델NO	model_no	varchar(50)
-모델명	model_nm	varchar(50)
-판매상태	sale_status	varchar(3)	A:대기중 B:판매중 C:품절 D:판매중지 E:판매종료 Z:삭제	B
-원산지-대분류	origin_nm	varchar(10)	국산, 수입, 기타	수입
-원산지-중분류	origin_dtl_nm	varchar(30)	강원도, 수입시 국가명	중국
-원산지-소분류	origin_dtl2_nm	varchar(30)	고성군,
-식품재료원산지	origin_food	varchar(100)	식품재료/나라명 "," 반복	배추/중국산, 고추가루/대한민국
-농수산물구분	food_tp	char(1)	A:농산물, B:수산물, C:축산물, D:가공품	D
-수입시 수입신고번호	import_no	varchar(30)
-수입시 수입면장이미지	import_img	varchar(80)	이미지 URL
-인증 대상 구분	safe_cert_tp	char(1)	코드참조	A
-인증대상품목	safe_cert_item	varchar(20)		유기농산물
-인증받은 상호명(업체명)	safe_cmpy_nm	varchar(50)		프로방스
-인증번호	safe_cert_no	varchar(30)
-인증기관	safe_cert_int	varchar(30)
-발급일자	safe_cert_iss_dt	varchar(14)
-인증일자	safe_cert_dt	varchar(14)
-인증시작일자	safe_cert_s_dt	varchar(14)
-인증만료일	safe_cert_e_dt	varchar(14)
-인증서이미지	safe_cert_img	varchar(80)
-신고대상 구분	notify_cert_tp	char(1)	A:식품제조/가공업, B:건강기능식품, C:의료기기	A
-신고기관명	notify_cert_int	varchar(30)
-신고번호	notify_cert_no	varchar(30)
-품목허가번호	notify_cert_item_no	varchar(30)
-사전광고 심의필 여부	notify_cert_adv_yn	char(1)	Y, N	Y
-사전광고심의번호	notify_cert_adv_no	varchar(30)
-상품상세설명	dtl_desc	mediumtext
-상품요약설명	dtl_simple_desc	text
-상품추가상세설명1	dtl_add1_desc	text
-상품추가상세설명2	dtl_add2_desc	text
-상품추가상세설명3	dtl_add3_desc	text
-기본이미지	img_0	varchar(80)	이미지 URL
-고정이미지	img_19	varchar(80)	이미지 URL
-제휴사 판매자 코드	ptn_seller_cd	varchar(30)
-상품그룹명	prod_group	varchar(100)		';
+		_keyword = _input.value;
 
-require_once('table_layout.phtml');
+					_table = $("#table1519457305");
+
+		if(_table) {
+			_table.find("tr").each(function(idx){
+				if(idx > 0) {
+					if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0 && !$(this).find("input:checkbox:eq(0)").is(":checked")){
+						$(this).hide();
+					}else{
+						$(this).show();
+					}
+				}
+			});
+		}
+
+
+		if(_select) {
+			_select.html($("#jsm_search_hidden_select510648963").html());
+
+			$(" option").each(function(){
+				if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0) {
+					$(this).remove();
+				}
+			});
+		}
+	}
+
+	$(document).ready(function(){
+
+			});
+
+</script>
+
+
+<input
+	type="text"
+	style='width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;'
+	class="jsm_search_keyword_input"
+	id="jsm_search_input510648963"
+	onblur="jsm_search_fn510648963(this);"
+	onfocus="jsm_search_fn510648963(this);"
+	onkeyup="jsm_search_fn510648963(this);"
+	placeholder="상품가져오기 필드 기술서 검색"
+	title="상품가져오기 필드 기술서 검색"
+	>
+<select id="jsm_search_hidden_select510648963" style="display:none;"></select>
+
+</h3>
+
+<span class='info'></span>
+
+<table id='table1519457305' style="">
+            <tr>
+                <th style="width: 200px;">필드 변수 항목</th>
+                <th style="width: 150px;">필드 변수 명</th>
+                <th style="width: 150px;">필드 변수 타입</th>
+                <th style="">값 범례</th>
+                <th style="width: 250px;">예시</th>
+            </tr>
+
+            <tr>
+                <td class="">상품코드</td>
+                <td class="">goods_key</td>
+                <td class="">int(12)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">표준카테고리 전체분류명</td>
+                <td class="">cate_all_nm</td>
+                <td class="">varchar(100)</td>
+                <td class="">표준카테고리 대중소세명 구분자는 “>”</td>
+                <td class="">여성의류>테마/이벤트의류>유니폼</td>
+            </tr>
+        <tr>
+                <td class="">자사상품코드</td>
+                <td class="">ptn_goods_cd</td>
+                <td class="">varchar(65)</td>
+                <td class=""></td>
+                <td class="">A00585686</td>
+            </tr>
+        <tr>
+                <td class="">상품구분</td>
+                <td class="">prod_tp</td>
+                <td class="">char(1)</td>
+                <td class="">A:사입, B:직영, C:제조, D:위탁, Z:해당없음</td>
+                <td class="">A</td>
+            </tr>
+        <tr>
+                <td class="">상품명</td>
+                <td class="">prod_nm</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">노출상품명</td>
+                <td class="">prod_exp_nm</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품약어</td>
+                <td class="">prod_abbr</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">영문상품명</td>
+                <td class="">prod_en_nm</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">중문상품명</td>
+                <td class="">prod_en_cn</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">일어상품명</td>
+                <td class="">prod_en_jp</td>
+                <td class="">varchar(255)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">매입처코드</td>
+                <td class="">buying_cd</td>
+                <td class="">varchar(10)</td>
+                <td class="">매입처코드</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">사이트검색어 구분자","</td>
+                <td class="">site_srch</td>
+                <td class="">varchar(500)</td>
+                <td class="">구분자","</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">원가(매입가)</td>
+                <td class="">org_price</td>
+                <td class="">int(12)</td>
+                <td class="">숫자만기입</td>
+                <td class="">45000</td>
+            </tr>
+        <tr>
+                <td class="">판매가</td>
+                <td class="">sale_price</td>
+                <td class="">int(12)</td>
+                <td class="">숫자만기입</td>
+                <td class="">60000</td>
+            </tr>
+        <tr>
+                <td class="">리스트가(태그가)</td>
+                <td class="">list_price</td>
+                <td class="">int(12)</td>
+                <td class="">숫자만기입</td>
+                <td class="">80000</td>
+            </tr>
+        <tr>
+                <td class="">마진율</td>
+                <td class="">margin</td>
+                <td class="">int(4)</td>
+                <td class="">숫자만기입</td>
+                <td class="">20</td>
+            </tr>
+        <tr>
+                <td class="">과세구분</td>
+                <td class="">tax_tp</td>
+                <td class="">char(1)</td>
+                <td class="">A:과세, B:면세, C:비과세, D:영세</td>
+                <td class="">A</td>
+            </tr>
+        <tr>
+                <td class="">배송비구분</td>
+                <td class="">dlvy_tp</td>
+                <td class="">char(1)</td>
+                <td class="">A:무료,B:착불,C:선결제,D:조건부배송,Z:해당없음</td>
+                <td class="">A</td>
+            </tr>
+        <tr>
+                <td class="">배송비</td>
+                <td class="">dlvy_cost</td>
+                <td class="">int(12)</td>
+                <td class="">숫자만기입</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">ISBN</td>
+                <td class="">isbn</td>
+                <td class="">varchar(100)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">브랜드명</td>
+                <td class="">brand_nm</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">성인용품여부</td>
+                <td class="">adult_yn</td>
+                <td class="">char(1)</td>
+                <td class="">[Y|N]</td>
+                <td class="">N</td>
+            </tr>
+        <tr>
+                <td class="">계절정보</td>
+                <td class="">season_tp</td>
+                <td class="">varchar(4)</td>
+                <td class="">봄, 여름, 가을, 겨울, 공용, 해당없음</td>
+                <td class="">공용</td>
+            </tr>
+        <tr>
+                <td class="">남여구분</td>
+                <td class="">sex_tp</td>
+                <td class="">varchar(4)</td>
+                <td class="">남, 여, 공용, 해당없음</td>
+                <td class="">해당없음</td>
+            </tr>
+        <tr>
+                <td class="">연령</td>
+                <td class="">age_tp</td>
+                <td class="">char(2)</td>
+                <td class="">12:12세이상, 15:15세이상, 19:19세이상, 00:제한없음, X:해당없음</td>
+                <td class="">해당없음</td>
+            </tr>
+        <tr>
+                <td class="">판매지역정보</td>
+                <td class="">sale_area</td>
+                <td class="">varchar(12)</td>
+                <td class="">전국, 전국(도서/산간제외), 수도권, 기타</td>
+                <td class="">수도권</td>
+            </tr>
+        <tr>
+                <td class="">상품유효일</td>
+                <td class="">expire_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+                <td class="">상품유효일</td>
+            </tr>
+        <tr>
+                <td class="">무게(g으로 표시)</td>
+                <td class="">prod_weight</td>
+                <td class="">int(5)</td>
+                <td class="">g 으로 단위로 숫자만 입력</td>
+                <td class="">50</td>
+            </tr>
+        <tr>
+                <td class="">제조사</td>
+                <td class="">maker_nm</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">제조년도</td>
+                <td class="">make_yy</td>
+                <td class="">varchar(4)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">제조일(발행일)</td>
+                <td class="">make_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">모델NO</td>
+                <td class="">model_no</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">모델명</td>
+                <td class="">model_nm</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">판매상태</td>
+                <td class="">sale_status</td>
+                <td class="">varchar(3)</td>
+                <td class="">A:대기중 B:판매중 C:품절 D:판매중지 E:판매종료 Z:삭제</td>
+                <td class="">B</td>
+            </tr>
+        <tr>
+                <td class="">원산지-대분류</td>
+                <td class="">origin_nm</td>
+                <td class="">varchar(10)</td>
+                <td class="">국산, 수입, 기타</td>
+                <td class="">수입</td>
+            </tr>
+        <tr>
+                <td class="">원산지-중분류</td>
+                <td class="">origin_dtl_nm</td>
+                <td class="">varchar(30)</td>
+                <td class="">강원도, 수입시 국가명</td>
+                <td class="">중국</td>
+            </tr>
+        <tr>
+                <td class="">원산지-소분류</td>
+                <td class="">origin_dtl2_nm</td>
+                <td class="">varchar(30)</td>
+                <td class="">고성군,</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">식품재료원산지</td>
+                <td class="">origin_food</td>
+                <td class="">varchar(100)</td>
+                <td class="">식품재료/나라명 "," 반복</td>
+                <td class="">배추/중국산, 고추가루/대한민국</td>
+            </tr>
+        <tr>
+                <td class="">농수산물구분</td>
+                <td class="">food_tp</td>
+                <td class="">char(1)</td>
+                <td class="">A:농산물, B:수산물, C:축산물, D:가공품</td>
+                <td class="">D</td>
+            </tr>
+        <tr>
+                <td class="">수입시 수입신고번호</td>
+                <td class="">import_no</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수입시 수입면장이미지</td>
+                <td class="">import_img</td>
+                <td class="">varchar(80)</td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증 대상 구분</td>
+                <td class="">safe_cert_tp</td>
+                <td class="">char(1)</td>
+                <td class="">코드참조</td>
+                <td class="">A</td>
+            </tr>
+        <tr>
+                <td class="">인증대상품목</td>
+                <td class="">safe_cert_item</td>
+                <td class="">varchar(20)</td>
+                <td class=""></td>
+                <td class="">유기농산물</td>
+            </tr>
+        <tr>
+                <td class="">인증받은 상호명(업체명)</td>
+                <td class="">safe_cmpy_nm</td>
+                <td class="">varchar(50)</td>
+                <td class=""></td>
+                <td class="">프로방스</td>
+            </tr>
+        <tr>
+                <td class="">인증번호</td>
+                <td class="">safe_cert_no</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증기관</td>
+                <td class="">safe_cert_int</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">발급일자</td>
+                <td class="">safe_cert_iss_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증일자</td>
+                <td class="">safe_cert_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증시작일자</td>
+                <td class="">safe_cert_s_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증만료일</td>
+                <td class="">safe_cert_e_dt</td>
+                <td class="">varchar(14)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증서이미지</td>
+                <td class="">safe_cert_img</td>
+                <td class="">varchar(80)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">신고대상 구분</td>
+                <td class="">notify_cert_tp</td>
+                <td class="">char(1)</td>
+                <td class="">A:식품제조/가공업, B:건강기능식품, C:의료기기</td>
+                <td class="">A</td>
+            </tr>
+        <tr>
+                <td class="">신고기관명</td>
+                <td class="">notify_cert_int</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">신고번호</td>
+                <td class="">notify_cert_no</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">품목허가번호</td>
+                <td class="">notify_cert_item_no</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">사전광고 심의필 여부</td>
+                <td class="">notify_cert_adv_yn</td>
+                <td class="">char(1)</td>
+                <td class="">Y, N</td>
+                <td class="">Y</td>
+            </tr>
+        <tr>
+                <td class="">사전광고심의번호</td>
+                <td class="">notify_cert_adv_no</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품상세설명</td>
+                <td class="">dtl_desc</td>
+                <td class="">mediumtext</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품요약설명</td>
+                <td class="">dtl_simple_desc</td>
+                <td class="">text</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품추가상세설명1</td>
+                <td class="">dtl_add1_desc</td>
+                <td class="">text</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품추가상세설명2</td>
+                <td class="">dtl_add2_desc</td>
+                <td class="">text</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품추가상세설명3</td>
+                <td class="">dtl_add3_desc</td>
+                <td class="">text</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">기본이미지</td>
+                <td class="">img_0</td>
+                <td class="">varchar(80)</td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">고정이미지</td>
+                <td class="">img_19</td>
+                <td class="">varchar(80)</td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">제휴사 판매자 코드</td>
+                <td class="">ptn_seller_cd</td>
+                <td class="">varchar(30)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품그룹명</td>
+                <td class="">prod_group</td>
+                <td class="">varchar(100)</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        </table>
+

@@ -1,721 +1,1965 @@
-<?
-require_once('common.lib');
 
-if (checkCmpyId()) {
-} else {
-    exit;
-}
-
-$title = '상품필드 기술서';
-
-$style = array(
-    'width: 200px;',
-    'width: 150px;',
-    'width: 150px;',
-    'width: 100px;',
-    '',
-    'width: 250px;',
-);
-
-$class = array(
-    '',
-    '',
-    '',
-    'center',
-    '',
-    '',
-);
-
-$head_string = '필드 변수 항목	필드 변수 명	필드 변수 타입	필수여부	값 범례	예시';
-
-$body_string = '상품코드	goods_key	int(12)
-표준카테고리 전체분류명	cate_all_nm	varchar(100)	Y	표준카테고리 대중소세명 구분자는 “>” ,  마지막 카테고리까지 정확히 입력하여 주세요	여성의류>테마/이벤트의류>유니폼
-오픈마켓카테고리 명	mall_cate_all_nm	varchar(150)	N	* 입력방법:   쇼핑몰코드=쇼핑몰아이디@대>중>소>세;<br>* 필수 아닙니다. 미입력시 샵플링에서 지정된 카테고리로 자동 설정됩니다.<br>* 오픈마켓쇼핑몰만 해당됩니다. 쇼핑몰아이디를 모르시면 비워두고입력하면 됩니다.<br>* 오픈마켓카테고리 분류표는 메뉴 “상품 > 상품대량등록” 에서 “오픈마켓카테고리엑셀저장” 버튼을 통해 확인할실 수 있습니다.	SMALL_00001=auctionid@여성의류>티셔츠>브이넥 티셔츠; SMALL_00002=gmakid@여성의류>티셔츠>브이넥 티셔츠;SMALL_00003=ssssid@여성의류>티셔츠>브이넥 티셔츠;
-사용자카테고리 대분류코드                                                                                                                            	p_cate_cd_1	varchar(50)		대분류 코드	1000
-사용자카테고리 중분류코드	p_cate_cd_2	varchar(50)		중분류코드	1100
-사용자카테고리 소분류코드	p_cate_cd_3	varchar(50)		소분류코드	1110
-사용자카테고리 세분류코드                                                                                                                                    	p_cate_cd_4	varchar(50)		세분류코드	1111
-자사상품코드	ptn_goods_cd	varchar(65)			A00585686
-상품구분 	prod_tp	char(1)	Y	A:사입, B:직영, C:제조, D:위탁, Z:해당없음	A
-상품명	prod_nm	varchar(255)	Y
-노출상품명	prod_exp_nm	varchar(255)
-상품약어	prod_abbr	varchar(255)
-영문상품명	prod_en_nm	varchar(255)
-중문상품명	prod_en_cn	varchar(255)
-일어상품명	prod_en_jp	varchar(255)
-매입처코드	buying_cd	varchar(10)		매입처코드
-사이트검색어 구분자","	site_srch	varchar(500)		구분자","
-원가(매입가)	org_price	int(12)	Y	숫자만기입	45000
-판매가	sale_price	int(12)	Y	숫자만기입	60000
-리스트가(태그가)	list_price	int(12)	Y	숫자만기입	80000
-마진율	margin	int(4)		숫자만기입	20
-매입처_원가	buying_org_price	varchar(20)		숫자만기입
-매입처_판매가	buying_sale_price	int(12)		숫자만기입
-매입처_리스트가(태그가)	buying_list_price	int(12)		숫자만기입
-매입처_마진율	buying_margin	int(4)		숫자만기입
-과세구분	tax_tp	char(1)	Y	A:과세, B:면세, C:비과세, D:영세	A
-배송비구분	dlvy_tp	char(1)		A:무료,B:착불,C:선결제,D:조건부배송,Z:해당없음	A
-배송비	dlvy_cost	int(12)		숫자만기입
-ISBN	isbn	varchar(100)
-브랜드명	brand_nm	varchar(50)
-성인용품여부	adult_yn	char(1)		[Y|N]	N
-계절정보	season_tp	varchar(4)		봄, 여름, 가을, 겨울, 공용, 해당없음	공용
-남여구분	sex_tp	varchar(4)		남, 여, 공용, 해당없음	해당없음
-연령	age_tp	char(2)		12:12세이상, 15:15세이상, 19:19세이상, 00:제한없음, X:해당없음	해당없음
-판매지역정보	sale_area	varchar(12)		전국, 전국(도서/산간제외), 수도권, 기타	수도권
-상품유효일	expire_dt	varchar(14)			상품유효일
-무게(g으로 표시)	prod_weight	int(5)		g 으로 단위로 숫자만 입력	50
-제조사	maker_nm	varchar(50)
-제조년도	make_yy	varchar(4)
-제조일(발행일)	make_dt	varchar(14)
-모델NO	model_no	varchar(50)
-모델명	model_nm	varchar(50)
-판매상태	sale_status	varchar(3)	Y	A:대기중 B:판매중 C:품절 D:판매중지 E:판매종료 Z:삭제	B
-원산지-대분류	origin_nm	varchar(10)	Y	국산, 수입, 기타	수입
-원산지-중분류	origin_dtl_nm	varchar(30)		강원도, 수입시 국가명	중국
-원산지-소분류	origin_dtl2_nm	varchar(30)		고성군,
-식품재료원산지	origin_food	varchar(100)		식품재료/나라명 "," 반복	배추/중국산, 고추가루/대한민국
-농수산물구분	food_tp	char(1)		A:농산물, B:수산물, C:축산물, D:가공품	D
-수입시 수입신고번호	import_no	varchar(30)
-수입시 수입면장이미지	import_img	varchar(80)		이미지 URL	http://img.aaa.co.kr/aaa.jpg
-인증 대상 구분	safe_cert_tp	char(1)		A:친환경, B:공산품, C:전기용품, D:방송통신기자재, E:어린이제품, F:자가검사번호,<br>G:위해요소중점관리인증(HACCP), H:농산물우수관리인증(GAP), I:가공식품표준화인증(KS),<br>J:우수건강식품제조기준인증(GMP), K:건강기능식품인증, L:수산물품질인증,<br>M:수산특산물품질인증, N:수산전통식품품질인증, O:전통식품품질인증,<br>P:유기가공식품인증, Q:원산지증명, R:농산물이력추적, S:도축증명서,<br>T:등급판정확인서, U:형식승인, V:형식검정/형식등록, W:해외안전인증서류, Z:기타	A<br>* 하단 코드표참조
-인증대상품목	safe_cert_item	varchar(20)		안전인증, 자율안전확인, 어린이보호포장, 안전품질표시, 방송통신기자재 적합성평가인증, ..	유기농산물<br>* 하단 코드표참조
-인증받은 상호명(업체명)	safe_cmpy_nm	varchar(50)			프로방스
-인증번호	safe_cert_no	varchar(30)
-인증기관	safe_cert_int	varchar(30)
-발급일자	safe_cert_iss_dt	varchar(14)
-인증일자	safe_cert_dt	varchar(14)
-인증시작일자	safe_cert_s_dt	varchar(14)
-인증만료일	safe_cert_e_dt	varchar(14)
-인증서이미지	safe_cert_img	varchar(80)
-신고대상 구분	notify_cert_tp	char(1)		A:식품제조/가공업, B:건강기능식품, C:의료기기	A
-신고기관명	notify_cert_int	varchar(30)
-신고번호	notify_cert_no	varchar(30)
-품목허가번호	notify_cert_item_no	varchar(30)
-사전광고 심의필 여부	notify_cert_adv_yn	char(1)		Y, N	Y
-사전광고심의번호	notify_cert_adv_no	varchar(30)
-상품상세설명	dtl_desc	mediumtext	Y
-상품요약설명	dtl_simple_desc	text
-상품추가상세설명1	dtl_add1_desc	text
-상품추가상세설명2	dtl_add2_desc	text
-상품추가상세설명3	dtl_add3_desc	text
-추가상품코드리스트	add_item_lst	varchar(200)		구분자","	pk0005,pk0006
-제휴관리코드	use_partner_cd	varchar(15)
-제휴사상품코드	use_partner_prod_id	varchar(30)
-기본이미지	img_0	varchar(80)	Y	이미지 URL
-고정이미지	img_19	varchar(80)	Y	이미지 URL
-리스트이미지	img_20	varchar(80)		이미지 URL
-추가이미지1	img_1	varchar(80)		이미지 URL
-추가이미지2	img_2	varchar(80)		이미지 URL
-추가이미지3	img_3	varchar(80)		이미지 URL
-추가이미지4	img_4	varchar(80)		이미지 URL
-추가이미지5	img_5	varchar(80)		이미지 URL
-추가이미지6	img_6	varchar(80)		이미지 URL
-추가이미지7	img_7	varchar(80)		이미지 URL
-추가이미지8	img_8	varchar(80)		이미지 URL
-추가이미지9	img_9	varchar(80)		이미지 URL
-추가이미지10	img_10	varchar(80)		이미지 URL
-추가이미지11	img_11	varchar(80)		이미지 URL
-추가이미지12	img_12	varchar(80)		이미지 URL
-추가이미지13	img_13	varchar(80)		이미지 URL
-추가이미지14	img_14	varchar(80)		이미지 URL
-추가이미지15	img_15	varchar(80)		이미지 URL
-추가이미지16	img_16	varchar(80)		이미지 URL
-추가이미지17	img_17	varchar(80)		이미지 URL
-추가이미지18	img_18	varchar(80)		이미지 URL
-스토어팜리스트이미지	img_21	varchar(80)		이미지 URL
-부가이미지1	img_22	varchar(80)		이미지 URL
-부가이미지2	img_23	varchar(80)		이미지 URL
-부가이미지3	img_24	varchar(80)		이미지 URL
-부가이미지4	img_25	varchar(80)		이미지 URL
-부가이미지5	img_26	varchar(80)		이미지 URL
-부가이미지6	img_27	varchar(80)		이미지 URL
-부가이미지7	img_28	varchar(80)		이미지 URL
-부가이미지8	img_29	varchar(80)		이미지 URL
-부가이미지9	img_30	varchar(80)		이미지 URL
-부가이미지10	img_31	varchar(80)		이미지 URL	';
-
-require('table_layout.phtml');
+<h3>
+    상품필드 기술서    <span class='ver'>(마지막 수정일시: 2023-09-12 16:48:59)</span>
 
 
+<script>
 
-$title = '상품 원산지';
+	function jsm_search_fn164002250(_input)
+	{
+		var _table, _select, _keyword;
 
-//$tableStyle = 'width:200px;';
+		_keyword = _input.value;
 
-/*
-$style = array(
-    'width: 200px;',
-    'width: 200px;',
-);
+					_table = $("#table2129071887");
 
-$head_string = '원산지-대분류	원산지-중분류	원산지-소분류';
-
-$body_string = '국산	서울
-국산	인천
-국산	대전
-국산	광주
-국산	대구
-국산	울산
-국산	부산
-국산	경기도
-국산	강원도
-국산	충청북도
-국산	충청남도
-국산	전라북도
-국산	전라남도
-국산	경상북도
-국산	경상남도
-국산	제주특별자치도
-국산	세종특별자치시
-수입	남극대륙	앤타크티커
-수입	남아메리카	수리남
-수입	남아메리카	아루바
-수입	남아메리카	아르헨티나
-수입	남아메리카	안길라
-수입	남아메리카	에콰도르
-수입	남아메리카	영국령 버진군도
-수입	남아메리카	우루과이
-수입	남아메리카	칠레
-수입	남아메리카	케이만군도
-수입	남아메리카	남조지아사우스샌드위치제도
-수입	남아메리카	콜롬비아
-수입	남아메리카	터크스·카이코스군도
-수입	남아메리카	네덜란드령 안틸레스
-수입	남아메리카	파라과이
-수입	남아메리카	페루
-수입	남아메리카	포클랜드(말비나스)군도
-수입	남아메리카	푸에토리코
-수입	남아메리카	프랑스령 기아나
-수입	남아메리카	가이아니
-수입	남아메리카	말티니크
-수입	남아메리카	몬트세라트
-수입	남아메리카	미국령 버진군도
-수입	남아메리카	베네수엘라공화국
-수입	남아메리카	볼리비아
-수입	남아메리카	브라질
-수입	북아메리카	세인트루시아
-수입	북아메리카	세인트빈센트그레나딘
-수입	북아메리카	세인트키츠네비스
-수입	북아메리카	그린랜드
-수입	북아메리카	세인트피에레도.미쾌론도
-수입	북아메리카	세인트 피레 미켈론
-수입	북아메리카	아이티
-수입	북아메리카	엔티가바부다
-수입	북아메리카	엘살바도르
-수입	북아메리카	온두라스
-수입	북아메리카	자메이카
-수입	북아메리카	캐나다
-수입	북아메리카	코스타리카
-수입	북아메리카	쿠바
-수입	북아메리카	트리니다드토바고
-수입	북아메리카	파나마
-수입	북아메리카	니카라과
-수입	북아메리카	도미니카공화국
-수입	북아메리카	도미니카연방
-수입	북아메리카	멕시코
-수입	북아메리카	과테말라
-수입	북아메리카	미국
-수입	북아메리카	괌
-수입	북아메리카	바베이도스
-수입	북아메리카	바하마
-수입	북아메리카	그레나다
-수입	북아메리카	버뮤다
-수입	북아메리카	벨리즈
-수입	아시아	스리랑카
-수입	아시아	시리아
-수입	아시아	싱가포르
-수입	아시아	아랍에미리트
-수입	아시아	아르메니아공화국
-수입	아시아	아제르바이잔
-수입	아시아	아프가니스탄
-수입	아시아	영국령 인도양지역
-수입	아시아	예멘
-수입	아시아	오만
-수입	아시아	요르단
-수입	아시아	우즈베키스탄
-수입	아시아	이라크
-수입	아시아	이란
-수입	아시아	이스라엘
-수입	아시아	인도
-수입	아시아	인도네시아
-수입	아시아	일본
-수입	아시아	중국
-수입	아시아	카자흐스탄
-수입	아시아	카타르
-수입	아시아	캄보디아
-수입	아시아	쿠웨이트
-수입	아시아	키르기스스탄
-수입	아시아	타지키스탄
-수입	아시아	태국
-수입	아시아	투르크메니스탄
-수입	아시아	파키스탄
-수입	아시아	네팔
-수입	아시아	필리핀
-수입	아시아	홍콩
-수입	아시아	티모르
-수입	아시아	대만
-수입	아시아	동티모르
-수입	아시아	라오스
-수입	아시아	레바논
-수입	아시아	마카오
-수입	아시아	말레이시아
-수입	아시아	몰디브
-수입	아시아	몽골
-수입	아시아	미얀마(버마)
-수입	아시아	바레인
-수입	아시아	방글라데시
-수입	아시아	베트남
-수입	아시아	그루지야
-수입	아시아	부탄
-수입	아시아	북마리아나군도
-수입	아시아	북한
-수입	아시아	브루나이
-수입	아시아	사우디아라비아
-수입	아시아	미얀마
-수입	오세아니아	서사모아
-수입	오세아니아	솔로몬제도
-수입	오세아니아	나우루
-수입	오세아니아	오스트레일리아
-수입	오세아니아	월리스·후트나
-수입	오세아니아	코코스군도
-수입	오세아니아	쿠크군도
-수입	오세아니아	크리스마스 아일랜드
-수입	오세아니아	키리바시
-수입	오세아니아	토켈라우
-수입	오세아니아	통가
-수입	오세아니아	투발루
-수입	오세아니아	파푸아뉴기니
-수입	오세아니아	팔라우
-수입	오세아니아	프랑스령폴리네시아
-수입	오세아니아	피지
-수입	오세아니아	피트카이른
-수입	오세아니아	헤어드도·맥도널드군도
-수입	오세아니아	마셜
-수입	오세아니아	뉴질랜드
-수입	오세아니아	뉴칼레도니아
-수입	오세아니아	니우에
-수입	오세아니아	마샬군도
-수입	오세아니아	사모아
-수입	오세아니아	미국령 태평양군도
-수입	오세아니아	미크로네시아
-수입	오세아니아	바누아투
-수입	오세아니아	보빗군도
-수입	유럽	그리스
-수입	유럽	키프로스
-수입	유럽	산마리노
-수입	유럽	스발바드·잠마엔도
-수입	유럽	스웨덴
-수입	유럽	스위스
-수입	유럽	스페인
-수입	유럽	슬로바키아
-수입	유럽	슬로베니아
-수입	유럽	아이슬란드
-수입	유럽	아일랜드
-수입	유럽	안도라
-수입	유럽	알바니아
-수입	유럽	에스토니아
-수입	유럽	영국
-수입	유럽	오스트리아
-수입	유럽	우크라이나
-수입	유럽	몬테네그로
-수입	유럽	이탈리아
-수입	유럽	지브롤터
-수입	유럽	체코
-수입	유럽	크로아티아
-수입	유럽	네덜란드
-수입	유럽	터키
-수입	유럽	파로에군도
-수입	유럽	포르투갈
-수입	유럽	폴란드
-수입	유럽	프랑스
-수입	유럽	프랑스 메트로 폴리탄
-수입	유럽	노르웨이
-수입	유럽	핀란드
-수입	유럽	헝가리
-수입	유럽	노폴크 아일랜드
-수입	유럽	세르비아
-수입	유럽	마케도니아
-수입	유럽	덴마크
-수입	유럽	독일
-수입	유럽	라트비아
-수입	유럽	러시아
-수입	유럽	루마니아
-수입	유럽	룩셈부르크
-수입	유럽	리투아니아
-수입	유럽	리히텐슈타인
-수입	유럽	과들루프
-수입	유럽	모나코
-수입	유럽	몰도바
-수입	유럽	몰타
-수입	유럽	바티칸
-수입	유럽	벨기에
-수입	유럽	벨로루시
-수입	유럽	보스니아헤르체고비나
-수입	유럽	불가리아
-수입	유럽	조지아
-수입	유럽	보스니아
-수입	아프리카	가나
-수입	아프리카	상투메프린시페
-수입	아프리카	서사하라
-수입	아프리카	세네갈
-수입	아프리카	세이셀
-수입	아프리카	소말리아
-수입	아프리카	수단
-수입	아프리카	스와질랜드
-수입	아프리카	기니
-수입	아프리카	시에라리온
-수입	아프리카	기니비사우
-수입	아프리카	알제리
-수입	아프리카	나미비아
-수입	아프리카	앙골라
-수입	아프리카	에리트레아
-수입	아프리카	에티오피아
-수입	아프리카	우간다
-수입	아프리카	나이지리아
-수입	아프리카	이집트
-수입	아프리카	자이르
-수입	아프리카	잠비아
-수입	아프리카	적도기니
-수입	아프리카	중앙아프리카공화국
-수입	아프리카	지부티
-수입	아프리카	짐바브웨
-수입	아프리카	차드
-수입	아프리카	남아프리카공화국
-수입	아프리카	카메룬
-수입	아프리카	카보베르데
-수입	아프리카	케냐
-수입	아프리카	코모로
-수입	아프리카	코트디부아르
-수입	아프리카	콩고공화국
-수입	아프리카	가봉
-수입	아프리카	탄자니아
-수입	아프리카	토고
-수입	아프리카	튀니지
-수입	아프리카	프랑스령 극남군도
-수입	아프리카	콩고민주공화국
-수입	아프리카	니제르
-수입	아프리카	라이베리아
-수입	아프리카	감비아
-수입	아프리카	레소토
-수입	아프리카	르완다
-수입	아프리카	리비아
-수입	아프리카	리유니온
-수입	아프리카	마다가스카르
-수입	아프리카	마요뜨
-수입	아프리카	말라위
-수입	아프리카	말리
-수입	아프리카	모로코
-수입	아프리카	모리셔스
-수입	아프리카	모리타니
-수입	아프리카	모잠비크
-수입	아프리카	베냉
-수입	아프리카	보츠와나
-수입	아프리카	부룬디
-수입	아프리카	부르키나파소
-기타	기타	기타국가
-기타	기타	상세설명표기';
-*/
-
-$head_string = '원산지';
-
-$body_string = '앤타크티커
-수리남
-아루바
-아르헨티나
-안길라
-에콰도르
-영국령 버진군도
-우루과이
-칠레
-케이만군도
-남조지아사우스샌드위치제도
-콜롬비아
-터크스·카이코스군도
-네덜란드령 안틸레스
-파라과이
-페루
-포클랜드(말비나스)군도
-푸에토리코
-프랑스령 기아나
-가이아니
-말티니크
-몬트세라트
-미국령 버진군도
-베네수엘라공화국
-볼리비아
-브라질
-세인트루시아
-세인트빈센트그레나딘
-세인트키츠네비스
-그린랜드
-세인트피에레도.미쾌론도
-세인트 피레 미켈론
-아이티
-엔티가바부다
-엘살바도르
-온두라스
-자메이카
-캐나다
-코스타리카
-쿠바
-트리니다드토바고
-파나마
-니카라과
-도미니카공화국
-도미니카연방
-멕시코
-과테말라
-미국
-괌
-바베이도스
-바하마
-그레나다
-버뮤다
-벨리즈
-스리랑카
-시리아
-싱가포르
-아랍에미리트
-아르메니아공화국
-아제르바이잔
-아프가니스탄
-영국령 인도양지역
-예멘
-오만
-요르단
-우즈베키스탄
-이라크
-이란
-이스라엘
-인도
-인도네시아
-일본
-중국
-카자흐스탄
-카타르
-캄보디아
-쿠웨이트
-키르기스스탄
-타지키스탄
-태국
-투르크메니스탄
-파키스탄
-네팔
-필리핀
-홍콩
-티모르
-대만
-동티모르
-라오스
-레바논
-마카오
-말레이시아
-몰디브
-몽골
-미얀마(버마)
-바레인
-방글라데시
-베트남
-그루지야
-부탄
-북마리아나군도
-북한
-브루나이
-사우디아라비아
-미얀마
-서사모아
-솔로몬제도
-나우루
-오스트레일리아
-월리스·후트나
-코코스군도
-쿠크군도
-크리스마스 아일랜드
-키리바시
-토켈라우
-통가
-투발루
-파푸아뉴기니
-팔라우
-프랑스령폴리네시아
-피지
-피트카이른
-헤어드도·맥도널드군도
-마셜
-뉴질랜드
-뉴칼레도니아
-니우에
-마샬군도
-사모아
-미국령 태평양군도
-미크로네시아
-바누아투
-보빗군도
-그리스
-키프로스
-산마리노
-스발바드·잠마엔도
-스웨덴
-스위스
-스페인
-슬로바키아
-슬로베니아
-아이슬란드
-아일랜드
-안도라
-알바니아
-에스토니아
-영국
-오스트리아
-우크라이나
-몬테네그로
-이탈리아
-지브롤터
-체코
-크로아티아
-네덜란드
-터키
-파로에군도
-포르투갈
-폴란드
-프랑스
-프랑스 메트로 폴리탄
-노르웨이
-핀란드
-헝가리
-노폴크 아일랜드
-세르비아
-마케도니아
-덴마크
-독일
-라트비아
-러시아
-루마니아
-룩셈부르크
-리투아니아
-리히텐슈타인
-과들루프
-모나코
-몰도바
-몰타
-바티칸
-벨기에
-벨로루시
-보스니아헤르체고비나
-불가리아
-조지아
-보스니아
-가나
-상투메프린시페
-서사하라
-세네갈
-세이셀
-소말리아
-수단
-스와질랜드
-기니
-시에라리온
-기니비사우
-알제리
-나미비아
-앙골라
-에리트레아
-에티오피아
-우간다
-나이지리아
-이집트
-자이르
-잠비아
-적도기니
-중앙아프리카공화국
-지부티
-짐바브웨
-차드
-남아프리카공화국
-카메룬
-카보베르데
-케냐
-코모로
-코트디부아르
-콩고공화국
-가봉
-탄자니아
-토고
-튀니지
-프랑스령 극남군도
-콩고민주공화국
-니제르
-라이베리아
-감비아
-레소토
-르완다
-리비아
-리유니온
-마다가스카르
-마요뜨
-말라위
-말리
-모로코
-모리셔스
-모리타니
-모잠비크
-베냉
-보츠와나
-부룬디
-부르키나파소
-기타국가
-상세설명표기';
-
-require('table_layout.phtml');
+		if(_table) {
+			_table.find("tr").each(function(idx){
+				if(idx > 0) {
+					if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0 && !$(this).find("input:checkbox:eq(0)").is(":checked")){
+						$(this).hide();
+					}else{
+						$(this).show();
+					}
+				}
+			});
+		}
 
 
+		if(_select) {
+			_select.html($("#jsm_search_hidden_select164002250").html());
 
-$title = '상품 인증정보';
+			$(" option").each(function(){
+				if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0) {
+					$(this).remove();
+				}
+			});
+		}
+	}
 
-$info = '* 인증대상 구분에 따라 하단에 입력된 값중 선택하여 반드시 정확하게 입력하여 주시기 바랍니다. F ~ W는 빈칸으로 두시기 바랍니다.<br>* 인증대상을 기타로 선택 후 해당 인증대상을 인증대상품목에 입력합니다.';
+	$(document).ready(function(){
 
-$head_string = '안전인증 대상 구분	 인증대상품목';
+			});
 
-$body_string = '  A:친환경	유기농산물
-  A:친환경	무농약농산물
-  A:친환경	저농약농산물
-  A:친환경	유기축산물
-  A:친환경	무항생제축산물
-  A:친환경	수산물
-  A:친환경	수산가공품품질인증
-  B:생활제품	안전인증
-  B:생활제품	자율안전확인
-  B:생활제품	어린이보호포장
-  B:생활제품	안전품질표시
-  B:생활제품	공급자적합성확인
-  C:전기용품	안전인증(KCC)
-  C:전기용품	자율안전확인(KCC)
-  C:전기용품	공급자적합성확인
-  D:방송통신기자재	적합인증(MIC)
-  D:방송통신기자재	적합등록
-  D:방송통신기자재	잠정인증
-  E:어린이제품	안전인증
-  E:어린이제품	안전확인
-  E:어린이제품	공급자적합성확인
-  F:자가검사번호
-  G:위해요소중점관리인증(HACCP)
-  H:농산물우수관리인증(GAP)
-  I:가공식품표준화인증(KS)
-  J:우수건강식품제조기준인증(GMP)
-  K:건강기능식품인증
-  L:수산물품질인증
-  M:수산특산물품질인증
-  N:수산전통식품품질인증
-  O:전통식품품질인증
-  P:유기가공식품인증
-  Q:원산지증명
-  R:농산물이력추적
-  S:도축증명서
-  T:등급판정확인서
-  U:형식승인
-  V:형식검정/형식등록
-  W:해외안전인증서류
-  Z:기타	';
+</script>
 
-require('table_layout.phtml');
+
+<input
+	type="text"
+	style='width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;'
+	class="jsm_search_keyword_input"
+	id="jsm_search_input164002250"
+	onblur="jsm_search_fn164002250(this);"
+	onfocus="jsm_search_fn164002250(this);"
+	onkeyup="jsm_search_fn164002250(this);"
+	placeholder="상품필드 기술서 검색"
+	title="상품필드 기술서 검색"
+	>
+<select id="jsm_search_hidden_select164002250" style="display:none;"></select>
+
+</h3>
+
+<span class='info'></span>
+
+<table id='table2129071887' style="">
+            <tr>
+                <th style="width: 200px;">필드 변수 항목</th>
+                <th style="width: 150px;">필드 변수 명</th>
+                <th style="width: 150px;">필드 변수 타입</th>
+                <th style="width: 100px;">필수여부</th>
+                <th style="">값 범례</th>
+                <th style="width: 250px;">예시</th>
+            </tr>
+
+            <tr>
+                <td class="">상품코드</td>
+                <td class="">goods_key</td>
+                <td class="">int(12)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">표준카테고리 전체분류명</td>
+                <td class="">cate_all_nm</td>
+                <td class="">varchar(100)</td>
+                <td class="center">Y</td>
+                <td class="">표준카테고리 대중소세명 구분자는 “>” ,  마지막 카테고리까지 정확히 입력하여 주세요</td>
+                <td class="">여성의류>테마/이벤트의류>유니폼</td>
+            </tr>
+        <tr>
+                <td class="">오픈마켓카테고리 명</td>
+                <td class="">mall_cate_all_nm</td>
+                <td class="">varchar(150)</td>
+                <td class="center">N</td>
+                <td class="">* 입력방법:   쇼핑몰코드=쇼핑몰아이디@대>중>소>세;<br>* 필수 아닙니다. 미입력시 샵플링에서 지정된 카테고리로 자동 설정됩니다.<br>* 오픈마켓쇼핑몰만 해당됩니다. 쇼핑몰아이디를 모르시면 비워두고입력하면 됩니다.<br>* 오픈마켓카테고리 분류표는 메뉴 “상품 > 상품대량등록” 에서 “오픈마켓카테고리엑셀저장” 버튼을 통해 확인할실 수 있습니다.</td>
+                <td class="">SMALL_00001=auctionid@여성의류>티셔츠>브이넥 티셔츠; SMALL_00002=gmakid@여성의류>티셔츠>브이넥 티셔츠;SMALL_00003=ssssid@여성의류>티셔츠>브이넥 티셔츠;</td>
+            </tr>
+        <tr>
+                <td class="">사용자카테고리 대분류코드</td>
+                <td class="">p_cate_cd_1</td>
+                <td class="">varchar(50)</td>
+                <td class="center"></td>
+                <td class="">대분류 코드</td>
+                <td class="">1000</td>
+            </tr>
+        <tr>
+                <td class="">사용자카테고리 중분류코드</td>
+                <td class="">p_cate_cd_2</td>
+                <td class="">varchar(50)</td>
+                <td class="center"></td>
+                <td class="">중분류코드</td>
+                <td class="">1100</td>
+            </tr>
+        <tr>
+                <td class="">사용자카테고리 소분류코드</td>
+                <td class="">p_cate_cd_3</td>
+                <td class="">varchar(50)</td>
+                <td class="center"></td>
+                <td class="">소분류코드</td>
+                <td class="">1110</td>
+            </tr>
+        <tr>
+                <td class="">사용자카테고리 세분류코드</td>
+                <td class="">p_cate_cd_4</td>
+                <td class="">varchar(50)</td>
+                <td class="center"></td>
+                <td class="">세분류코드</td>
+                <td class="">1111</td>
+            </tr>
+        <tr>
+                <td class="">자사상품코드</td>
+                <td class="">ptn_goods_cd</td>
+                <td class="">varchar(65)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class="">A00585686</td>
+            </tr>
+        <tr>
+                <td class="">상품구분</td>
+                <td class="">prod_tp</td>
+                <td class="">char(1)</td>
+                <td class="center">Y</td>
+                <td class="">A:사입, B:직영, C:제조, D:위탁, Z:해당없음</td>
+                <td class="">A</td>
+            </tr>
+        <tr>
+                <td class="">상품명</td>
+                <td class="">prod_nm</td>
+                <td class="">varchar(255)</td>
+                <td class="center">Y</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">노출상품명</td>
+                <td class="">prod_exp_nm</td>
+                <td class="">varchar(255)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품약어</td>
+                <td class="">prod_abbr</td>
+                <td class="">varchar(255)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">영문상품명</td>
+                <td class="">prod_en_nm</td>
+                <td class="">varchar(255)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">중문상품명</td>
+                <td class="">prod_en_cn</td>
+                <td class="">varchar(255)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">일어상품명</td>
+                <td class="">prod_en_jp</td>
+                <td class="">varchar(255)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">매입처코드</td>
+                <td class="">buying_cd</td>
+                <td class="">varchar(10)</td>
+                <td class="center"></td>
+                <td class="">매입처코드</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">사이트검색어 구분자","</td>
+                <td class="">site_srch</td>
+                <td class="">varchar(500)</td>
+                <td class="center"></td>
+                <td class="">구분자","</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">원가(매입가)</td>
+                <td class="">org_price</td>
+                <td class="">int(12)</td>
+                <td class="center">Y</td>
+                <td class="">숫자만기입</td>
+                <td class="">45000</td>
+            </tr>
+        <tr>
+                <td class="">판매가</td>
+                <td class="">sale_price</td>
+                <td class="">int(12)</td>
+                <td class="center">Y</td>
+                <td class="">숫자만기입</td>
+                <td class="">60000</td>
+            </tr>
+        <tr>
+                <td class="">리스트가(태그가)</td>
+                <td class="">list_price</td>
+                <td class="">int(12)</td>
+                <td class="center">Y</td>
+                <td class="">숫자만기입</td>
+                <td class="">80000</td>
+            </tr>
+        <tr>
+                <td class="">마진율</td>
+                <td class="">margin</td>
+                <td class="">int(4)</td>
+                <td class="center"></td>
+                <td class="">숫자만기입</td>
+                <td class="">20</td>
+            </tr>
+        <tr>
+                <td class="">매입처_원가</td>
+                <td class="">buying_org_price</td>
+                <td class="">varchar(20)</td>
+                <td class="center"></td>
+                <td class="">숫자만기입</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">매입처_판매가</td>
+                <td class="">buying_sale_price</td>
+                <td class="">int(12)</td>
+                <td class="center"></td>
+                <td class="">숫자만기입</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">매입처_리스트가(태그가)</td>
+                <td class="">buying_list_price</td>
+                <td class="">int(12)</td>
+                <td class="center"></td>
+                <td class="">숫자만기입</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">매입처_마진율</td>
+                <td class="">buying_margin</td>
+                <td class="">int(4)</td>
+                <td class="center"></td>
+                <td class="">숫자만기입</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">과세구분</td>
+                <td class="">tax_tp</td>
+                <td class="">char(1)</td>
+                <td class="center">Y</td>
+                <td class="">A:과세, B:면세, C:비과세, D:영세</td>
+                <td class="">A</td>
+            </tr>
+        <tr>
+                <td class="">배송비구분</td>
+                <td class="">dlvy_tp</td>
+                <td class="">char(1)</td>
+                <td class="center"></td>
+                <td class="">A:무료,B:착불,C:선결제,D:조건부배송,Z:해당없음</td>
+                <td class="">A</td>
+            </tr>
+        <tr>
+                <td class="">배송비</td>
+                <td class="">dlvy_cost</td>
+                <td class="">int(12)</td>
+                <td class="center"></td>
+                <td class="">숫자만기입</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">ISBN</td>
+                <td class="">isbn</td>
+                <td class="">varchar(100)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">브랜드명</td>
+                <td class="">brand_nm</td>
+                <td class="">varchar(50)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">성인용품여부</td>
+                <td class="">adult_yn</td>
+                <td class="">char(1)</td>
+                <td class="center"></td>
+                <td class="">[Y|N]</td>
+                <td class="">N</td>
+            </tr>
+        <tr>
+                <td class="">계절정보</td>
+                <td class="">season_tp</td>
+                <td class="">varchar(4)</td>
+                <td class="center"></td>
+                <td class="">봄, 여름, 가을, 겨울, 공용, 해당없음</td>
+                <td class="">공용</td>
+            </tr>
+        <tr>
+                <td class="">남여구분</td>
+                <td class="">sex_tp</td>
+                <td class="">varchar(4)</td>
+                <td class="center"></td>
+                <td class="">남, 여, 공용, 해당없음</td>
+                <td class="">해당없음</td>
+            </tr>
+        <tr>
+                <td class="">연령</td>
+                <td class="">age_tp</td>
+                <td class="">char(2)</td>
+                <td class="center"></td>
+                <td class="">12:12세이상, 15:15세이상, 19:19세이상, 00:제한없음, X:해당없음</td>
+                <td class="">해당없음</td>
+            </tr>
+        <tr>
+                <td class="">판매지역정보</td>
+                <td class="">sale_area</td>
+                <td class="">varchar(12)</td>
+                <td class="center"></td>
+                <td class="">전국, 전국(도서/산간제외), 수도권, 기타</td>
+                <td class="">수도권</td>
+            </tr>
+        <tr>
+                <td class="">상품유효일</td>
+                <td class="">expire_dt</td>
+                <td class="">varchar(14)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class="">상품유효일</td>
+            </tr>
+        <tr>
+                <td class="">무게(g으로 표시)</td>
+                <td class="">prod_weight</td>
+                <td class="">int(5)</td>
+                <td class="center"></td>
+                <td class="">g 으로 단위로 숫자만 입력</td>
+                <td class="">50</td>
+            </tr>
+        <tr>
+                <td class="">제조사</td>
+                <td class="">maker_nm</td>
+                <td class="">varchar(50)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">제조년도</td>
+                <td class="">make_yy</td>
+                <td class="">varchar(4)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">제조일(발행일)</td>
+                <td class="">make_dt</td>
+                <td class="">varchar(14)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">모델NO</td>
+                <td class="">model_no</td>
+                <td class="">varchar(50)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">모델명</td>
+                <td class="">model_nm</td>
+                <td class="">varchar(50)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">판매상태</td>
+                <td class="">sale_status</td>
+                <td class="">varchar(3)</td>
+                <td class="center">Y</td>
+                <td class="">A:대기중 B:판매중 C:품절 D:판매중지 E:판매종료 Z:삭제</td>
+                <td class="">B</td>
+            </tr>
+        <tr>
+                <td class="">원산지-대분류</td>
+                <td class="">origin_nm</td>
+                <td class="">varchar(10)</td>
+                <td class="center">Y</td>
+                <td class="">국산, 수입, 기타</td>
+                <td class="">수입</td>
+            </tr>
+        <tr>
+                <td class="">원산지-중분류</td>
+                <td class="">origin_dtl_nm</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class="">강원도, 수입시 국가명</td>
+                <td class="">중국</td>
+            </tr>
+        <tr>
+                <td class="">원산지-소분류</td>
+                <td class="">origin_dtl2_nm</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class="">고성군,</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">식품재료원산지</td>
+                <td class="">origin_food</td>
+                <td class="">varchar(100)</td>
+                <td class="center"></td>
+                <td class="">식품재료/나라명 "," 반복</td>
+                <td class="">배추/중국산, 고추가루/대한민국</td>
+            </tr>
+        <tr>
+                <td class="">농수산물구분</td>
+                <td class="">food_tp</td>
+                <td class="">char(1)</td>
+                <td class="center"></td>
+                <td class="">A:농산물, B:수산물, C:축산물, D:가공품</td>
+                <td class="">D</td>
+            </tr>
+        <tr>
+                <td class="">수입시 수입신고번호</td>
+                <td class="">import_no</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">수입시 수입면장이미지</td>
+                <td class="">import_img</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class="">http://img.aaa.co.kr/aaa.jpg</td>
+            </tr>
+        <tr>
+                <td class="">인증 대상 구분</td>
+                <td class="">safe_cert_tp</td>
+                <td class="">char(1)</td>
+                <td class="center"></td>
+                <td class="">A:친환경, B:공산품, C:전기용품, D:방송통신기자재, E:어린이제품, F:자가검사번호,<br>G:위해요소중점관리인증(HACCP), H:농산물우수관리인증(GAP), I:가공식품표준화인증(KS),<br>J:우수건강식품제조기준인증(GMP), K:건강기능식품인증, L:수산물품질인증,<br>M:수산특산물품질인증, N:수산전통식품품질인증, O:전통식품품질인증,<br>P:유기가공식품인증, Q:원산지증명, R:농산물이력추적, S:도축증명서,<br>T:등급판정확인서, U:형식승인, V:형식검정/형식등록, W:해외안전인증서류, Z:기타</td>
+                <td class="">A<br>* 하단 코드표참조</td>
+            </tr>
+        <tr>
+                <td class="">인증대상품목</td>
+                <td class="">safe_cert_item</td>
+                <td class="">varchar(20)</td>
+                <td class="center"></td>
+                <td class="">안전인증, 자율안전확인, 어린이보호포장, 안전품질표시, 방송통신기자재 적합성평가인증, ..</td>
+                <td class="">유기농산물<br>* 하단 코드표참조</td>
+            </tr>
+        <tr>
+                <td class="">인증받은 상호명(업체명)</td>
+                <td class="">safe_cmpy_nm</td>
+                <td class="">varchar(50)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class="">프로방스</td>
+            </tr>
+        <tr>
+                <td class="">인증번호</td>
+                <td class="">safe_cert_no</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증기관</td>
+                <td class="">safe_cert_int</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">발급일자</td>
+                <td class="">safe_cert_iss_dt</td>
+                <td class="">varchar(14)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증일자</td>
+                <td class="">safe_cert_dt</td>
+                <td class="">varchar(14)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증시작일자</td>
+                <td class="">safe_cert_s_dt</td>
+                <td class="">varchar(14)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증만료일</td>
+                <td class="">safe_cert_e_dt</td>
+                <td class="">varchar(14)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">인증서이미지</td>
+                <td class="">safe_cert_img</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">신고대상 구분</td>
+                <td class="">notify_cert_tp</td>
+                <td class="">char(1)</td>
+                <td class="center"></td>
+                <td class="">A:식품제조/가공업, B:건강기능식품, C:의료기기</td>
+                <td class="">A</td>
+            </tr>
+        <tr>
+                <td class="">신고기관명</td>
+                <td class="">notify_cert_int</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">신고번호</td>
+                <td class="">notify_cert_no</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">품목허가번호</td>
+                <td class="">notify_cert_item_no</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">사전광고 심의필 여부</td>
+                <td class="">notify_cert_adv_yn</td>
+                <td class="">char(1)</td>
+                <td class="center"></td>
+                <td class="">Y, N</td>
+                <td class="">Y</td>
+            </tr>
+        <tr>
+                <td class="">사전광고심의번호</td>
+                <td class="">notify_cert_adv_no</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품상세설명</td>
+                <td class="">dtl_desc</td>
+                <td class="">mediumtext</td>
+                <td class="center">Y</td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품요약설명</td>
+                <td class="">dtl_simple_desc</td>
+                <td class="">text</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품추가상세설명1</td>
+                <td class="">dtl_add1_desc</td>
+                <td class="">text</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품추가상세설명2</td>
+                <td class="">dtl_add2_desc</td>
+                <td class="">text</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">상품추가상세설명3</td>
+                <td class="">dtl_add3_desc</td>
+                <td class="">text</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가상품코드리스트</td>
+                <td class="">add_item_lst</td>
+                <td class="">varchar(200)</td>
+                <td class="center"></td>
+                <td class="">구분자","</td>
+                <td class="">pk0005,pk0006</td>
+            </tr>
+        <tr>
+                <td class="">제휴관리코드</td>
+                <td class="">use_partner_cd</td>
+                <td class="">varchar(15)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">제휴사상품코드</td>
+                <td class="">use_partner_prod_id</td>
+                <td class="">varchar(30)</td>
+                <td class="center"></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">기본이미지</td>
+                <td class="">img_0</td>
+                <td class="">varchar(80)</td>
+                <td class="center">Y</td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">고정이미지</td>
+                <td class="">img_19</td>
+                <td class="">varchar(80)</td>
+                <td class="center">Y</td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">리스트이미지</td>
+                <td class="">img_20</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지1</td>
+                <td class="">img_1</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지2</td>
+                <td class="">img_2</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지3</td>
+                <td class="">img_3</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지4</td>
+                <td class="">img_4</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지5</td>
+                <td class="">img_5</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지6</td>
+                <td class="">img_6</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지7</td>
+                <td class="">img_7</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지8</td>
+                <td class="">img_8</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지9</td>
+                <td class="">img_9</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지10</td>
+                <td class="">img_10</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지11</td>
+                <td class="">img_11</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지12</td>
+                <td class="">img_12</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지13</td>
+                <td class="">img_13</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지14</td>
+                <td class="">img_14</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지15</td>
+                <td class="">img_15</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지16</td>
+                <td class="">img_16</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지17</td>
+                <td class="">img_17</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">추가이미지18</td>
+                <td class="">img_18</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">스토어팜리스트이미지</td>
+                <td class="">img_21</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지1</td>
+                <td class="">img_22</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지2</td>
+                <td class="">img_23</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지3</td>
+                <td class="">img_24</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지4</td>
+                <td class="">img_25</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지5</td>
+                <td class="">img_26</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지6</td>
+                <td class="">img_27</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지7</td>
+                <td class="">img_28</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지8</td>
+                <td class="">img_29</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지9</td>
+                <td class="">img_30</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">부가이미지10</td>
+                <td class="">img_31</td>
+                <td class="">varchar(80)</td>
+                <td class="center"></td>
+                <td class="">이미지 URL</td>
+                <td class=""></td>
+            </tr>
+        </table>
+
+
+<h3>
+    상품 원산지    <span class='ver'>(마지막 수정일시: 2023-09-12 16:48:59)</span>
+
+
+<script>
+
+	function jsm_search_fn1771334364(_input)
+	{
+		var _table, _select, _keyword;
+
+		_keyword = _input.value;
+
+					_table = $("#table1308551293");
+
+		if(_table) {
+			_table.find("tr").each(function(idx){
+				if(idx > 0) {
+					if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0 && !$(this).find("input:checkbox:eq(0)").is(":checked")){
+						$(this).hide();
+					}else{
+						$(this).show();
+					}
+				}
+			});
+		}
+
+
+		if(_select) {
+			_select.html($("#jsm_search_hidden_select1771334364").html());
+
+			$(" option").each(function(){
+				if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0) {
+					$(this).remove();
+				}
+			});
+		}
+	}
+
+	$(document).ready(function(){
+
+			});
+
+</script>
+
+
+<input
+	type="text"
+	style='width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;'
+	class="jsm_search_keyword_input"
+	id="jsm_search_input1771334364"
+	onblur="jsm_search_fn1771334364(this);"
+	onfocus="jsm_search_fn1771334364(this);"
+	onkeyup="jsm_search_fn1771334364(this);"
+	placeholder="상품 원산지 검색"
+	title="상품 원산지 검색"
+	>
+<select id="jsm_search_hidden_select1771334364" style="display:none;"></select>
+
+</h3>
+
+<span class='info'></span>
+
+<table id='table1308551293' style="">
+            <tr>
+                <th style="">원산지</th>
+            </tr>
+
+            <tr>
+                <td class="">앤타크티커</td>
+            </tr>
+        <tr>
+                <td class="">수리남</td>
+            </tr>
+        <tr>
+                <td class="">아루바</td>
+            </tr>
+        <tr>
+                <td class="">아르헨티나</td>
+            </tr>
+        <tr>
+                <td class="">안길라</td>
+            </tr>
+        <tr>
+                <td class="">에콰도르</td>
+            </tr>
+        <tr>
+                <td class="">영국령 버진군도</td>
+            </tr>
+        <tr>
+                <td class="">우루과이</td>
+            </tr>
+        <tr>
+                <td class="">칠레</td>
+            </tr>
+        <tr>
+                <td class="">케이만군도</td>
+            </tr>
+        <tr>
+                <td class="">남조지아사우스샌드위치제도</td>
+            </tr>
+        <tr>
+                <td class="">콜롬비아</td>
+            </tr>
+        <tr>
+                <td class="">터크스·카이코스군도</td>
+            </tr>
+        <tr>
+                <td class="">네덜란드령 안틸레스</td>
+            </tr>
+        <tr>
+                <td class="">파라과이</td>
+            </tr>
+        <tr>
+                <td class="">페루</td>
+            </tr>
+        <tr>
+                <td class="">포클랜드(말비나스)군도</td>
+            </tr>
+        <tr>
+                <td class="">푸에토리코</td>
+            </tr>
+        <tr>
+                <td class="">프랑스령 기아나</td>
+            </tr>
+        <tr>
+                <td class="">가이아니</td>
+            </tr>
+        <tr>
+                <td class="">말티니크</td>
+            </tr>
+        <tr>
+                <td class="">몬트세라트</td>
+            </tr>
+        <tr>
+                <td class="">미국령 버진군도</td>
+            </tr>
+        <tr>
+                <td class="">베네수엘라공화국</td>
+            </tr>
+        <tr>
+                <td class="">볼리비아</td>
+            </tr>
+        <tr>
+                <td class="">브라질</td>
+            </tr>
+        <tr>
+                <td class="">세인트루시아</td>
+            </tr>
+        <tr>
+                <td class="">세인트빈센트그레나딘</td>
+            </tr>
+        <tr>
+                <td class="">세인트키츠네비스</td>
+            </tr>
+        <tr>
+                <td class="">그린랜드</td>
+            </tr>
+        <tr>
+                <td class="">세인트피에레도.미쾌론도</td>
+            </tr>
+        <tr>
+                <td class="">세인트 피레 미켈론</td>
+            </tr>
+        <tr>
+                <td class="">아이티</td>
+            </tr>
+        <tr>
+                <td class="">엔티가바부다</td>
+            </tr>
+        <tr>
+                <td class="">엘살바도르</td>
+            </tr>
+        <tr>
+                <td class="">온두라스</td>
+            </tr>
+        <tr>
+                <td class="">자메이카</td>
+            </tr>
+        <tr>
+                <td class="">캐나다</td>
+            </tr>
+        <tr>
+                <td class="">코스타리카</td>
+            </tr>
+        <tr>
+                <td class="">쿠바</td>
+            </tr>
+        <tr>
+                <td class="">트리니다드토바고</td>
+            </tr>
+        <tr>
+                <td class="">파나마</td>
+            </tr>
+        <tr>
+                <td class="">니카라과</td>
+            </tr>
+        <tr>
+                <td class="">도미니카공화국</td>
+            </tr>
+        <tr>
+                <td class="">도미니카연방</td>
+            </tr>
+        <tr>
+                <td class="">멕시코</td>
+            </tr>
+        <tr>
+                <td class="">과테말라</td>
+            </tr>
+        <tr>
+                <td class="">미국</td>
+            </tr>
+        <tr>
+                <td class="">괌</td>
+            </tr>
+        <tr>
+                <td class="">바베이도스</td>
+            </tr>
+        <tr>
+                <td class="">바하마</td>
+            </tr>
+        <tr>
+                <td class="">그레나다</td>
+            </tr>
+        <tr>
+                <td class="">버뮤다</td>
+            </tr>
+        <tr>
+                <td class="">벨리즈</td>
+            </tr>
+        <tr>
+                <td class="">스리랑카</td>
+            </tr>
+        <tr>
+                <td class="">시리아</td>
+            </tr>
+        <tr>
+                <td class="">싱가포르</td>
+            </tr>
+        <tr>
+                <td class="">아랍에미리트</td>
+            </tr>
+        <tr>
+                <td class="">아르메니아공화국</td>
+            </tr>
+        <tr>
+                <td class="">아제르바이잔</td>
+            </tr>
+        <tr>
+                <td class="">아프가니스탄</td>
+            </tr>
+        <tr>
+                <td class="">영국령 인도양지역</td>
+            </tr>
+        <tr>
+                <td class="">예멘</td>
+            </tr>
+        <tr>
+                <td class="">오만</td>
+            </tr>
+        <tr>
+                <td class="">요르단</td>
+            </tr>
+        <tr>
+                <td class="">우즈베키스탄</td>
+            </tr>
+        <tr>
+                <td class="">이라크</td>
+            </tr>
+        <tr>
+                <td class="">이란</td>
+            </tr>
+        <tr>
+                <td class="">이스라엘</td>
+            </tr>
+        <tr>
+                <td class="">인도</td>
+            </tr>
+        <tr>
+                <td class="">인도네시아</td>
+            </tr>
+        <tr>
+                <td class="">일본</td>
+            </tr>
+        <tr>
+                <td class="">중국</td>
+            </tr>
+        <tr>
+                <td class="">카자흐스탄</td>
+            </tr>
+        <tr>
+                <td class="">카타르</td>
+            </tr>
+        <tr>
+                <td class="">캄보디아</td>
+            </tr>
+        <tr>
+                <td class="">쿠웨이트</td>
+            </tr>
+        <tr>
+                <td class="">키르기스스탄</td>
+            </tr>
+        <tr>
+                <td class="">타지키스탄</td>
+            </tr>
+        <tr>
+                <td class="">태국</td>
+            </tr>
+        <tr>
+                <td class="">투르크메니스탄</td>
+            </tr>
+        <tr>
+                <td class="">파키스탄</td>
+            </tr>
+        <tr>
+                <td class="">네팔</td>
+            </tr>
+        <tr>
+                <td class="">필리핀</td>
+            </tr>
+        <tr>
+                <td class="">홍콩</td>
+            </tr>
+        <tr>
+                <td class="">티모르</td>
+            </tr>
+        <tr>
+                <td class="">대만</td>
+            </tr>
+        <tr>
+                <td class="">동티모르</td>
+            </tr>
+        <tr>
+                <td class="">라오스</td>
+            </tr>
+        <tr>
+                <td class="">레바논</td>
+            </tr>
+        <tr>
+                <td class="">마카오</td>
+            </tr>
+        <tr>
+                <td class="">말레이시아</td>
+            </tr>
+        <tr>
+                <td class="">몰디브</td>
+            </tr>
+        <tr>
+                <td class="">몽골</td>
+            </tr>
+        <tr>
+                <td class="">미얀마(버마)</td>
+            </tr>
+        <tr>
+                <td class="">바레인</td>
+            </tr>
+        <tr>
+                <td class="">방글라데시</td>
+            </tr>
+        <tr>
+                <td class="">베트남</td>
+            </tr>
+        <tr>
+                <td class="">그루지야</td>
+            </tr>
+        <tr>
+                <td class="">부탄</td>
+            </tr>
+        <tr>
+                <td class="">북마리아나군도</td>
+            </tr>
+        <tr>
+                <td class="">북한</td>
+            </tr>
+        <tr>
+                <td class="">브루나이</td>
+            </tr>
+        <tr>
+                <td class="">사우디아라비아</td>
+            </tr>
+        <tr>
+                <td class="">미얀마</td>
+            </tr>
+        <tr>
+                <td class="">서사모아</td>
+            </tr>
+        <tr>
+                <td class="">솔로몬제도</td>
+            </tr>
+        <tr>
+                <td class="">나우루</td>
+            </tr>
+        <tr>
+                <td class="">오스트레일리아</td>
+            </tr>
+        <tr>
+                <td class="">월리스·후트나</td>
+            </tr>
+        <tr>
+                <td class="">코코스군도</td>
+            </tr>
+        <tr>
+                <td class="">쿠크군도</td>
+            </tr>
+        <tr>
+                <td class="">크리스마스 아일랜드</td>
+            </tr>
+        <tr>
+                <td class="">키리바시</td>
+            </tr>
+        <tr>
+                <td class="">토켈라우</td>
+            </tr>
+        <tr>
+                <td class="">통가</td>
+            </tr>
+        <tr>
+                <td class="">투발루</td>
+            </tr>
+        <tr>
+                <td class="">파푸아뉴기니</td>
+            </tr>
+        <tr>
+                <td class="">팔라우</td>
+            </tr>
+        <tr>
+                <td class="">프랑스령폴리네시아</td>
+            </tr>
+        <tr>
+                <td class="">피지</td>
+            </tr>
+        <tr>
+                <td class="">피트카이른</td>
+            </tr>
+        <tr>
+                <td class="">헤어드도·맥도널드군도</td>
+            </tr>
+        <tr>
+                <td class="">마셜</td>
+            </tr>
+        <tr>
+                <td class="">뉴질랜드</td>
+            </tr>
+        <tr>
+                <td class="">뉴칼레도니아</td>
+            </tr>
+        <tr>
+                <td class="">니우에</td>
+            </tr>
+        <tr>
+                <td class="">마샬군도</td>
+            </tr>
+        <tr>
+                <td class="">사모아</td>
+            </tr>
+        <tr>
+                <td class="">미국령 태평양군도</td>
+            </tr>
+        <tr>
+                <td class="">미크로네시아</td>
+            </tr>
+        <tr>
+                <td class="">바누아투</td>
+            </tr>
+        <tr>
+                <td class="">보빗군도</td>
+            </tr>
+        <tr>
+                <td class="">그리스</td>
+            </tr>
+        <tr>
+                <td class="">키프로스</td>
+            </tr>
+        <tr>
+                <td class="">산마리노</td>
+            </tr>
+        <tr>
+                <td class="">스발바드·잠마엔도</td>
+            </tr>
+        <tr>
+                <td class="">스웨덴</td>
+            </tr>
+        <tr>
+                <td class="">스위스</td>
+            </tr>
+        <tr>
+                <td class="">스페인</td>
+            </tr>
+        <tr>
+                <td class="">슬로바키아</td>
+            </tr>
+        <tr>
+                <td class="">슬로베니아</td>
+            </tr>
+        <tr>
+                <td class="">아이슬란드</td>
+            </tr>
+        <tr>
+                <td class="">아일랜드</td>
+            </tr>
+        <tr>
+                <td class="">안도라</td>
+            </tr>
+        <tr>
+                <td class="">알바니아</td>
+            </tr>
+        <tr>
+                <td class="">에스토니아</td>
+            </tr>
+        <tr>
+                <td class="">영국</td>
+            </tr>
+        <tr>
+                <td class="">오스트리아</td>
+            </tr>
+        <tr>
+                <td class="">우크라이나</td>
+            </tr>
+        <tr>
+                <td class="">몬테네그로</td>
+            </tr>
+        <tr>
+                <td class="">이탈리아</td>
+            </tr>
+        <tr>
+                <td class="">지브롤터</td>
+            </tr>
+        <tr>
+                <td class="">체코</td>
+            </tr>
+        <tr>
+                <td class="">크로아티아</td>
+            </tr>
+        <tr>
+                <td class="">네덜란드</td>
+            </tr>
+        <tr>
+                <td class="">터키</td>
+            </tr>
+        <tr>
+                <td class="">파로에군도</td>
+            </tr>
+        <tr>
+                <td class="">포르투갈</td>
+            </tr>
+        <tr>
+                <td class="">폴란드</td>
+            </tr>
+        <tr>
+                <td class="">프랑스</td>
+            </tr>
+        <tr>
+                <td class="">프랑스 메트로 폴리탄</td>
+            </tr>
+        <tr>
+                <td class="">노르웨이</td>
+            </tr>
+        <tr>
+                <td class="">핀란드</td>
+            </tr>
+        <tr>
+                <td class="">헝가리</td>
+            </tr>
+        <tr>
+                <td class="">노폴크 아일랜드</td>
+            </tr>
+        <tr>
+                <td class="">세르비아</td>
+            </tr>
+        <tr>
+                <td class="">마케도니아</td>
+            </tr>
+        <tr>
+                <td class="">덴마크</td>
+            </tr>
+        <tr>
+                <td class="">독일</td>
+            </tr>
+        <tr>
+                <td class="">라트비아</td>
+            </tr>
+        <tr>
+                <td class="">러시아</td>
+            </tr>
+        <tr>
+                <td class="">루마니아</td>
+            </tr>
+        <tr>
+                <td class="">룩셈부르크</td>
+            </tr>
+        <tr>
+                <td class="">리투아니아</td>
+            </tr>
+        <tr>
+                <td class="">리히텐슈타인</td>
+            </tr>
+        <tr>
+                <td class="">과들루프</td>
+            </tr>
+        <tr>
+                <td class="">모나코</td>
+            </tr>
+        <tr>
+                <td class="">몰도바</td>
+            </tr>
+        <tr>
+                <td class="">몰타</td>
+            </tr>
+        <tr>
+                <td class="">바티칸</td>
+            </tr>
+        <tr>
+                <td class="">벨기에</td>
+            </tr>
+        <tr>
+                <td class="">벨로루시</td>
+            </tr>
+        <tr>
+                <td class="">보스니아헤르체고비나</td>
+            </tr>
+        <tr>
+                <td class="">불가리아</td>
+            </tr>
+        <tr>
+                <td class="">조지아</td>
+            </tr>
+        <tr>
+                <td class="">보스니아</td>
+            </tr>
+        <tr>
+                <td class="">가나</td>
+            </tr>
+        <tr>
+                <td class="">상투메프린시페</td>
+            </tr>
+        <tr>
+                <td class="">서사하라</td>
+            </tr>
+        <tr>
+                <td class="">세네갈</td>
+            </tr>
+        <tr>
+                <td class="">세이셀</td>
+            </tr>
+        <tr>
+                <td class="">소말리아</td>
+            </tr>
+        <tr>
+                <td class="">수단</td>
+            </tr>
+        <tr>
+                <td class="">스와질랜드</td>
+            </tr>
+        <tr>
+                <td class="">기니</td>
+            </tr>
+        <tr>
+                <td class="">시에라리온</td>
+            </tr>
+        <tr>
+                <td class="">기니비사우</td>
+            </tr>
+        <tr>
+                <td class="">알제리</td>
+            </tr>
+        <tr>
+                <td class="">나미비아</td>
+            </tr>
+        <tr>
+                <td class="">앙골라</td>
+            </tr>
+        <tr>
+                <td class="">에리트레아</td>
+            </tr>
+        <tr>
+                <td class="">에티오피아</td>
+            </tr>
+        <tr>
+                <td class="">우간다</td>
+            </tr>
+        <tr>
+                <td class="">나이지리아</td>
+            </tr>
+        <tr>
+                <td class="">이집트</td>
+            </tr>
+        <tr>
+                <td class="">자이르</td>
+            </tr>
+        <tr>
+                <td class="">잠비아</td>
+            </tr>
+        <tr>
+                <td class="">적도기니</td>
+            </tr>
+        <tr>
+                <td class="">중앙아프리카공화국</td>
+            </tr>
+        <tr>
+                <td class="">지부티</td>
+            </tr>
+        <tr>
+                <td class="">짐바브웨</td>
+            </tr>
+        <tr>
+                <td class="">차드</td>
+            </tr>
+        <tr>
+                <td class="">남아프리카공화국</td>
+            </tr>
+        <tr>
+                <td class="">카메룬</td>
+            </tr>
+        <tr>
+                <td class="">카보베르데</td>
+            </tr>
+        <tr>
+                <td class="">케냐</td>
+            </tr>
+        <tr>
+                <td class="">코모로</td>
+            </tr>
+        <tr>
+                <td class="">코트디부아르</td>
+            </tr>
+        <tr>
+                <td class="">콩고공화국</td>
+            </tr>
+        <tr>
+                <td class="">가봉</td>
+            </tr>
+        <tr>
+                <td class="">탄자니아</td>
+            </tr>
+        <tr>
+                <td class="">토고</td>
+            </tr>
+        <tr>
+                <td class="">튀니지</td>
+            </tr>
+        <tr>
+                <td class="">프랑스령 극남군도</td>
+            </tr>
+        <tr>
+                <td class="">콩고민주공화국</td>
+            </tr>
+        <tr>
+                <td class="">니제르</td>
+            </tr>
+        <tr>
+                <td class="">라이베리아</td>
+            </tr>
+        <tr>
+                <td class="">감비아</td>
+            </tr>
+        <tr>
+                <td class="">레소토</td>
+            </tr>
+        <tr>
+                <td class="">르완다</td>
+            </tr>
+        <tr>
+                <td class="">리비아</td>
+            </tr>
+        <tr>
+                <td class="">리유니온</td>
+            </tr>
+        <tr>
+                <td class="">마다가스카르</td>
+            </tr>
+        <tr>
+                <td class="">마요뜨</td>
+            </tr>
+        <tr>
+                <td class="">말라위</td>
+            </tr>
+        <tr>
+                <td class="">말리</td>
+            </tr>
+        <tr>
+                <td class="">모로코</td>
+            </tr>
+        <tr>
+                <td class="">모리셔스</td>
+            </tr>
+        <tr>
+                <td class="">모리타니</td>
+            </tr>
+        <tr>
+                <td class="">모잠비크</td>
+            </tr>
+        <tr>
+                <td class="">베냉</td>
+            </tr>
+        <tr>
+                <td class="">보츠와나</td>
+            </tr>
+        <tr>
+                <td class="">부룬디</td>
+            </tr>
+        <tr>
+                <td class="">부르키나파소</td>
+            </tr>
+        <tr>
+                <td class="">기타국가</td>
+            </tr>
+        <tr>
+                <td class="">상세설명표기</td>
+            </tr>
+        </table>
+
+
+<h3>
+    상품 인증정보    <span class='ver'>(마지막 수정일시: 2023-09-12 16:48:59)</span>
+
+
+<script>
+
+	function jsm_search_fn1189021175(_input)
+	{
+		var _table, _select, _keyword;
+
+		_keyword = _input.value;
+
+					_table = $("#table1457167605");
+
+		if(_table) {
+			_table.find("tr").each(function(idx){
+				if(idx > 0) {
+					if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0 && !$(this).find("input:checkbox:eq(0)").is(":checked")){
+						$(this).hide();
+					}else{
+						$(this).show();
+					}
+				}
+			});
+		}
+
+
+		if(_select) {
+			_select.html($("#jsm_search_hidden_select1189021175").html());
+
+			$(" option").each(function(){
+				if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0) {
+					$(this).remove();
+				}
+			});
+		}
+	}
+
+	$(document).ready(function(){
+
+			});
+
+</script>
+
+
+<input
+	type="text"
+	style='width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;'
+	class="jsm_search_keyword_input"
+	id="jsm_search_input1189021175"
+	onblur="jsm_search_fn1189021175(this);"
+	onfocus="jsm_search_fn1189021175(this);"
+	onkeyup="jsm_search_fn1189021175(this);"
+	placeholder="상품 인증정보 검색"
+	title="상품 인증정보 검색"
+	>
+<select id="jsm_search_hidden_select1189021175" style="display:none;"></select>
+
+</h3>
+
+<span class='info'>* 인증대상 구분에 따라 하단에 입력된 값중 선택하여 반드시 정확하게 입력하여 주시기 바랍니다. F ~ W는 빈칸으로 두시기 바랍니다.<br>* 인증대상을 기타로 선택 후 해당 인증대상을 인증대상품목에 입력합니다.</span>
+
+<table id='table1457167605' style="">
+            <tr>
+                <th style="">안전인증 대상 구분</th>
+                <th style="">인증대상품목</th>
+            </tr>
+
+            <tr>
+                <td class="">A:친환경</td>
+                <td class="">유기농산물</td>
+            </tr>
+        <tr>
+                <td class="">A:친환경</td>
+                <td class="">무농약농산물</td>
+            </tr>
+        <tr>
+                <td class="">A:친환경</td>
+                <td class="">저농약농산물</td>
+            </tr>
+        <tr>
+                <td class="">A:친환경</td>
+                <td class="">유기축산물</td>
+            </tr>
+        <tr>
+                <td class="">A:친환경</td>
+                <td class="">무항생제축산물</td>
+            </tr>
+        <tr>
+                <td class="">A:친환경</td>
+                <td class="">수산물</td>
+            </tr>
+        <tr>
+                <td class="">A:친환경</td>
+                <td class="">수산가공품품질인증</td>
+            </tr>
+        <tr>
+                <td class="">B:생활제품</td>
+                <td class="">안전인증</td>
+            </tr>
+        <tr>
+                <td class="">B:생활제품</td>
+                <td class="">자율안전확인</td>
+            </tr>
+        <tr>
+                <td class="">B:생활제품</td>
+                <td class="">어린이보호포장</td>
+            </tr>
+        <tr>
+                <td class="">B:생활제품</td>
+                <td class="">안전품질표시</td>
+            </tr>
+        <tr>
+                <td class="">B:생활제품</td>
+                <td class="">공급자적합성확인</td>
+            </tr>
+        <tr>
+                <td class="">C:전기용품</td>
+                <td class="">안전인증(KCC)</td>
+            </tr>
+        <tr>
+                <td class="">C:전기용품</td>
+                <td class="">자율안전확인(KCC)</td>
+            </tr>
+        <tr>
+                <td class="">C:전기용품</td>
+                <td class="">공급자적합성확인</td>
+            </tr>
+        <tr>
+                <td class="">D:방송통신기자재</td>
+                <td class="">적합인증(MIC)</td>
+            </tr>
+        <tr>
+                <td class="">D:방송통신기자재</td>
+                <td class="">적합등록</td>
+            </tr>
+        <tr>
+                <td class="">D:방송통신기자재</td>
+                <td class="">잠정인증</td>
+            </tr>
+        <tr>
+                <td class="">E:어린이제품</td>
+                <td class="">안전인증</td>
+            </tr>
+        <tr>
+                <td class="">E:어린이제품</td>
+                <td class="">안전확인</td>
+            </tr>
+        <tr>
+                <td class="">E:어린이제품</td>
+                <td class="">공급자적합성확인</td>
+            </tr>
+        <tr>
+                <td class="">F:자가검사번호</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">G:위해요소중점관리인증(HACCP)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">H:농산물우수관리인증(GAP)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">I:가공식품표준화인증(KS)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">J:우수건강식품제조기준인증(GMP)</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">K:건강기능식품인증</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">L:수산물품질인증</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">M:수산특산물품질인증</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">N:수산전통식품품질인증</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">O:전통식품품질인증</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">P:유기가공식품인증</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">Q:원산지증명</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">R:농산물이력추적</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">S:도축증명서</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">T:등급판정확인서</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">U:형식승인</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">V:형식검정/형식등록</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">W:해외안전인증서류</td>
+                <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">Z:기타</td>
+                <td class=""></td>
+            </tr>
+        </table>
+

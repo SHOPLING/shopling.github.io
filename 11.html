@@ -1,40 +1,291 @@
-<?
-require_once('common.lib');
 
-if (checkCmpyId()) {
-} else {
-    exit;
-}
+<h3>
+    클레임수집    <span class='ver'>(마지막 수정일시: 2023-08-22 14:23:03)</span>
+</h3>
 
-$title = '클레임수집';
+<table>
+    <tr> <th width='100'>기능</th>  <td><xmp>삽플링 클레임 가져오기  (아래 둘중 하나 골라서 사용)</xmp></td></tr>    <tr> <th>URL</th>               <td><xmp>https://api.shopling.co.kr/claim/claim_gather_api.phtml?mode=1&xml_src_url=(아래 xml 데이타가 있는 url 기술)
+https://api.shopling.co.kr/claim/claim_gather_api.phtml?mode=2     -> 소켓통신으로 바로 xml로 밀어넣을시</xmp></td>                       </tr></table>
 
-$desc = '삽플링 클레임 가져오기';
+<span class='info'>※ 필수값이 아니고 해당사항이 없는경우는 미선언 하시면 됩니다.</span>
 
-$url = 'claim/claim_gather_api.phtml';
+<table>
 
-$request_string = '<reqst>
-   <apiClaimGather>
-		login_id	로그인ID	<![CDATA[]]>			Y
-		company_id	고객사 아이디				Y	shopPling 발급
-		api_auth_key	API 인증코드				Y	shopPling 발급
-		start_dt	검색시작일자(클레임수집기준일자)		yyyymmdd		Y	3개월 이내로 검색
-		end_dt	검색종료일자(클레임수집기준일자)		yyyymmdd		Y
-		claim_fields	출력 클레임필드명(구분자"," 로 여러개가능)	<![CDATA[]]>			Y	클레임필드 기술서 참고하여 필요정보 기술
-   </apiClaimGather>
-</reqst> 								';
+    <tr>
+        <th style='width:50px;'  >요청   </th>
+        <th style='width:150px;' >XML node   </th>
+        <th style='width:30px;'  >반복       </th>
+        <th style='width:100px;' >field      </th>
+        <th style='width:300px;' >field 설명 </th>
+        <th style='width:80px;'  >Data type  </th>
+        <th style='width:50px;'  >format     </th>
+        <th style='width:20px;'  >max        </th>
+        <th style='width:30px;'  >필수       </th>
+        <th style='width:500px;' >비고       </th>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp><reqst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>   <apiClaimGather>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>login_id</xmp></td>
+        <td>로그인ID</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>company_id</xmp></td>
+        <td>고객사 아이디</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>api_auth_key</xmp></td>
+        <td>API 인증코드</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>start_dt</xmp></td>
+        <td>검색시작일자(클레임수집기준일자)</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp>yyyymmdd</xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>3개월&nbsp;이내로&nbsp;검색</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>end_dt</xmp></td>
+        <td>검색종료일자(클레임수집기준일자)</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp>yyyymmdd</xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>claim_fields</xmp></td>
+        <td>출력 클레임필드명(구분자"," 로 여러개가능)</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>클레임필드&nbsp;기술서&nbsp;참고하여&nbsp;필요정보&nbsp;기술</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>   </apiClaimGather>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></reqst> </xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr></table>
 
-$response_string = '<rspns>
-   <apiClaimGatherRst>
-		login_id	로그인ID	<![CDATA[]]>			Y
-		company_id	고객사 아이디				Y	shopPling 발급
-      <claimListRst>	Y
-	Y	claim_var_name	클레임정보 필드 변수명	<![CDATA[]]>				클레임필드 기술서 변수 참조
-      </claimListRst>	Y
-		cnt	전체건수					전체 건수
-   </apiClaimGatherRst>
-</rspns> 								';
+<table>
 
-$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+    <tr>
+        <th style='width:50px;'  >응답   </th>
+        <th style='width:150px;' >XML node   </th>
+        <th style='width:30px;'  >반복       </th>
+        <th style='width:100px;' >field      </th>
+        <th style='width:300px;' >field 설명 </th>
+        <th style='width:80px;'  >Data type  </th>
+        <th style='width:50px;'  >format     </th>
+        <th style='width:20px;'  >max        </th>
+        <th style='width:30px;'  >필수       </th>
+        <th style='width:500px;' >비고       </th>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp><rspns>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>   <apiClaimGatherRst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>login_id</xmp></td>
+        <td>로그인ID</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>company_id</xmp></td>
+        <td>고객사 아이디</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>      <claimListRst></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>claim_var_name</xmp></td>
+        <td>클레임정보 필드 변수명</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>클레임필드&nbsp;기술서&nbsp;변수&nbsp;참조</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>      </claimListRst></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>cnt</xmp></td>
+        <td>전체건수</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>전체&nbsp;건수</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>   </apiClaimGatherRst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></rspns> </xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr></table>
+
+<h3>XML 요청 예시</h3><div class='code'><pre><xmp><\?xml version="1.0" encoding="UTF-8"?>
 <reqst>
    <apiClaimGather>
       <login_id><![CDATA[shoppling]]></login_id>
@@ -44,9 +295,8 @@ $request_example = '<?xml version="1.0" encoding="UTF-8"?>
       <end_dt>20150207</end_dt>
       <claim_fields><![CDATA[claim_key, mall_key, mall_login_id, auto_fg, mall_claim_tp, ord_status]]></claim_fields>
    </apiClaimGather>
-</reqst>';
-
-$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+</reqst></xmp></pre></div>
+<h3>XML 응답 예시</h3><div class='code'><pre><xmp><\?xml version="1.0" encoding="UTF-8"?>
 <rspns>
    <apiClaimGatherRst>
       <login_id><![CDATA[shoppling]]></login_id>
@@ -77,8 +327,5 @@ $response_example = '<?xml version="1.0" encoding="UTF-8"?>
       </claimListRst>
       <cnt>3</cnt>
    </apiClaimGatherRst>
-</rspns>';
+</rspns></xmp></pre></div>
 
-require_once('api_content_layout.phtml');
-
-?>

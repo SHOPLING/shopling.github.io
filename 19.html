@@ -1,50 +1,411 @@
-<?
-require_once('common.lib');
 
-if (checkCmpyId()) {
-} else {
-    exit;
-}
+<h3>
+    쇼핑몰 상품코드 가져오기    <span class='ver'>(마지막 수정일시: 2023-08-22 14:23:03)</span>
+</h3>
 
-$title = '쇼핑몰 상품코드 가져오기';
+<table>
+    <tr> <th width='100'>기능</th>  <td><xmp>샵플링 상품코드에 해당하는 쇼핑몰 상품코드 가져오기  (아래 둘중 하나 골라서 사용)</xmp></td></tr>    <tr> <th>URL</th>               <td><xmp>https://api.shopling.co.kr/prod/get_mall_goods_cd.phtml?mode=1&xml_src_url=(아래 xml 데이타가 있는 url 기술)
+https://api.shopling.co.kr/prod/get_mall_goods_cd.phtml?mode=2     -> 소켓통신으로 바로 xml로 밀어넣을시</xmp></td>                       </tr></table>
 
-$desc = '샵플링 상품코드에 해당하는 쇼핑몰 상품코드 가져오기';
+<span class='info'>※ 필수값이 아니고 해당사항이 없는경우는 미선언 하시면 됩니다.</span>
 
-$url = 'prod/get_mall_goods_cd.phtml';
+<table>
 
-$request_string = '<reqst>
-   <apiGetMallGoodsCd>
-		login_id	로그인ID	<![CDATA[]]>			Y
-		company_id	고객사 아이디				Y	shopPling 발급
-		api_auth_key	API 인증코드				Y	shopPling 발급
-		partner_id	파트너 코드					필요시 partner_id (habibi)
-      <goodsInfo>	Y
-	Y	mall_key	쇼핑몰 코드	<![CDATA[]]>			Y	쇼핑몰 코드 필수
-	Y	mall_login_id	쇼핑몰 아이디	<![CDATA[]]>				쇼핑몰 로그인 아이디 선택
-	Y	goods_key	샵플링 상품코드	<![CDATA[]]>			Y	샵플링 상품코드 필수
-      </goodsInfo>	Y
-   </apiGetMallGoodsCd>
-</reqst> 								';
+    <tr>
+        <th style='width:50px;'  >요청   </th>
+        <th style='width:150px;' >XML node   </th>
+        <th style='width:30px;'  >반복       </th>
+        <th style='width:100px;' >field      </th>
+        <th style='width:300px;' >field 설명 </th>
+        <th style='width:80px;'  >Data type  </th>
+        <th style='width:50px;'  >format     </th>
+        <th style='width:20px;'  >max        </th>
+        <th style='width:30px;'  >필수       </th>
+        <th style='width:500px;' >비고       </th>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp><reqst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>   <apiGetMallGoodsCd>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>login_id</xmp></td>
+        <td>로그인ID</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>company_id</xmp></td>
+        <td>고객사 아이디</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>api_auth_key</xmp></td>
+        <td>API 인증코드</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>shopPling&nbsp;발급</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>partner_id</xmp></td>
+        <td>파트너 코드</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>필요시&nbsp;partner_id&nbsp;(habibi)</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>      <goodsInfo></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>mall_key</xmp></td>
+        <td>쇼핑몰 코드</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>쇼핑몰&nbsp;코드&nbsp;필수</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>mall_login_id</xmp></td>
+        <td>쇼핑몰 아이디</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td>쇼핑몰&nbsp;로그인&nbsp;아이디&nbsp;선택</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>goods_key</xmp></td>
+        <td>샵플링 상품코드</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td>샵플링&nbsp;상품코드&nbsp;필수</td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>      </goodsInfo></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp>   </apiGetMallGoodsCd>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>request</xmp></td>
+        <td><xmp></reqst> </xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr></table>
 
-$response_string = '<rspns>
-   <apiGetMallGoodsCdRst>
-		login_id	로그인ID	<![CDATA[]]>			Y
-		company_id	고객사 아이디				Y
-      <goodsListRst>	Y
-	Y	mall_key	쇼핑몰 코드
-	Y	mall_login_id	쇼핑몰 아이디	<![CDATA[]]>
-	Y	goods_key	샵플링 상품코드	<![CDATA[]]>
-	Y	mall_goods_cd	쇼핑몰 상품코드	<![CDATA[]]>
-	Y	link_seq	샵플링 연동번호	<![CDATA[]]>
-	Y	code	성공,실패 결과코드	<![CDATA[]]>
-	Y	msg	성공,실패 결과메세지	<![CDATA[]]>
-      </goodsListRst>	Y
-		succs_cnt	성공건수
-		fail_cnt	실패건수
-   </apiGetMallGoodsCdRst>
-</rspns> 								';
+<table>
 
-$request_example = '<?xml version="1.0" encoding="UTF-8"?>
+    <tr>
+        <th style='width:50px;'  >응답   </th>
+        <th style='width:150px;' >XML node   </th>
+        <th style='width:30px;'  >반복       </th>
+        <th style='width:100px;' >field      </th>
+        <th style='width:300px;' >field 설명 </th>
+        <th style='width:80px;'  >Data type  </th>
+        <th style='width:50px;'  >format     </th>
+        <th style='width:20px;'  >max        </th>
+        <th style='width:30px;'  >필수       </th>
+        <th style='width:500px;' >비고       </th>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp><rspns>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>   <apiGetMallGoodsCdRst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>login_id</xmp></td>
+        <td>로그인ID</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>company_id</xmp></td>
+        <td>고객사 아이디</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp>Y</xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>      <goodsListRst></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>mall_key</xmp></td>
+        <td>쇼핑몰 코드</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>mall_login_id</xmp></td>
+        <td>쇼핑몰 아이디</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>goods_key</xmp></td>
+        <td>샵플링 상품코드</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>mall_goods_cd</xmp></td>
+        <td>쇼핑몰 상품코드</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>link_seq</xmp></td>
+        <td>샵플링 연동번호</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>code</xmp></td>
+        <td>성공,실패 결과코드</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp>msg</xmp></td>
+        <td>성공,실패 결과메세지</td>
+        <td class='center'><xmp><![CDATA[]]></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>      </goodsListRst></xmp></td>
+        <td><xmp>Y</xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>succs_cnt</xmp></td>
+        <td>성공건수</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp>fail_cnt</xmp></td>
+        <td>실패건수</td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp>   </apiGetMallGoodsCdRst>
+</xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class='center'><xmp>response</xmp></td>
+        <td><xmp></rspns> </xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td></td>
+        <td class='center'><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td><xmp></xmp></td>
+        <td class='center'><xmp></xmp></td>
+        <td></td>
+    </tr></table>
+
+<h3>XML 요청 예시</h3><div class='code'><pre><xmp><\?xml version="1.0" encoding="UTF-8"?>
 <reqst>
    <apiGetMallGoodsCd>
       <login_id><![CDATA[shoppling]]></login_id>
@@ -56,9 +417,8 @@ $request_example = '<?xml version="1.0" encoding="UTF-8"?>
          <goods_key><![CDATA[100058978956]]></goods_key>
       </goodsInfo>
    </apiGetMallGoodsCd>
-</reqst>';
-
-$response_example = '<?xml version="1.0" encoding="UTF-8"?>
+</reqst></xmp></pre></div>
+<h3>XML 응답 예시</h3><div class='code'><pre><xmp><\?xml version="1.0" encoding="UTF-8"?>
 <rspns>
    <apiGetMallGoodsCdRst>
       <login_id><![CDATA[shoppling]]></login_id>
@@ -84,8 +444,5 @@ $response_example = '<?xml version="1.0" encoding="UTF-8"?>
       <succs_cnt>2</succs_cnt>
       <fail_cnt>0</fail_cnt>
    </apiGetMallGoodsCdRst>
-</rspns>';
+</rspns></xmp></pre></div>
 
-require_once('api_content_layout.phtml');
-
-?>
