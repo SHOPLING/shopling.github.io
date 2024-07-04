@@ -1,17 +1,17 @@
 
 <h3>
-    클레임 필드 기술서    <span class='ver'>(마지막 수정일시: 2024-07-04 15:26:28)</span>
+    클레임 필드 기술서    <span class='ver'>(마지막 수정일시: 2024-07-04 16:13:15)</span>
 
 
 <script>
 
-	function jsm_search_fn174366154(_input)
+	function jsm_search_fn1520581891(_input)
 	{
 		var _table, _select, _keyword;
 
 		_keyword = _input.value;
 
-					_table = $("#table2004998527");
+					_table = $("#table1401708964");
 
 		if(_table) {
 			_table.find("tr").each(function(idx){
@@ -27,7 +27,7 @@
 
 
 		if(_select) {
-			_select.html($("#jsm_search_hidden_select174366154").html());
+			_select.html($("#jsm_search_hidden_select1520581891").html());
 
 			$(" option").each(function(){
 				if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0) {
@@ -48,20 +48,20 @@
 	type="text"
 	style='width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;'
 	class="jsm_search_keyword_input"
-	id="jsm_search_input174366154"
-	onblur="jsm_search_fn174366154(this);"
-	onfocus="jsm_search_fn174366154(this);"
-	onkeyup="jsm_search_fn174366154(this);"
+	id="jsm_search_input1520581891"
+	onblur="jsm_search_fn1520581891(this);"
+	onfocus="jsm_search_fn1520581891(this);"
+	onkeyup="jsm_search_fn1520581891(this);"
 	placeholder="클레임 필드 기술서 검색"
 	title="클레임 필드 기술서 검색"
 	>
-<select id="jsm_search_hidden_select174366154" style="display:none;"></select>
+<select id="jsm_search_hidden_select1520581891" style="display:none;"></select>
 
 </h3>
 
 <span class='info'></span>
 
-<table id='table2004998527' style="">
+<table id='table1401708964' style="">
             <tr>
                 <th style="width: 300px;">필드 변수 항목</th>
                 <th style="width: 150px;">필드 변수 명</th>
@@ -100,7 +100,7 @@
                 <td class=""></td>
             </tr>
         <tr>
-                <td class="">클레임상태</td>
+                <td class="">수집클레임상태</td>
                 <td class="">ord_status</td>
                 <td class="">char(3)</td>
                 <td class="">취소접수, 취소완료, 반품접수, 반품완료, 교환접수, 교환완료</td>
@@ -194,5 +194,11 @@
                 <td class="">i_dt</td>
                 <td class="">varchar(14)</td>
                 <td class=""></td>
+            </tr>
+        <tr>
+                <td class="">클레임처리상태</td>
+                <td class="">claim_status</td>
+                <td class="">char(3)</td>
+                <td class="">취소접수, 취소완료, 반품접수, 반품완료, 반품입고완료, 교환접수, 교환완료, 교환입고완료</td>
             </tr>
         </table>
