@@ -5,13 +5,13 @@
 
 <script>
 
-	function jsm_search_fn177130818(_input)
+	function jsm_search_fn166444103(_input)
 	{
 		var _table, _select, _keyword;
 
 		_keyword = _input.value;
 
-					_table = $("#table1161273164");
+					_table = $("#table2126404044");
 
 		if(_table) {
 			_table.find("tr").each(function(idx){
@@ -27,7 +27,7 @@
 
 
 		if(_select) {
-			_select.html($("#jsm_search_hidden_select177130818").html());
+			_select.html($("#jsm_search_hidden_select166444103").html());
 
 			$(" option").each(function(){
 				if($(this).clone().wrapAll('<div/>').parent().html().toUpperCase().indexOf(_keyword.toUpperCase()) < 0) {
@@ -48,20 +48,20 @@
 	type="text"
 	style='width: 500px; padding: 0 5px; border: solid 1px #e2e1e1; float: right;'
 	class="jsm_search_keyword_input"
-	id="jsm_search_input177130818"
-	onblur="jsm_search_fn177130818(this);"
-	onfocus="jsm_search_fn177130818(this);"
-	onkeyup="jsm_search_fn177130818(this);"
+	id="jsm_search_input166444103"
+	onblur="jsm_search_fn166444103(this);"
+	onfocus="jsm_search_fn166444103(this);"
+	onkeyup="jsm_search_fn166444103(this);"
 	placeholder="QnA 필드 기술서 검색"
 	title="QnA 필드 기술서 검색"
 	>
-<select id="jsm_search_hidden_select177130818" style="display:none;"></select>
+<select id="jsm_search_hidden_select166444103" style="display:none;"></select>
 
 </h3>
 
 <span class='info'></span>
 
-<table id='table1161273164' style="">
+<table id='table2126404044' style="">
             <tr>
                 <th style="width: 300px;">필드 변수 항목</th>
                 <th style="width: 150px;">필드 변수 명</th>
@@ -183,5 +183,10 @@
                 <td class="">varchar(14)</td>
                 <td class=""></td>
             </tr>
+        <tr>
+                <td class=""></td>
+                <td class=""></td>
+                <td class=""></td>
+                <td class=""></td>
+            </tr>
         </table>
-

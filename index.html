@@ -58,8 +58,6 @@
     #content div.code { margin: 0 0 30px; padding: 10px; background-color: var(--background-color); }
 </style>
 
-<link rel="stylesheet" href="style.css">
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script>
@@ -71,14 +69,14 @@
         }, 'text');
     }
 
-    function getMenu() { getHTML('menu.html', '#menu'); }
+    function getMenu() { getHTML('menu.phtml', '#menu'); }
 
     function getContent(url) { getHTML(url, '#content'); }
 
     $(document).ready(function() {
         getMenu();
 
-        getContent('main.html');
+        getContent('main.phtml');
 
         $('#menu').on('click', 'li', function() {
             $('li.on').removeClass('on');
