@@ -69,14 +69,14 @@
         }, 'text');
     }
 
-    function getMenu() { getHTML('menu.phtml', '#menu'); }
+    function getMenu() { getHTML('menu.html', '#menu'); }
 
     function getContent(url) { getHTML(url, '#content'); }
 
     $(document).ready(function() {
         getMenu();
 
-        getContent('main.phtml');
+        getContent('main.html');
 
         $('#menu').on('click', 'li', function() {
             $('li.on').removeClass('on');
