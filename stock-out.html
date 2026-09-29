@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>재고출고등록 - Shopling API</title>
+<meta name="description" content="[E3] 상품출고관리 출고(일반) 전표 등록 (엑셀대량출고등록과 동일)">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav id="nav">
+<a class="brand" href="index.html">Shopling API</a>
+<input id="q" type="search" placeholder="필드·코드 검색" autocomplete="off">
+<ul id="results"></ul>
+<h3>시작하기</h3><ul><li><a href="index.html">시작하기</a></li><li><a href="changelog.html">변경이력</a></li></ul><h3>상품</h3><ul><li><a href="prod-register.html">상품등록</a></li><li><a href="prod-modify.html">상품수정</a></li><li><a href="prod-modify2.html">상품수정 (2)</a></li><li><a href="prod-mall-modify.html">쇼핑몰별 상품등록수정</a></li><li><a href="prod-gather.html">상품조회</a></li><li><a href="prod-mall-goods-cd.html">쇼핑몰상품코드조회</a></li></ul><h3>재고</h3><ul><li><a href="stock-out.html" class="on">재고출고등록</a></li></ul><h3>주문</h3><ul><li><a href="order-gather.html">주문조회</a></li><li><a href="order-status.html">주문상태 발주처리</a></li><li><a href="order-invoice.html">송장등록</a></li></ul><h3>클레임</h3><ul><li><a href="claim-gather.html">클레임조회</a></li><li><a href="claim-request.html">클레임요청처리</a></li></ul><h3>문의</h3><ul><li><a href="qna-gather.html">문의조회</a></li><li><a href="qna-reply.html">문의답변등록</a></li></ul><h3>코드표</h3><ul><li><a href="code-prod-field.html">상품필드</a></li><li><a href="code-prod-gather-field.html">상품조회필드</a></li><li><a href="code-notice.html">상품정보고시 코드</a></li><li><a href="code-order-field.html">주문필드</a></li><li><a href="code-claim-field.html">클레임필드</a></li><li><a href="code-qna-field.html">문의필드</a></li><li><a href="code-dlvy.html">택배사 코드</a></li><li><a href="code-mall.html">쇼핑몰 코드</a></li></ul>
+</nav>
+<main>
+<h1>재고출고등록</h1><p class="desc">[E3] 상품출고관리 출고(일반) 전표 등록 (엑셀대량출고등록과 동일)</p><div class="endpoint"><span class="method">POST</span> <code>https://api.shopling.co.kr/prod/stock_out_api.phtml?mode=2</code> <a class="hint" href="index.html#call">호출 방식</a></div><h2>요청</h2><table class="fields"><thead><tr><th class="w-field">필드</th><th>설명</th><th class="w-s">타입</th><th class="w-s">형식</th><th class="w-xs">최대</th><th class="w-xs">필수</th><th>비고</th></tr></thead><tbody><tr class="node"><td colspan="7" style="padding-left:10px"><code>&lt;reqst&gt;</code></td></tr><tr class="node"><td colspan="7" style="padding-left:26px"><code>&lt;apiStockOut&gt;</code></td></tr><tr id="req-login_id"><td style="padding-left:42px"><a class="anchor" href="#req-login_id"><code>login_id</code></a></td><td>로그인ID</td><td class="c"><span title="값을 &lt;![CDATA[...]]&gt; 로 감싸 주세요">CDATA</span></td><td></td><td class="c"></td><td class="c"><b class="req">Y</b></td><td></td></tr><tr id="req-company_id"><td style="padding-left:42px"><a class="anchor" href="#req-company_id"><code>company_id</code></a></td><td>고객사 아이디</td><td class="c"></td><td></td><td class="c"></td><td class="c"><b class="req">Y</b></td><td>shopPling 발급</td></tr><tr id="req-api_auth_key"><td style="padding-left:42px"><a class="anchor" href="#req-api_auth_key"><code>api_auth_key</code></a></td><td>API 인증코드</td><td class="c"></td><td></td><td class="c"></td><td class="c"><b class="req">Y</b></td><td>shopPling 발급</td></tr><tr id="req-strage_cd"><td style="padding-left:42px"><a class="anchor" href="#req-strage_cd"><code>strage_cd</code></a></td><td>출고창고 코드</td><td class="c"></td><td></td><td class="c"></td><td class="c"><b class="req">Y</b></td><td>[E] 창고관리에 등록된 사용중 창고코드</td></tr><tr id="req-detail_tp"><td style="padding-left:42px"><a class="anchor" href="#req-detail_tp"><code>detail_tp</code></a></td><td>출고구분</td><td class="c"></td><td></td><td class="c"></td><td class="c"><b class="req">Y</b></td><td>O:정상 R:반품 E:교환 M:이동 S:실사 Z:기타</td></tr><tr id="req-inout_dt"><td style="padding-left:42px"><a class="anchor" href="#req-inout_dt"><code>inout_dt</code></a></td><td>출고일자</td><td class="c"></td><td>yyyymmdd</td><td class="c"></td><td class="c"></td><td>미선언시 호출일자. 행별 inout_dt 가 있으면 그 값 우선</td></tr><tr id="req-invntry_nm"><td style="padding-left:42px"><a class="anchor" href="#req-invntry_nm"><code>invntry_nm</code></a></td><td>전표명</td><td class="c"><span title="값을 &lt;![CDATA[...]]&gt; 로 감싸 주세요">CDATA</span></td><td></td><td class="c"></td><td class="c"></td><td>미선언시 "API 출고전표"</td></tr><tr id="req-memo"><td style="padding-left:42px"><a class="anchor" href="#req-memo"><code>memo</code></a></td><td>전표 메모</td><td class="c"><span title="값을 &lt;![CDATA[...]]&gt; 로 감싸 주세요">CDATA</span></td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="req-apply_yn"><td style="padding-left:42px"><a class="anchor" href="#req-apply_yn"><code>apply_yn</code></a></td><td>재고반영여부</td><td class="c"></td><td></td><td class="c"></td><td class="c"></td><td>Y:등록 즉시 재고반영 / N:미반영 등록(기본) - [E3] 상품출고관리에서 재고반영</td></tr><tr id="req-fail_tp"><td style="padding-left:42px"><a class="anchor" href="#req-fail_tp"><code>fail_tp</code></a></td><td>오류처리방식</td><td class="c"></td><td></td><td class="c"></td><td class="c"></td><td>A:한 건이라도 오류면 전체 미등록(기본) / P:오류건만 제외하고 등록</td></tr><tr class="node"><td colspan="7" style="padding-left:42px"><code>&lt;stockInfo&gt;</code> <span class="badge">반복</span> <span class="node-note">1회 최대 5,000건</span></td></tr><tr id="req-barcode"><td style="padding-left:58px"><a class="anchor" href="#req-barcode"><code>barcode</code></a></td><td>바코드</td><td class="c"><span title="값을 &lt;![CDATA[...]]&gt; 로 감싸 주세요">CDATA</span></td><td></td><td class="c"></td><td class="c"></td><td>barcode 또는 prod_id+opt_id 중 하나 필수 (barcode 우선)</td></tr><tr id="req-prod_id"><td style="padding-left:58px"><a class="anchor" href="#req-prod_id"><code>prod_id</code></a></td><td>샵플링 상품코드</td><td class="c">number</td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="req-opt_id"><td style="padding-left:58px"><a class="anchor" href="#req-opt_id"><code>opt_id</code></a></td><td>샵플링 옵션코드</td><td class="c">number</td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="req-qty"><td style="padding-left:58px"><a class="anchor" href="#req-qty"><code>qty</code></a></td><td>출고수량</td><td class="c">number</td><td></td><td class="c"></td><td class="c"><b class="req">Y</b></td><td>0 제외 정수</td></tr><tr id="req-unit"><td style="padding-left:58px"><a class="anchor" href="#req-unit"><code>unit</code></a></td><td>상태</td><td class="c"><span title="값을 &lt;![CDATA[...]]&gt; 로 감싸 주세요">CDATA</span></td><td></td><td class="c"></td><td class="c"></td><td>"불량" 포함시 불량재고로 출고</td></tr><tr id="req-cust_cd"><td style="padding-left:58px"><a class="anchor" href="#req-cust_cd"><code>cust_cd</code></a></td><td>매입처코드</td><td class="c"></td><td></td><td class="c"></td><td class="c"></td><td>매입처(공급처) 코드. 매입처+출고일자가 같은 행끼리 한 전표로 등록</td></tr><tr id="req-loct_nm"><td style="padding-left:58px"><a class="anchor" href="#req-loct_nm"><code>loct_nm</code></a></td><td>로케이션</td><td class="c"><span title="값을 &lt;![CDATA[...]]&gt; 로 감싸 주세요">CDATA</span></td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="req-memo"><td style="padding-left:58px"><a class="anchor" href="#req-memo"><code>memo</code></a></td><td>명세 메모</td><td class="c"><span title="값을 &lt;![CDATA[...]]&gt; 로 감싸 주세요">CDATA</span></td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="req-inout_dt"><td style="padding-left:58px"><a class="anchor" href="#req-inout_dt"><code>inout_dt</code></a></td><td>출고일자</td><td class="c"></td><td>yyyymmdd</td><td class="c"></td><td class="c"></td><td></td></tr></tbody></table><h2>응답</h2><table class="fields"><thead><tr><th class="w-field">필드</th><th>설명</th><th class="w-s">타입</th><th class="w-s">형식</th><th class="w-xs">최대</th><th class="w-xs">필수</th><th>비고</th></tr></thead><tbody><tr class="node"><td colspan="7" style="padding-left:10px"><code>&lt;rspns&gt;</code></td></tr><tr class="node"><td colspan="7" style="padding-left:26px"><code>&lt;apiStockOutRst&gt;</code></td></tr><tr id="res-login_id"><td style="padding-left:42px"><a class="anchor" href="#res-login_id"><code>login_id</code></a></td><td>로그인ID</td><td class="c"></td><td></td><td class="c"></td><td class="c"><b class="req">Y</b></td><td></td></tr><tr id="res-company_id"><td style="padding-left:42px"><a class="anchor" href="#res-company_id"><code>company_id</code></a></td><td>고객사 아이디</td><td class="c"></td><td></td><td class="c"></td><td class="c"><b class="req">Y</b></td><td></td></tr><tr class="node"><td colspan="7" style="padding-left:42px"><code>&lt;stockListRst&gt;</code> <span class="badge">반복</span> <span class="node-note">요청 stockInfo 순서대로</span></td></tr><tr id="res-seq"><td style="padding-left:58px"><a class="anchor" href="#res-seq"><code>seq</code></a></td><td>요청 행번호</td><td class="c">number</td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="res-barcode"><td style="padding-left:58px"><a class="anchor" href="#res-barcode"><code>barcode</code></a></td><td>바코드</td><td class="c"></td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="res-prod_id"><td style="padding-left:58px"><a class="anchor" href="#res-prod_id"><code>prod_id</code></a></td><td>샵플링 상품코드</td><td class="c">number</td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="res-opt_id"><td style="padding-left:58px"><a class="anchor" href="#res-opt_id"><code>opt_id</code></a></td><td>샵플링 옵션코드</td><td class="c">number</td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="res-invntry_no"><td style="padding-left:58px"><a class="anchor" href="#res-invntry_no"><code>invntry_no</code></a></td><td>등록된 출고전표번호</td><td class="c"></td><td></td><td class="c"></td><td class="c"></td><td>등록된 경우만</td></tr><tr id="res-code"><td style="padding-left:58px"><a class="anchor" href="#res-code"><code>code</code></a></td><td>결과코드</td><td class="c"><span title="값을 &lt;![CDATA[...]]&gt; 로 감싸 주세요">CDATA</span></td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="res-msg"><td style="padding-left:58px"><a class="anchor" href="#res-msg"><code>msg</code></a></td><td>결과메세지</td><td class="c"><span title="값을 &lt;![CDATA[...]]&gt; 로 감싸 주세요">CDATA</span></td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="res-succs_cnt"><td style="padding-left:42px"><a class="anchor" href="#res-succs_cnt"><code>succs_cnt</code></a></td><td>성공건수</td><td class="c"></td><td></td><td class="c"></td><td class="c"></td><td></td></tr><tr id="res-fail_cnt"><td style="padding-left:42px"><a class="anchor" href="#res-fail_cnt"><code>fail_cnt</code></a></td><td>실패건수</td><td class="c"></td><td></td><td class="c"></td><td class="c"></td><td></td></tr></tbody></table><h2>요청 예시</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;reqst&gt;
+   &lt;apiStockOut&gt;
+      &lt;login_id&gt;&lt;![CDATA[shoppling]]&gt;&lt;/login_id&gt;
+      &lt;company_id&gt;S001&lt;/company_id&gt;
+      &lt;api_auth_key&gt;fgsddfgfkdgdkfgk&lt;/api_auth_key&gt;
+      &lt;strage_cd&gt;A001&lt;/strage_cd&gt;
+      &lt;detail_tp&gt;O&lt;/detail_tp&gt;
+      &lt;inout_dt&gt;20260929&lt;/inout_dt&gt;
+      &lt;apply_yn&gt;Y&lt;/apply_yn&gt;
+      &lt;fail_tp&gt;A&lt;/fail_tp&gt;
+      &lt;stockInfo&gt;
+         &lt;barcode&gt;&lt;![CDATA[8801234567890]]&gt;&lt;/barcode&gt;
+         &lt;qty&gt;3&lt;/qty&gt;
+      &lt;/stockInfo&gt;
+      &lt;stockInfo&gt;
+         &lt;prod_id&gt;100058&lt;/prod_id&gt;
+         &lt;opt_id&gt;2&lt;/opt_id&gt;
+         &lt;qty&gt;1&lt;/qty&gt;
+         &lt;cust_cd&gt;B001&lt;/cust_cd&gt;
+      &lt;/stockInfo&gt;
+   &lt;/apiStockOut&gt;
+&lt;/reqst&gt;</code></pre><h2>응답 예시</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;rspns&gt;
+   &lt;apiStockOutRst&gt;
+      &lt;login_id&gt;shoppling&lt;/login_id&gt;
+      &lt;company_id&gt;S001&lt;/company_id&gt;
+      &lt;stockListRst&gt;
+         &lt;seq&gt;1&lt;/seq&gt;
+         &lt;barcode&gt;8801234567890&lt;/barcode&gt;
+         &lt;prod_id&gt;100057&lt;/prod_id&gt;
+         &lt;opt_id&gt;1&lt;/opt_id&gt;
+         &lt;invntry_no&gt;260929-4-0001&lt;/invntry_no&gt;
+         &lt;code&gt;&lt;![CDATA[000]]&gt;&lt;/code&gt;
+         &lt;msg&gt;&lt;![CDATA[정상]]&gt;&lt;/msg&gt;
+      &lt;/stockListRst&gt;
+      &lt;stockListRst&gt;
+         &lt;seq&gt;2&lt;/seq&gt;
+         &lt;barcode&gt;&lt;/barcode&gt;
+         &lt;prod_id&gt;100058&lt;/prod_id&gt;
+         &lt;opt_id&gt;2&lt;/opt_id&gt;
+         &lt;invntry_no&gt;260929-4-0002&lt;/invntry_no&gt;
+         &lt;code&gt;&lt;![CDATA[000]]&gt;&lt;/code&gt;
+         &lt;msg&gt;&lt;![CDATA[정상]]&gt;&lt;/msg&gt;
+      &lt;/stockListRst&gt;
+      &lt;succs_cnt&gt;2&lt;/succs_cnt&gt;
+      &lt;fail_cnt&gt;0&lt;/fail_cnt&gt;
+   &lt;/apiStockOutRst&gt;
+&lt;/rspns&gt;</code></pre><h2>결과코드</h2><pre><code>000 : 정상
+901 : 입력값 오류 (상품정보 누락, 코드·수량·매입처·일자 형식 오류)
+910 : 대상 상품 없음 (재고관리 대상 상품이 아니거나 재고연결상품)
+920 : 다른 행의 오류로 등록되지 않음 (fail_tp=A)
+930 : 등록 실패
+940 : 출고전표는 등록되었으나 재고반영 실패 (미반영 전표로 남음, apply_yn=Y)
+
+※ 요청 전체 오류(인증 실패, 재고관리 미사용 업체, 창고·출고구분 코드 오류, 5,000건 초과 등)는 XML 이 아닌 안내 문구로 응답합니다.</code></pre>
+</main>
+<script src="assets/app.js"></script>
+</body>
+</html>
