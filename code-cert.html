@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>상품 인증정보 - Shopling API</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav id="nav">
+<a class="brand" href="index.html">Shopling API</a>
+<input id="q" type="search" placeholder="필드·코드 검색" autocomplete="off">
+<ul id="results"></ul>
+<h3>시작하기</h3><ul><li><a href="index.html">시작하기</a></li><li><a href="changelog.html">변경이력</a></li></ul><h3>상품</h3><ul><li><a href="prod-register.html">상품등록</a></li><li><a href="prod-modify.html">상품수정</a></li><li><a href="prod-modify2.html">상품수정 (2)</a></li><li><a href="prod-mall-modify.html">쇼핑몰별 상품등록수정</a></li><li><a href="prod-pkg.html">패키지구성등록</a></li><li><a href="prod-gather.html">상품조회</a></li><li><a href="prod-mall-goods-cd.html">쇼핑몰상품코드조회</a></li></ul><h3>재고</h3><ul><li><a href="stock-in.html">재고입고등록</a></li><li><a href="stock-out.html">재고출고등록</a></li><li><a href="stock-inout.html">입출고전표조회</a></li></ul><h3>주문</h3><ul><li><a href="order-gather.html">주문조회</a></li><li><a href="order-status.html">주문상태 발주처리</a></li><li><a href="order-invoice.html">송장등록</a></li></ul><h3>클레임</h3><ul><li><a href="claim-gather.html">클레임조회</a></li><li><a href="claim-request.html">클레임요청처리</a></li></ul><h3>문의</h3><ul><li><a href="qna-gather.html">문의조회</a></li><li><a href="qna-reply.html">문의답변등록</a></li></ul><h3>코드표</h3><ul><li><a href="code-prod-field.html">상품필드</a></li><li class="sub"><a href="code-prod-field-list.html">상품필드</a></li><li class="sub"><a href="code-origin.html">상품 원산지</a></li><li class="sub"><a href="code-cert.html" class="on">상품 인증정보</a></li><li><a href="code-prod-gather-field.html">상품조회필드</a></li><li><a href="code-notice.html">상품정보고시 코드</a></li><li class="sub"><a href="code-notice-class.html">[공정위] 분류 코드</a></li><li class="sub"><a href="code-notice-attr.html">상품속성정보 코드</a></li><li class="sub"><a href="code-notice-item.html">분류별 속성 항목 리스트</a></li><li><a href="code-order-field.html">주문필드</a></li><li><a href="code-claim-field.html">클레임필드</a></li><li><a href="code-qna-field.html">문의필드</a></li><li><a href="code-dlvy.html">택배사 코드</a></li><li><a href="code-mall.html">쇼핑몰 코드</a></li></ul>
+</nav>
+<main>
+<h1>상품 인증정보</h1><p class="info">* 인증대상 구분에 따라 하단에 입력된 값중 선택하여 반드시 정확하게 입력하여 주시기 바랍니다. F ~ W는 빈칸으로 두시기 바랍니다.<br>* 인증대상을 기타로 선택 후 해당 인증대상을 인증대상품목에 입력합니다.</p><table class="filterable fit"><thead><tr><th>안전인증 대상 구분</th><th>인증대상품목</th></tr></thead><tbody><tr><td>A:친환경</td><td>유기농산물</td></tr><tr><td>A:친환경</td><td>무농약농산물</td></tr><tr><td>A:친환경</td><td>저농약농산물</td></tr><tr><td>A:친환경</td><td>유기축산물</td></tr><tr><td>A:친환경</td><td>무항생제축산물</td></tr><tr><td>A:친환경</td><td>수산물</td></tr><tr><td>A:친환경</td><td>수산가공품품질인증</td></tr><tr><td>B:생활제품</td><td>안전인증</td></tr><tr><td>B:생활제품</td><td>자율안전확인</td></tr><tr><td>B:생활제품</td><td>어린이보호포장</td></tr><tr><td>B:생활제품</td><td>안전품질표시</td></tr><tr><td>B:생활제품</td><td>공급자적합성확인</td></tr><tr><td>C:전기용품</td><td>안전인증(KCC)</td></tr><tr><td>C:전기용품</td><td>자율안전확인(KCC)</td></tr><tr><td>C:전기용품</td><td>공급자적합성확인</td></tr><tr><td>D:방송통신기자재</td><td>적합인증(MIC)</td></tr><tr><td>D:방송통신기자재</td><td>적합등록</td></tr><tr><td>D:방송통신기자재</td><td>잠정인증</td></tr><tr><td>E:어린이제품</td><td>안전인증</td></tr><tr><td>E:어린이제품</td><td>안전확인</td></tr><tr><td>E:어린이제품</td><td>공급자적합성확인</td></tr><tr><td>F:자가검사번호</td><td></td></tr><tr><td>G:위해요소중점관리인증(HACCP)</td><td></td></tr><tr><td>H:농산물우수관리인증(GAP)</td><td></td></tr><tr><td>I:가공식품표준화인증(KS)</td><td></td></tr><tr><td>J:우수건강식품제조기준인증(GMP)</td><td></td></tr><tr><td>K:건강기능식품인증</td><td></td></tr><tr><td>L:수산물품질인증</td><td></td></tr><tr><td>M:수산특산물품질인증</td><td></td></tr><tr><td>N:수산전통식품품질인증</td><td></td></tr><tr><td>O:전통식품품질인증</td><td></td></tr><tr><td>P:유기가공식품인증</td><td></td></tr><tr><td>Q:원산지증명</td><td></td></tr><tr><td>R:농산물이력추적</td><td></td></tr><tr><td>S:도축증명서</td><td></td></tr><tr><td>T:등급판정확인서</td><td></td></tr><tr><td>U:형식승인</td><td></td></tr><tr><td>V:형식검정/형식등록</td><td></td></tr><tr><td>W:해외안전인증서류</td><td></td></tr><tr><td>X:생활화학/살생물제품</td><td>안전확인/승인/신고_국가인증</td></tr><tr><td>X:생활화학/살생물제품</td><td>승인번호_국가인증</td></tr><tr><td>Y:의약외품</td><td>품목허가</td></tr><tr><td>Y:의약외품</td><td>품목신고</td></tr><tr><td>Z:기타</td><td></td></tr></tbody></table>
+</main>
+<script src="assets/app.js"></script>
+</body>
+</html>

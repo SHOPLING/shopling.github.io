@@ -12,6 +12,8 @@ code,pre{font-family:Consolas,"D2Coding",monospace;font-size:13px}
 #nav ul{list-style:none;margin:0;padding:0}
 #nav li a{display:block;padding:3px 8px;border-radius:6px;color:var(--fg)}
 #nav li a.on{background:var(--accent);color:#fff}
+#nav li.sub a{padding-left:22px;font-size:13px}
+#nav li a{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #q{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
 #results{margin:4px 0 0!important}
 #results li a{font-size:13px}
@@ -24,14 +26,17 @@ h2{font-size:18px;margin:32px 0 8px;padding-bottom:4px;border-bottom:1px solid v
 .method{display:inline-block;padding:0 6px;border-radius:4px;background:#1a7f37;color:#fff;font-weight:700;font-size:12px}
 .hint{margin-left:8px;font-size:12px}
 table{border-collapse:collapse;width:100%;margin:8px 0 16px}
+table.fit{width:auto;min-width:50%}
 th,td{border:1px solid var(--line);padding:5px 10px;vertical-align:top;text-align:left;word-break:break-word}
-th{background:var(--soft)}
+th{background:var(--soft);white-space:nowrap}
 td.c{text-align:center}
+td.c,.nw{white-space:nowrap}
 tr.node td{background:var(--node)}
 .node-note{color:var(--muted);font-size:13px}
 .badge{font-size:11px;padding:0 6px;border-radius:10px;background:var(--accent);color:#fff}
 .req{color:var(--red)}
-.w-field{width:190px}.w-s{width:90px}.w-xs{width:50px}
+table.fields{table-layout:fixed}
+.w-field{width:220px}.w-s{width:90px}.w-f{width:170px}.w-xs{width:50px}
 a.anchor{color:var(--fg)}
 tr:target td{background:rgba(255,212,0,.25)}
 pre{background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:12px;overflow-x:auto}

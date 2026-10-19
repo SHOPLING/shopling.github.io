@@ -1,6 +1,9 @@
 // 필드·코드 검색 (search.json) + 큰 표 행 필터
 (function () {
     var q = document.getElementById("q"), out = document.getElementById("results"), index = null;
+    // 좌측 메뉴를 현재 페이지 항목이 보이는 위치로 스크롤
+    var nav = document.getElementById("nav"), on = nav && nav.querySelector("a.on");
+    if (on && nav.scrollHeight > nav.clientHeight) nav.scrollTop = on.offsetTop - nav.clientHeight / 2;
     function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;"}[c]; }); }
     function show() {
         var k = q.value.trim().toLowerCase();
